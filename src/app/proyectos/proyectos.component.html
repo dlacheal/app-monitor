@@ -1,0 +1,32 @@
+<div class="card border-primary mb-3 my-3 mx-3">
+    <div class="card-header">Listado de Proyectos</div>
+    <div class="card-body text-primary">
+      <!-- 
+        <h5 class="card-title">Listado de Puestos</h5>
+      -->
+      
+      <table class="table table-borbered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>FECHA INICIO</th>
+                <th>T. ESTIMADO</th>
+                <th>T. REAL</th>
+                <th>UBICACIÓN</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let proyecto of proyectos">
+                <td>{{proyecto.id}}</td>
+                <td>{{proyecto.nombreProyecto}}</td>
+                <td>{{proyecto.fechaInicio}}</td>
+                <td>{{proyecto.tiempoEstimado}}</td>
+                <td>{{proyecto.tiempoReal}}</td>
+                <td>{{proyecto.ubicacion}}</td>
+            </tr>
+        </tbody>
+      </table>
+
+    </div>
+</div>
