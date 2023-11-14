@@ -9,15 +9,18 @@ import { PuestosComponent } from './puestos/puestos.component';
 import { PuestoService } from './puestos/puesto.service';
 import { CategoriaService } from './categorias/categoria.service';
 import { ProyectoService } from './proyectos/proyecto.service';
+import { PersonaService } from './personas/persona.service';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ProyectosComponent } from './proyectos/proyectos.component';
+import { PersonasComponent } from './personas/personas.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/puestos', pathMatch: 'full'},
   {path: 'puestos', component: PuestosComponent},
   {path: 'categorias', component: CategoriasComponent},
   {path: 'proyectos', component: ProyectosComponent},
+  {path: 'personas', component: PersonasComponent},
   
 ];
 
@@ -29,14 +32,15 @@ const routes: Routes = [
     CategoriasComponent,
     PuestosComponent,
     CategoriasComponent,
-    ProyectosComponent
+    ProyectosComponent,
+    PersonasComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [PuestoService, CategoriaService, ProyectoService],
+  providers: [PuestoService, CategoriaService, ProyectoService, PersonaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

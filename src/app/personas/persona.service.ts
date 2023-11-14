@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Puesto } from './puesto';
+import { Persona } from './persona';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -7,15 +7,15 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class PuestoService {
+export class PersonaService {
 
-  private urlEndPoint: string = '/api/puestos';
+  private urlEndPoint: string = '/api/personas';
 
   constructor(private http:HttpClient) { }
 
-  getPuestos(): Observable<Puesto[]> {
-    return this.http.get<Puesto[]>(this.urlEndPoint).pipe(
-      map( response => response as Puesto[] )
+  getPersonas(): Observable<Persona[]>{
+    return this.http.get<Persona[]>(this.urlEndPoint).pipe(
+      map(response => response as Persona[])
     );
   }
 }
