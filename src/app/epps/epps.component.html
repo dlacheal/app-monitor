@@ -1,0 +1,32 @@
+<div class="card border-primary mb-3 my-3 mx-3">
+    <div class="card-header">Listado de Epps</div>
+    <div class="card-body text-primary">
+      <!-- 
+        <h5 class="card-title">Listado de Puestos</h5>
+      -->
+      
+      <table class="table table-borbered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>STOCK</th>
+                <th>TALLA</th>
+                <th>PRECIO</th>
+                <th>CATEGORIA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let epp of epps">
+                <td>{{epp.id}}</td>
+                <td>{{epp.nombre}}</td>
+                <td>{{epp.stockActual}}</td>
+                <td>{{epp.talla}}</td>
+                <td>{{epp.precio}}</td>
+                <td>{{epp.codigoCategoria.descripcion}}</td>
+            </tr>
+        </tbody>
+      </table>
+
+    </div>
+</div>

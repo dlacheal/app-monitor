@@ -1,0 +1,30 @@
+<div class="card border-primary mb-3 my-3 mx-3">
+    <div class="card-header">Listado de Empleados</div>
+    <div class="card-body text-primary">
+      <!-- 
+        <h5 class="card-title">Listado de Puestos</h5>
+      -->
+      
+      <table class="table table-borbered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>EMPLEADO</th>
+                <th>PUESTO</th>
+                <th>LICENCIA</th>
+                <th>TIPO SANGRE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let empleado of empleados">
+                <td>{{empleado.id}}</td>
+                <td>{{empleado.codigoPersona.nombres}} {{empleado.codigoPersona.apellidos}}</td>
+                <td>{{empleado.codigoPuesto.descripcion}}</td>
+                <td>{{empleado.licencia}}</td>
+                <td>{{empleado.tipoSangre}}</td>
+            </tr>
+        </tbody>
+      </table>
+
+    </div>
+</div>
