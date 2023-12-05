@@ -14,6 +14,7 @@ import { ProyectoService } from './proyectos/proyecto.service';
 import { PersonaService } from './personas/persona.service';
 import { EppService } from './epps/epp.service';
 import { EmpleadoService } from './empleados/empleado.service';
+import { RegistroService } from './registros/registro.service';
 
 import { CategoriasComponent } from './categorias/categorias.component';
 import { PuestosComponent } from './puestos/puestos.component';
@@ -21,6 +22,8 @@ import { ProyectosComponent } from './proyectos/proyectos.component';
 import { PersonasComponent } from './personas/personas.component';
 import { EppsComponent } from './epps/epps.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
+import { RegistrosComponent } from './registros/registros.component';
+
 
 
 const routes: Routes = [
@@ -31,6 +34,7 @@ const routes: Routes = [
   {path: 'personas', component: PersonasComponent},
   {path: 'epps', component: EppsComponent},
   {path: 'empleados', component: EmpleadosComponent},
+  {path: 'registros', component: RegistrosComponent},
   
 ];
 
@@ -45,7 +49,8 @@ const routes: Routes = [
     ProyectosComponent,
     PersonasComponent,
     EppsComponent,
-    EmpleadosComponent
+    EmpleadosComponent,
+    RegistrosComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,8 @@ const routes: Routes = [
     ProyectoService, 
     PersonaService,
     EppService,
-    EmpleadoService
+    EmpleadoService,
+    RegistroService
   ],
   bootstrap: [AppComponent]
 })
