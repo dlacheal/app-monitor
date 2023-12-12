@@ -13,7 +13,7 @@ export class RegistrosComponent {
   constructor(private registroService: RegistroService){}
 
   ngOnInit(){
-    this.registroService.getEpps().subscribe(
+    this.registroService.getRegistros().subscribe(
       registros => this.registros = registros
     );
   }

@@ -1,0 +1,68 @@
+<div class="card bg-dark text-white mb-3 my-3 mx-3" >
+
+  <div class="card-header">{{ tituloFormEpp }}</div>
+  <div class="card-body">
+    <form (ngSubmit) = "createEpp()">
+      <!-- Nombres -->
+      <div class="form.group row">
+        <label for="nombreEpp" class="col-form-label col-sm-2">NOMBRE EPP</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="epp.nombre" name="nombreEpp">
+        </div>
+      </div>
+
+      <br>
+      <!-- StockActual -->
+      <div class="form.group row">
+        <label for="stockActual" class="col-form-label col-sm-2">STOCK</label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" [(ngModel)]="epp.stockActual" name="stockActual">
+        </div>
+      </div>
+
+      <br>
+      <!-- Talla -->
+      <div class="form.group row">
+        <label for="tallaEpp" class="col-form-label col-sm-2">TALLA</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="epp.talla" name="tallaEpp">
+        </div>
+      </div>
+
+      <br>
+      <!-- Precio -->
+      <div class="form.group row">
+        <label for="precioEpp" class="col-form-label col-sm-2">PRECIO</label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" [(ngModel)]="epp.precio" name="precioEpp">
+        </div>
+      </div>
+
+      <br>
+      <!-- Categoria -->
+      <div class="form.group row">
+        <label for="categoriaEpp" class="col-form-label col-sm-2">CATEGORÍA</label>
+        <div class="col-sm-6">
+          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="epp.codigoCategoria"
+                  name="categoriaEpp">
+            <option [ngValue]="undefined"> SELECCIONAR</option>
+            <option *ngFor="let categoriaEpp of categoriasEpp" [ngValue]="categoriaEpp">{{categoriaEpp.descripcion}} </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Boton -->
+      <br>
+      <br>
+      <br>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role="button" >
+            Crear
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

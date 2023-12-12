@@ -1,5 +1,6 @@
 import { Persona } from "../personas/persona";
 import { Puesto } from "../puestos/puesto";
+import {Registro} from "../registros/registro";
 
 export class Empleado {
     id: number;
@@ -9,4 +10,5 @@ export class Empleado {
     tipoSangre: string;
     codigoPuesto: Puesto;
     codigoPersona: Persona;
+    registros: Registro[] = [];
 }

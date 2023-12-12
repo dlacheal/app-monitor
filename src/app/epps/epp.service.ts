@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Epp } from './epp';
@@ -9,6 +9,7 @@ import { Epp } from './epp';
 export class EppService {
 
   private urlEndPoint: string = '/api/epps';
+  private httpHeaders =  new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http:HttpClient) { }
 
@@ -16,5 +17,9 @@ export class EppService {
     return this.http.get<Epp[]>(this.urlEndPoint).pipe(
       map(response => response as Epp[])
     );
+  }
+
+  createEpp(epp: Epp): Observable<Epp>{
+    return this.http.post<Epp>(this.urlEndPoint, epp, {headers: this.httpHeaders})
   }
 }

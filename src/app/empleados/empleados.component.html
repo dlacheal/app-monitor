@@ -1,15 +1,17 @@
 <div class="card border-primary mb-3 my-3 mx-3">
     <div class="card-header">Listado de Empleados</div>
     <div class="card-body text-primary">
-      <!-- 
+      <!--
         <h5 class="card-title">Listado de Puestos</h5>
       -->
-      
+      <div class="my-2 text-left">
+        <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/empleados/form']"> Crear Empleado </button>
+      </div>
       <table class="table table-borbered table-striped">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>EMPLEADO</th>
+                <th>NOMBRE EMPLEADO</th>
                 <th>PUESTO</th>
                 <th>LICENCIA</th>
                 <th>TIPO SANGRE</th>

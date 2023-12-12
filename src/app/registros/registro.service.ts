@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Registro } from './registro';
@@ -9,12 +9,17 @@ import { Registro } from './registro';
 export class RegistroService {
 
   private urlEndPoint: string = '/api/registros';
+  private httpHeaders =  new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http:HttpClient) { }
 
-  getEpps(): Observable<Registro[]>{
+  getRegistros(): Observable<Registro[]>{
     return this.http.get<Registro[]>(this.urlEndPoint).pipe(
       map(response => response as Registro[])
     );
+  }
+
+  createRegistro(registro: Registro): Observable<Registro>{
+    return this.http.post<Registro>(this.urlEndPoint, registro, {headers: this.httpHeaders})
   }
 }

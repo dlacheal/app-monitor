@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Puesto } from './puesto';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 export class PuestoService {
 
   private urlEndPoint: string = '/api/puestos';
+  private httpHeaders =  new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http:HttpClient) { }
 
@@ -17,5 +18,9 @@ export class PuestoService {
     return this.http.get<Puesto[]>(this.urlEndPoint).pipe(
       map( response => response as Puesto[] )
     );
+  }
+
+  createPuesto(puesto: Puesto): Observable<Puesto>{
+    return this.http.post<Puesto>(this.urlEndPoint, puesto, {headers: this.httpHeaders})
   }
 }

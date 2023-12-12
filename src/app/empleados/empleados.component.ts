@@ -7,13 +7,13 @@ import { EmpleadoService } from './empleado.service';
   templateUrl: './empleados.component.html'
 })
 export class EmpleadosComponent {
-  
+
   empleados: Empleado[];
 
   constructor(private empleadoService: EmpleadoService){}
 
   ngOnInit(){
-    this.empleadoService.getEpps().subscribe(
+    this.empleadoService.getEmpleados().subscribe(
       empleados => this.empleados = empleados
     );
   }

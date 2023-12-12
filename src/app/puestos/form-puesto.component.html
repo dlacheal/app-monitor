@@ -1,0 +1,29 @@
+<p>form-puesto works!</p>
+<div class="card bg-dark text-white mb-3 my-3 mx-3" >
+
+  <div class="card-header">{{ tituloFormPuesto}}</div>
+  <div class="card-body">
+    <form (ngSubmit) = "createPuesto()">
+      <!-- Descripcion -->
+      <div class="form.group row">
+        <label for="descripcion" class="col-form-label col-sm-2">DESCRIPCIÓN</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="puesto.descripcion" name="descripcion">
+        </div>
+      </div>
+
+      <!-- Boton -->
+      <br>
+      <br>
+      <br>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role="button" >
+            Crear
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

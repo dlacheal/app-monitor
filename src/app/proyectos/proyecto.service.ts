@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Proyecto } from './proyecto';
 import { Observable } from 'rxjs';
@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 export class ProyectoService {
 
   private urlEndPoint: string = '/api/proyectos';
+  private httpHeaders =  new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http:HttpClient) { }
 
@@ -18,5 +19,9 @@ export class ProyectoService {
     return this.http.get<Proyecto[]>(this.urlEndPoint).pipe(
       map( response => response as Proyecto[] )
     );
+  }
+
+  createProyecto(proyecto: Proyecto): Observable<Proyecto>{
+    return this.http.post<Proyecto>(this.urlEndPoint, proyecto, {headers: this.httpHeaders})
   }
 }

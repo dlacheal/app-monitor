@@ -1,0 +1,64 @@
+<div class="card bg-dark text-white mb-3 my-3 mx-3" >
+
+  <div class="card-header">{{ tituloFromProyecto}}</div>
+  <div class="card-body">
+    <form (ngSubmit) = "createProyecto()">
+      <!-- Nombre Proyecto -->
+      <div class="form.group row">
+        <label for="nombre" class="col-form-label col-sm-2">NOMBRE PROYECTO</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="proyecto.nombreProyecto" name="nombre">
+        </div>
+      </div>
+
+      <br>
+      <!-- Fecha Inicio -->
+      <div class="form.group row">
+        <label for="fecha" class="col-form-label col-sm-2">FECHA INICIO</label>
+        <div class="col-sm-6">
+          <input type="date" class="form-control" [(ngModel)]="proyecto.fechaInicio" name="fecha">
+        </div>
+      </div>
+
+      <br>
+      <!-- Tiempo Estimado -->
+      <div class="form.group row">
+        <label for="tiempoEstimado" class="col-form-label col-sm-2">TIEMPO ESTIMADO (mes)</label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" [(ngModel)]="proyecto.tiempoEstimado" name="tiempoEstimado">
+        </div>
+      </div>
+
+      <br>
+      <!-- Tiempo Real -->
+      <div class="form.group row">
+        <label for="tiempoReal" class="col-form-label col-sm-2">TIEMPO REAL (mes)</label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" [(ngModel)]="proyecto.tiempoReal" name="tiempoReal">
+        </div>
+      </div>
+
+      <br>
+      <!-- Ubicacion -->
+      <div class="form.group row">
+        <label for="ubicacion" class="col-form-label col-sm-2">UBICACIÓN</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="proyecto.ubicacion" name="ubicacion">
+        </div>
+      </div>
+
+      <!-- Boton -->
+      <br>
+      <br>
+      <br>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role="button" >
+            Crear
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

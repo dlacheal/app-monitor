@@ -1,0 +1,166 @@
+<div class="card bg-dark text-white mb-3 my-3 mx-3" >
+
+  <div class="card-header">{{ tituloFormRegistro }}</div>
+  <div class="card-body">
+    <form (ngSubmit) = "createRegistro()">
+
+      <!-- Numero Registro -->
+      <div class="form.group row">
+        <label for="numeroRegistro" class="col-form-label col-sm-2">Nº REGISTRO</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="registro.numeroRegistro" name="numeroRegistro">
+        </div>
+      </div>
+
+      <br>
+      <!-- Formato Registro -->
+      <div class="form.group row">
+        <label for="formatoRegistro" class="col-form-label col-sm-2">FORMATO REGISTRO</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="registro.formatoRegistro" name="formatoRegistro">
+        </div>
+      </div>
+
+      <br>
+      <!-- Numero Trabajadores -->
+      <div class="form.group row">
+        <label for="numeroTrabajadores" class="col-form-label col-sm-2">Nº TRABAJADORES</label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" [(ngModel)]="registro.numeroTrabajadores" name="numeroTrabajadores">
+        </div>
+      </div>
+
+      <br>
+      <!-- Revisado
+      <div class="form-group row">
+        <label for="revisado" class="col-sm-2 col-form-label">REVISADO</label>
+        <div class="col-sm-6">
+          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="registro.revisado" name="revisado">
+            <option [ngValue]="undefined"> Seleccionar</option>
+            <option value="false">NO</option>
+            <option value="true">SI</option>
+          </select>
+        </div>
+      </div>
+      -->
+
+      <!-- Aprobado
+      <div class="form-group row">
+        <label for="aprobado" class="col-sm-2 col-form-label">APROBADO</label>
+        <div class="col-sm-6">
+          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="registro.aprobado" name="aprobado">
+            <option [ngValue]="undefined"> Seleccionar</option>
+            <option value="false">NO</option>
+            <option value="true">SI</option>
+          </select>
+        </div>
+      </div>
+      -->
+
+      <!-- entregado
+      <div class="form-group row">
+        <label for="aprobado" class="col-sm-2 col-form-label">ENTREGADO</label>
+        <div class="col-sm-6">
+          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="registro.entregado" name="aprobado">
+            <option [ngValue]="undefined"> Seleccionar</option>
+            <option value="false">NO APROBADO</option>
+            <option value="true">APROBADO</option>
+          </select>
+        </div>
+      </div>
+      -->
+
+      <br>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckboxRevisado" [(ngModel)]="registro.revisado" [ngModelOptions]="{standalone: true}">
+        <label class="form-check-label" for="inlineCheckboxRevisado">REVISADO</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckboxAprobado" [(ngModel)]="registro.entregado" [ngModelOptions]="{standalone: true}">
+        <label class="form-check-label" for="inlineCheckboxAprobado">ENTREGADO</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckboxEntregado" [(ngModel)]="registro.aprobado" [ngModelOptions]="{standalone: true}">
+        <label class="form-check-label" for="inlineCheckboxEntregado">APROBADO</label>
+      </div>
+
+      <!--
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" [ngModel]="registro.revisado"> REVISADO
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" [ngModel]="registro.revisado"> REVISADO
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" [ngModel]="registro.revisado"> REVISADO
+        </label>
+      </div>
+      -->
+
+      <br>
+      <!-- Nombre Proyecto Operario -->
+      <div class="form.group row">
+        <label for="nombreProyectoOperario" class="col-form-label col-sm-2">NOMBRE PROYECTO OPERARIO</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="registro.nombreProyectoOperario" name="nombreProyectoOperario">
+        </div>
+      </div>
+
+      <br>
+      <!-- Planta Operario -->
+      <div class="form.group row">
+        <label for="plantaOperario" class="col-form-label col-sm-2">PLANTA OPERARIO</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="registro.plantaOperario" name="plantaOperario">
+        </div>
+      </div>
+
+      <br>
+      <!-- Empleado -->
+      <div class="form.group row">
+        <label for="codigoEmpleado" class="col-form-label col-sm-2">EMPLEADO</label>
+        <div class="col-sm-6">
+          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="registro.codigoEmpleado"
+                  name="codigoEmpleado">
+            <option [ngValue]="undefined"> SELECCIONAR</option>
+            <option *ngFor="let empleado of empleados" [ngValue]="empleado">{{empleado.codigoPersona.nombres}} {{empleado.codigoPersona.apellidos}} </option>
+          </select>
+        </div>
+      </div>
+
+      <br>
+      <!-- Proyecto -->
+      <div class="form.group row">
+        <label for="codigoProyecto" class="col-form-label col-sm-2">PROYECTO</label>
+        <div class="col-sm-6">
+          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="registro.codigoProyecto"
+                  name="codigoProyecto">
+            <option [ngValue]="undefined"> SELECCIONAR</option>
+            <option *ngFor="let proyecto of proyectos" [ngValue]="proyecto">{{proyecto.nombreProyecto}} </option>
+          </select>
+        </div>
+      </div>
+
+
+      <!-- Boton -->
+      <br>
+      <br>
+      <br>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role="button" >
+            Crear
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

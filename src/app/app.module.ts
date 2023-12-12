@@ -26,6 +26,16 @@ import { EmpleadosComponent } from './empleados/empleados.component';
 import { RegistrosComponent } from './registros/registros.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 
+import { FormsModule } from '@angular/forms';
+import { FormCategoriaComponent } from './categorias/form-categoria.component';
+import { FormPuestoComponent } from './puestos/form-puesto.component';
+import { FormProyectoComponent } from './proyectos/form-proyecto.component';
+import { FormPersonaComponent } from './personas/form-persona.component';
+import { FormEppComponent } from './epps/form-epp.component';
+import { FormEmpleadoComponent } from './empleados/form-empleado.component';
+import { FormRegistroComponent } from './registros/form-registro.component';
+import { FormUsuarioComponent } from './usuarios/form-usuario.component';
+
 
 
 const routes: Routes = [
@@ -38,12 +48,20 @@ const routes: Routes = [
   {path: 'empleados', component: EmpleadosComponent},
   {path: 'registros', component: RegistrosComponent},
   {path: 'usuarios', component: UsuariosComponent},
-  
+  {path: 'categorias/form', component: FormCategoriaComponent},
+  {path: 'puestos/form', component: FormPuestoComponent},
+  {path: 'proyectos/form', component: FormProyectoComponent},
+  {path: 'personas/form', component: FormPersonaComponent},
+  {path: 'epps/form', component: FormEppComponent},
+  {path: 'empleados/form', component: FormEmpleadoComponent},
+  {path: 'registros/form', component: FormRegistroComponent},
+  {path: 'usuarios/form', component: FormUsuarioComponent}
+
 ];
 
 @NgModule({
   declarations: [
-    AppComponent, 
+    AppComponent,
     HeaderComponent,
     FooterComponent,
     CategoriasComponent,
@@ -54,17 +72,26 @@ const routes: Routes = [
     EppsComponent,
     EmpleadosComponent,
     RegistrosComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    FormCategoriaComponent,
+    FormPuestoComponent,
+    FormProyectoComponent,
+    FormPersonaComponent,
+    FormEppComponent,
+    FormEmpleadoComponent,
+    FormRegistroComponent,
+    FormUsuarioComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [
-    PuestoService, 
-    CategoriaService, 
-    ProyectoService, 
+    PuestoService,
+    CategoriaService,
+    ProyectoService,
     PersonaService,
     EppService,
     EmpleadoService,

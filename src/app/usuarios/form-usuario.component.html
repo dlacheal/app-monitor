@@ -1,0 +1,64 @@
+<div class="card bg-dark text-white mb-3 my-3 mx-3" >
+
+  <div class="card-header">{{ tituloFormUsuario }}</div>
+  <div class="card-body">
+    <form (ngSubmit) = "createUsuario()">
+      <!-- Username -->
+      <div class="form.group row">
+        <label for="username" class="col-form-label col-sm-2">USERNAME</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="usuario.username" name="username">
+        </div>
+      </div>
+
+      <br>
+      <!-- Password -->
+      <div class="form.group row">
+        <label for="password" class="col-form-label col-sm-2">PASSWORD</label>
+        <div class="col-sm-6">
+          <input type="password" class="form-control" [(ngModel)]="usuario.password" name="password">
+        </div>
+      </div>
+
+      <br>
+      <!-- Enable -->
+      <div class="form-group row">
+        <label for="enable" class="col-sm-2 col-form-label">ESTADO</label>
+        <div class="col-sm-6">
+          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="usuario.enable" name="enable">
+            <option [ngValue]="undefined"> Seleccionar</option>
+            <option value="false">INHABILITADO</option>
+            <option value="true">HABILITADO</option>
+          </select>
+        </div>
+      </div>
+
+      <br>
+      <!-- Empleado -->
+      <div class="form.group row">
+        <label for="codigoEmpleadoUsuario" class="col-form-label col-sm-2">EMPLEADO</label>
+        <div class="col-sm-6">
+          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="usuario.codigoEmpleado"
+                  name="codigoEmpleadoUsuario">
+            <option [ngValue]="undefined"> SELECCIONAR</option>
+            <option *ngFor="let empleado of empleados" [ngValue]="empleado">{{empleado.codigoPersona.nombres}} {{empleado.codigoPersona.apellidos}} </option>
+          </select>
+        </div>
+      </div>
+
+
+      <!-- Boton -->
+      <br>
+      <br>
+      <br>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role="button" >
+            Crear
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
