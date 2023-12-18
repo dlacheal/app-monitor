@@ -16,13 +16,16 @@ export class CategoriaService {
   constructor(private http:HttpClient) { }
 
   getCategorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(this.urlEndPoint).pipe(
-      map( response => response as Categoria[] )
-    );
+    return this.http.get<Categoria[]>(this.urlEndPoint)
+    //   .pipe( map( response => response as Categoria[] )
+    // );
   }
 
   createCategoria(categoria: Categoria): Observable<Categoria>{
     return this.http.post<Categoria>(this.urlEndPoint, categoria, {headers: this.httpHeaders})
   }
 
+  getCategoria(id): Observable<Categoria>{
+    return this.http.get<Categoria>(`${this.urlEndPoint}/${id}`);
+  }
 }

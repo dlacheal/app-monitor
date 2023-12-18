@@ -1,43 +1,31 @@
-<!--
-<button type="button" (click)="setHabilitar()" class="btn btn-primary my-3">{{habilitar==true? 'Ocultar':'Mostrar'}}</button>
--->
-
-<!--
-<div class="card">
-    <div class="card-header">
-        Listado de Categorias
-    </div>
-    <ul class="list-group" *ngIf="habilitar == true">
-        <li class="list-group-item" *ngFor="let categoria of listaCategoria">{{categoria}}</li>
-    </ul>
-
-</div>
--->
-
 <div class="card border-primary mb-3 my-3 mx-3">
-    <div class="card-header">Listado de Categorias</div>
-    <div class="card-body text-primary">
-      <!-- 
-        <h5 class="card-title">Listado de Categorias</h5>
-      -->
-      <div class="my-2 text-left">
-        <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/categorias/form']"> Crear Categoria </button>
-      </div>
-
-      <table class="table table-borbered table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>DESCRIPCIÓN</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let categoria of categorias">
-                <td>{{categoria.id}}</td>
-                <td>{{categoria.descripcion}}</td>
-            </tr>
-        </tbody>
-      </table>
-
+  <div class="card-header">Listado de Categorias</div>
+  <div class="card-body text-primary">
+    <!--
+      <h5 class="card-title">Listado de Categorias</h5>
+    -->
+    <div class="my-2 text-left">
+      <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/categorias/form']"> Crear Categoria
+      </button>
     </div>
+
+    <table class="table table-borbered table-striped">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>DESCRIPCIÓN</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let categoria of categorias">
+        <td>{{categoria.id}}</td>
+        <td>{{categoria.descripcion}}</td>
+        <td>
+          <button class="btn btn-success" type="button" name="buttonUpdateCategoria" [routerLink]="['/categorias/form',categoria.id]">Editar</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
 </div>

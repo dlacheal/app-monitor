@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Epp} from "./epp";
 import {EppService} from "./epp.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Categoria} from "../categorias/categoria";
 import {CategoriaService} from "../categorias/categoria.service";
 import Swal from "sweetalert2";
@@ -18,12 +18,30 @@ export class FormEppComponent {
 
   constructor(private eppService: EppService,
               private categoriaService: CategoriaService,
-              private router: Router) {
+              private router: Router,
+              private activateRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void{
+    // this.cargarEpp();
+    this.activateRoute.paramMap.subscribe(params => {
+      let id = +params.get('id');
+      if(id){
+        this.eppService.getEpp(id).subscribe((epp) => this.epp = epp)
+      }
+    });
     this.categoriaService.getCategorias().subscribe(categorias => this.categoriasEpp = categorias);
+
   }
+
+  // cargarEpp(): void{
+  //   this.activateRoute.paramMap.subscribe(params => {
+  //     let id = +params.get('id');
+  //     if(id){
+  //       this.eppService.getEpp(id).subscribe((epp) => this.epp = epp)
+  //     }
+  //   });
+  // }
 
   public createEpp(): void{
     this.eppService.createEpp(this.epp)

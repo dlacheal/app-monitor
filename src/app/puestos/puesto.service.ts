@@ -23,4 +23,8 @@ export class PuestoService {
   createPuesto(puesto: Puesto): Observable<Puesto>{
     return this.http.post<Puesto>(this.urlEndPoint, puesto, {headers: this.httpHeaders})
   }
+
+  getPuesto(id): Observable<Puesto>{
+    return this.http.get<Puesto>(`${this.urlEndPoint}/${id}`);
+  }
 }

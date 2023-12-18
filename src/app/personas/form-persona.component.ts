@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Persona} from "./persona";
 import {PersonaService} from "./persona.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import Swal from "sweetalert2";
 
 @Component({
@@ -14,10 +14,23 @@ export class FormPersonaComponent {
   public tituloFormPersona = "Crear Persona";
 
   constructor(private personaService: PersonaService,
-              private router: Router) {
+              private router: Router,
+              private activateRoute: ActivatedRoute) {
   }
 
-  ngOnInit(){}
+  ngOnInit(): void{
+    this.cargarPersona();
+
+  }
+
+  cargarPersona(): void{
+    this.activateRoute.params.subscribe(params => {
+      let id = params['id'];
+      if(id){
+        this.personaService.getPersona(id).subscribe((persona) => this.persona = persona)
+      }
+    });
+  }
 
   public createPersona(): void{
     this.personaService.createPersona(this.persona)
@@ -28,4 +41,6 @@ export class FormPersonaComponent {
       }
     )
   }
+
+
 }

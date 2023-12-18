@@ -23,4 +23,8 @@ export class PersonaService {
   createPersona(persona: Persona): Observable<Persona>{
     return this.http.post<Persona>(this.urlEndPoint, persona, {headers: this.httpHeaders})
   }
+
+  getPersona(id): Observable<Persona>{
+    return this.http.get<Persona>(`${this.urlEndPoint}/${id}`);
+  }
 }

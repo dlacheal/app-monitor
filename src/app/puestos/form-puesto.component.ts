@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Puesto} from "./puesto";
 import {PuestoService} from "./puesto.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import Swal from "sweetalert2";
 
 @Component({
@@ -14,10 +14,22 @@ export class FormPuestoComponent {
   public tituloFormPuesto = "Crear Puesto";
 
   constructor(private puestoService: PuestoService,
-              private router: Router) {
+              private router: Router,
+              private activateRoute: ActivatedRoute) {
   }
 
-  ngOnInit(){}
+  ngOnInit(): void{
+    this.cargarPuesto();
+  }
+
+  cargarPuesto(): void{
+    this.activateRoute.params.subscribe(params => {
+      let id = params['id'];
+      if(id){
+        this.puestoService.getPuesto(id).subscribe((puesto) => this.puesto = puesto)
+      }
+    });
+  }
 
   public createPuesto(): void{
     this.puestoService.createPuesto(this.puesto).subscribe(

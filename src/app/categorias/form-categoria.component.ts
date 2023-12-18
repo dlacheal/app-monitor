@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Categoria } from './categoria';
 import {CategoriaService} from "./categoria.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import Swal from "sweetalert2";
 
 @Component({
@@ -14,9 +14,23 @@ export class FormCategoriaComponent {
   public tituloFormCategoria = "Crear Categoria";
 
   constructor(private categoriaService: CategoriaService,
-              private router: Router){}
+              private router: Router,
+              private activateRoute: ActivatedRoute){
+  }
 
-  ngOnInit(){}
+  ngOnInit(){
+    this.cargarCategoria();
+  }
+
+  cargarCategoria(): void{
+    this.activateRoute.params.subscribe(params =>{
+        let id = params['id'];
+        if(id){
+          this.categoriaService.getCategoria(id)
+            .subscribe((categoria) => this.categoria = categoria)
+        }
+      });
+  }
 
   public createCategoria(): void{
    this.categoriaService.createCategoria(this.categoria)

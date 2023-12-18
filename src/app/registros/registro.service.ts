@@ -22,4 +22,8 @@ export class RegistroService {
   createRegistro(registro: Registro): Observable<Registro>{
     return this.http.post<Registro>(this.urlEndPoint, registro, {headers: this.httpHeaders})
   }
+
+  getRegistro(id): Observable<Registro>{
+    return this.http.get<Registro>(`${this.urlEndPoint}/${id}`);
+  }
 }

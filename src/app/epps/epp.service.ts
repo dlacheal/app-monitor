@@ -22,4 +22,8 @@ export class EppService {
   createEpp(epp: Epp): Observable<Epp>{
     return this.http.post<Epp>(this.urlEndPoint, epp, {headers: this.httpHeaders})
   }
+
+  getEpp(id): Observable<Epp>{
+    return this.http.get<Epp>(`${this.urlEndPoint}/${id}`);
+  }
 }

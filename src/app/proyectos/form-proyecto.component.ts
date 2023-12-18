@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Proyecto} from "./proyecto";
 import {ProyectoService} from "./proyecto.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import Swal from "sweetalert2";
 
 @Component({
@@ -14,10 +14,22 @@ export class FormProyectoComponent {
   public tituloFromProyecto = "Crear Proyecto";
 
   constructor(private proyectoService: ProyectoService,
-              private router: Router) {
+              private router: Router,
+              private activateRoute: ActivatedRoute){
   }
 
-  ngOnInit(){}
+  ngOnInit(): void{
+    this.cargarProyecto();
+  }
+
+  cargarProyecto(): void{
+    this.activateRoute.params.subscribe(params =>{
+      let id = params['id'];
+      if(id){
+        this.proyectoService.getProyecto(id).subscribe((proyecto) => this.proyecto = proyecto)
+      }
+    });
+  }
 
   public createProyecto(): void{
     this.proyectoService.createProyecto(this.proyecto).subscribe(

@@ -5,7 +5,7 @@
     <form (ngSubmit) = "createEpp()">
       <!-- Nombres -->
       <div class="form.group row">
-        <label for="nombreEpp" class="col-form-label col-sm-2">NOMBRE EPP</label>
+        <span for="nombreEpp" class="col-form-label col-sm-2">NOMBRE EPP</span>
         <div class="col-sm-6">
           <input type="text" class="form-control" [(ngModel)]="epp.nombre" name="nombreEpp">
         </div>
@@ -14,7 +14,7 @@
       <br>
       <!-- StockActual -->
       <div class="form.group row">
-        <label for="stockActual" class="col-form-label col-sm-2">STOCK</label>
+        <span for="stockActual" class="col-form-label col-sm-2">STOCK</span>
         <div class="col-sm-6">
           <input type="number" class="form-control" [(ngModel)]="epp.stockActual" name="stockActual">
         </div>
@@ -23,7 +23,7 @@
       <br>
       <!-- Talla -->
       <div class="form.group row">
-        <label for="tallaEpp" class="col-form-label col-sm-2">TALLA</label>
+        <span for="tallaEpp" class="col-form-label col-sm-2">TALLA</span>
         <div class="col-sm-6">
           <input type="text" class="form-control" [(ngModel)]="epp.talla" name="tallaEpp">
         </div>
@@ -32,7 +32,7 @@
       <br>
       <!-- Precio -->
       <div class="form.group row">
-        <label for="precioEpp" class="col-form-label col-sm-2">PRECIO</label>
+        <span for="precioEpp" class="col-form-label col-sm-2">PRECIO</span>
         <div class="col-sm-6">
           <input type="number" class="form-control" [(ngModel)]="epp.precio" name="precioEpp">
         </div>
@@ -41,7 +41,7 @@
       <br>
       <!-- Categoria -->
       <div class="form.group row">
-        <label for="categoriaEpp" class="col-form-label col-sm-2">CATEGORÍA</label>
+        <span for="categoriaEpp" class="col-form-label col-sm-2">CATEGORÍA</span>
         <div class="col-sm-6">
           <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="epp.codigoCategoria"
                   name="categoriaEpp">

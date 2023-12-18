@@ -24,4 +24,8 @@ export class ProyectoService {
   createProyecto(proyecto: Proyecto): Observable<Proyecto>{
     return this.http.post<Proyecto>(this.urlEndPoint, proyecto, {headers: this.httpHeaders})
   }
+
+  getProyecto(id): Observable<Proyecto>{
+    return this.http.get<Proyecto>(`${this.urlEndPoint}/${id}`)
+  }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Usuario} from "./usuario";
 import {UsuarioService} from "./usuario.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Empleado} from "../empleados/empleado";
 import {EmpleadoService} from "../empleados/empleado.service";
 import Swal from "sweetalert2";
@@ -18,11 +18,23 @@ export class FormUsuarioComponent {
 
   constructor(private usuarioService: UsuarioService,
               private empleadoService: EmpleadoService,
-              private router: Router) {
+              private router: Router,
+              private activateRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void{
     this.empleadoService.getEmpleados().subscribe(empleados => this.empleados = empleados);
+    this.cargarUsuarios();
+
+  }
+
+  cargarUsuarios(): void{
+    this.activateRoute.params.subscribe(params => {
+      let id = params['id'];
+      if(id){
+        this.usuarioService.getPUsuario(id).subscribe((usuario) => this.usuario = usuario)
+      }
+    });
   }
 
   public createUsuario(): void{

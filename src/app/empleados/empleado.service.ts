@@ -22,4 +22,8 @@ export class EmpleadoService {
   createEmpleado(empleado: Empleado): Observable<Empleado>{
     return this.http.post<Empleado>(this.urlEndPoint, empleado, {headers: this.httpHeaders})
   }
+
+  getEmpleado(id): Observable<Empleado>{
+    return this.http.get<Empleado>(`${this.urlEndPoint}/${id}`);
+  }
 }

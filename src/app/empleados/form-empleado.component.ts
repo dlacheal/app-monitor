@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Empleado} from "./empleado";
 import {EmpleadoService} from "./empleado.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Puesto} from "../puestos/puesto";
 import {PuestoService} from "../puestos/puesto.service";
 import {PersonaService} from "../personas/persona.service";
@@ -22,17 +22,36 @@ export class FormEmpleadoComponent {
   constructor(private empleadoService: EmpleadoService,
               private puestoService: PuestoService,
               private personaService: PersonaService,
-              private router: Router) {
+              private router: Router,
+              private activateRoute: ActivatedRoute){
   }
 
   ngOnInit(): void{
     this.puestoService.getPuestos().subscribe(
       puestos => this.puestos = puestos
     );
-    this.personaService.getPersonas().subscribe(
-      personas => this.personas = personas
-    );
+
+    this.activateRoute.paramMap.subscribe(params => {
+      let id = +params.get('id');
+      if(id){
+        this.empleadoService.getEmpleado(id)
+          .subscribe((empleado) => this.empleado = empleado)
+      }
+    });
+
+    this.personaService.getPersonas().subscribe(personas => this.personas = personas);
+    // this.cargarEmpleado();
   }
+
+  // cargarEmpleado(): void{
+  //   this.activateRoute.params.subscribe(params =>{
+  //     let id = params['id'];
+  //     if(id){
+  //       this.empleadoService.getEmpleado(id)
+  //         .subscribe((empleado) => this.empleado = empleado)
+  //     }
+  //   });
+  // }
 
   public createEmpleado(): void{
     this.empleadoService.createEmpleado(this.empleado)
@@ -43,4 +62,5 @@ export class FormEmpleadoComponent {
       }
     )
   }
+
 }

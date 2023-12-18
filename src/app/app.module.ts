@@ -48,6 +48,7 @@ const routes: Routes = [
   {path: 'empleados', component: EmpleadosComponent},
   {path: 'registros', component: RegistrosComponent},
   {path: 'usuarios', component: UsuariosComponent},
+  // form-create
   {path: 'categorias/form', component: FormCategoriaComponent},
   {path: 'puestos/form', component: FormPuestoComponent},
   {path: 'proyectos/form', component: FormProyectoComponent},
@@ -55,7 +56,16 @@ const routes: Routes = [
   {path: 'epps/form', component: FormEppComponent},
   {path: 'empleados/form', component: FormEmpleadoComponent},
   {path: 'registros/form', component: FormRegistroComponent},
-  {path: 'usuarios/form', component: FormUsuarioComponent}
+  {path: 'usuarios/form', component: FormUsuarioComponent},
+  // form-edit
+  {path: 'categorias/form/:id', component: FormCategoriaComponent},
+  {path: 'puestos/form/:id', component: FormPuestoComponent},
+  {path: 'proyectos/form/:id', component: FormProyectoComponent},
+  {path: 'personas/form/:id', component: FormPersonaComponent},
+  {path: 'epps/form/:id', component: FormEppComponent},
+  {path: 'empleados/form/:id', component: FormEmpleadoComponent},
+  {path: 'registros/form/:id', component: FormRegistroComponent},
+  {path: 'usuarios/form/:id', component: FormUsuarioComponent},
 
 ];
 
