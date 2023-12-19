@@ -35,14 +35,32 @@ export class RegistroService {
   }
 
   createRegistro(registro: Registro): Observable<Registro>{
-    return this.http.post<Registro>(this.urlEndPoint, registro, {headers: this.httpHeaders});
+    return this.http.post<Registro>(this.urlEndPoint, registro, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('registro.service.createEmpleado(registro): ' + e.error.mensaje);
+        Swal.fire('Error al crear el registro', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   updateRegistro(registro: Registro): Observable<Registro>{
-    return this.http.put<Registro>(`${this.urlEndPoint}/${registro.id}`, registro, {headers: this.httpHeaders});
+    return this.http.put<Registro>(`${this.urlEndPoint}/${registro.id}`, registro, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('registro.service.updateRegistro(registro): ' + e.error.mensaje);
+        Swal.fire('Error al editar el registro', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   deleteRegistro(id: number): Observable<Registro>{
-    return this.http.delete<Registro>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+    return this.http.delete<Registro>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('registro.service.deleteRegistro(id): ' + e.error.mensaje);
+        Swal.fire('Error al eliminar el registro', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 }

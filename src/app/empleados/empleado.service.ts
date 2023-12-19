@@ -35,14 +35,32 @@ export class EmpleadoService {
   }
 
   createEmpleado(empleado: Empleado): Observable<Empleado>{
-    return this.http.post<Empleado>(this.urlEndPoint, empleado, {headers: this.httpHeaders});
+    return this.http.post<Empleado>(this.urlEndPoint, empleado, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('empleado.service.createEmpleado(empleado): ' + e.error.mensaje);
+        Swal.fire('Error al crear el empleado', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   updateEmpleado(empleado: Empleado): Observable<Empleado>{
-    return this.http.put<Empleado>(`${this.urlEndPoint}/${empleado.id}`, empleado, {headers: this.httpHeaders});
+    return this.http.put<Empleado>(`${this.urlEndPoint}/${empleado.id}`, empleado, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('empleado.service.updateEmpleado(empleado): ' + e.error.mensaje);
+        Swal.fire('Error al editar el empleado', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   deleEmpleado(id: number): Observable<Empleado>{
-    return this.http.delete<Empleado>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+    return this.http.delete<Empleado>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('empleado.service.deleEmpleado(id): ' + e.error.mensaje);
+        Swal.fire('Error al eliminar el empleado', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 }

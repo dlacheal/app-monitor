@@ -35,14 +35,32 @@ export class CategoriaService {
   }
 
   createCategoria(categoria: Categoria): Observable<Categoria>{
-    return this.http.post<Categoria>(this.urlEndPoint, categoria, {headers: this.httpHeaders});
+    return this.http.post<Categoria>(this.urlEndPoint, categoria, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('categoria.service.createCategoria(categoria): ' + e.error.mensaje);
+        Swal.fire('Error al crear la categoria', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   updateCategoria(categoria: Categoria): Observable<Categoria>{
-    return this.http.put<Categoria>(`${this.urlEndPoint}/${categoria.id}`, categoria, {headers: this.httpHeaders});
+    return this.http.put<Categoria>(`${this.urlEndPoint}/${categoria.id}`, categoria, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('categoria.service.updateCategoria(categoria): ' + e.error.mensaje);
+        Swal.fire('Error al editar la categoria', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   deletCategoria(id: number): Observable<Categoria>{
-    return this.http.delete<Categoria>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+    return this.http.delete<Categoria>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('categoria.service.deletCategoria(id): ' + e.error.mensaje);
+        Swal.fire('Error al eliminar la categoria', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 }

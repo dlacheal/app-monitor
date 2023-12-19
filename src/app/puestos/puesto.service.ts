@@ -36,14 +36,32 @@ export class PuestoService {
   }
 
   createPuesto(puesto: Puesto): Observable<Puesto>{
-    return this.http.post<Puesto>(this.urlEndPoint, puesto, {headers: this.httpHeaders});
+    return this.http.post<Puesto>(this.urlEndPoint, puesto, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('puesto.service.createPuesto(puesto): ' + e.error.mensaje);
+        Swal.fire('Error al crear el puesto', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   updatePuesto(puesto: Puesto): Observable<Puesto>{
-    return this.http.put<Puesto>(`${this.urlEndPoint}/${puesto.id}`, puesto, {headers: this.httpHeaders});
+    return this.http.put<Puesto>(`${this.urlEndPoint}/${puesto.id}`, puesto, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('puesto.service.updatePuesto(puesto): ' + e.error.mensaje);
+        Swal.fire('Error al editar el puesto', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   deletePuesto(id: number): Observable<Puesto>{
-    return this.http.delete<Puesto>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+    return this.http.delete<Puesto>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('puesto.service.deletePuesto(id): ' + e.error.mensaje);
+        Swal.fire('Error al eliminar el puesto', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 }

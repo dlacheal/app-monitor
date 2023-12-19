@@ -35,14 +35,32 @@ export class PersonaService {
   }
 
   createPersona(persona: Persona): Observable<Persona>{
-    return this.http.post<Persona>(this.urlEndPoint, persona, {headers: this.httpHeaders})
+    return this.http.post<Persona>(this.urlEndPoint, persona, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('persona.service.createPersona(persona): ' + e.error.mensaje);
+        Swal.fire('Error al crear la persona', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   updatePersona(persona: Persona): Observable<Persona>{
-    return this.http.put<Persona>(`${this.urlEndPoint}/${persona.id}`, persona, {headers: this.httpHeaders});
+    return this.http.put<Persona>(`${this.urlEndPoint}/${persona.id}`, persona, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('persona.service.updatePersona(persona): ' + e.error.mensaje);
+        Swal.fire('Error al editar la persona', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   deletePersona(id: number): Observable<Persona>{
-    return this.http.delete<Persona>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+    return this.http.delete<Persona>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('persona.service.deletePersona(id): ' + e.error.mensaje);
+        Swal.fire('Error al eliminar la persona', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 }

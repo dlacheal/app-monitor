@@ -35,14 +35,32 @@ export class EppService {
   }
 
   createEpp(epp: Epp): Observable<Epp>{
-    return this.http.post<Epp>(this.urlEndPoint, epp, {headers: this.httpHeaders})
+    return this.http.post<Epp>(this.urlEndPoint, epp, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('epp.service.createEpp(epp): ' + e.error.mensaje);
+        Swal.fire('Error al crear el epp', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   updateEpp(epp: Epp): Observable<Epp>{
-    return this.http.put<Epp>(`${this.urlEndPoint}/${epp.id}`, epp, {headers: this.httpHeaders});
+    return this.http.put<Epp>(`${this.urlEndPoint}/${epp.id}`, epp, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('epp.service.updateEpp(epp): ' + e.error.mensaje);
+        Swal.fire('Error al editar el epp', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   deleteEpp(id: number): Observable<Epp>{
-    return this.http.delete<Epp>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+    return this.http.delete<Epp>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('epp.service.deleteEpp(id): ' + e.error.mensaje);
+        Swal.fire('Error al eliminar el epp', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 }

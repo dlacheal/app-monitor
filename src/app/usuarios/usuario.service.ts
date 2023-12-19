@@ -35,14 +35,32 @@ export class UsuarioService {
   }
 
   createUsuario(usuario: Usuario): Observable<Usuario>{
-    return this.http.post<Usuario>(this.urlEndPoint, usuario, {headers: this.httpHeaders});
+    return this.http.post<Usuario>(this.urlEndPoint, usuario, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('usuario.service.createEmpleado(usuario): ' + e.error.mensaje);
+        Swal.fire('Error al crear el usuario', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   updateusuario(usuario: Usuario): Observable<Usuario>{
-    return this.http.put<Usuario>(`${this.urlEndPoint}/${usuario.id}`, usuario, {headers: this.httpHeaders});
+    return this.http.put<Usuario>(`${this.urlEndPoint}/${usuario.id}`, usuario, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('usuario.service.updateusuario(usuario): ' + e.error.mensaje);
+        Swal.fire('Error al editar el usuario', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   deleteUsuario(id: number): Observable<Usuario>{
-    return this.http.delete<Usuario>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+    return this.http.delete<Usuario>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('usuario.service.deleteUsuario(id): ' + e.error.mensaje);
+        Swal.fire('Error al eliminar el usuario', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 }

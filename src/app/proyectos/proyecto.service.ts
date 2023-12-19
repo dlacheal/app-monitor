@@ -37,14 +37,32 @@ export class ProyectoService {
   }
 
   createProyecto(proyecto: Proyecto): Observable<Proyecto>{
-    return this.http.post<Proyecto>(this.urlEndPoint, proyecto, {headers: this.httpHeaders});
+    return this.http.post<Proyecto>(this.urlEndPoint, proyecto, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('proyecto.service.createProyecto(empleado): ' + e.error.mensaje);
+        Swal.fire('Error al crear el proyecto', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   updateProyecto(proyecto: Proyecto): Observable<Proyecto>{
-    return this.http.put<Proyecto>(`${this.urlEndPoint}/${proyecto.id}`, proyecto, {headers: this.httpHeaders});
+    return this.http.put<Proyecto>(`${this.urlEndPoint}/${proyecto.id}`, proyecto, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('proyecto.service.updateProyecto(empleado): ' + e.error.mensaje);
+        Swal.fire('Error al editar el proyecto', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   deleteProyecto(id: number): Observable<Proyecto>{
-    return this.http.delete<Proyecto>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+    return this.http.delete<Proyecto>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error('proyecto.service.deleteProyecto(id): ' + e.error.mensaje);
+        Swal.fire('Error al eliminar el proyecto', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 }
