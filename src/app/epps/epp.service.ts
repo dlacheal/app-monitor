@@ -30,4 +30,8 @@ export class EppService {
   updateEpp(epp: Epp): Observable<Epp>{
     return this.http.put<Epp>(`${this.urlEndPoint}/${epp.id}`, epp, {headers: this.httpHeaders});
   }
+
+  deleteEpp(id: number): Observable<Epp>{
+    return this.http.delete<Epp>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+  }
 }

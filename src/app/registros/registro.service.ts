@@ -30,4 +30,8 @@ export class RegistroService {
   updateRegistro(registro: Registro): Observable<Registro>{
     return this.http.put<Registro>(`${this.urlEndPoint}/${registro.id}`, registro, {headers: this.httpHeaders});
   }
+
+  deleteRegistro(id: number): Observable<Registro>{
+    return this.http.delete<Registro>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+  }
 }

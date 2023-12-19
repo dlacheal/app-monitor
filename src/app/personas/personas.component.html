@@ -21,6 +21,7 @@
         <th>DIRECCIÓN</th>
         <th>EMEAIL</th>
         <th>EDITAR</th>
+        <th>ELIMINAR</th>
       </tr>
       </thead>
       <tbody>
@@ -37,6 +38,10 @@
           <button class="btn btn-success" type="button" name="buttonUpdatePersona"
                   [routerLink]="['/personas/form',persona.id]">Editar
           </button>
+        </td>
+
+        <td>
+          <button class="btn btn-danger" type="button" name="buttonDeletePersona" (click)='deletePersona(persona)' >Eliminar</button>
         </td>
       </tr>
       </tbody>

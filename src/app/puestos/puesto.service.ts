@@ -31,4 +31,8 @@ export class PuestoService {
   updatePuesto(puesto: Puesto): Observable<Puesto>{
     return this.http.put<Puesto>(`${this.urlEndPoint}/${puesto.id}`, puesto, {headers: this.httpHeaders});
   }
+
+  deletePuesto(id: number): Observable<Puesto>{
+    return this.http.delete<Puesto>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+  }
 }

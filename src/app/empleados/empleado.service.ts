@@ -30,4 +30,8 @@ export class EmpleadoService {
   updateEmpleado(empleado: Empleado): Observable<Empleado>{
     return this.http.put<Empleado>(`${this.urlEndPoint}/${empleado.id}`, empleado, {headers: this.httpHeaders});
   }
+
+  deleEmpleado(id: number): Observable<Empleado>{
+    return this.http.delete<Empleado>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+  }
 }

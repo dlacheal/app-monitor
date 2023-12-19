@@ -32,4 +32,8 @@ export class ProyectoService {
   updateProyecto(proyecto: Proyecto): Observable<Proyecto>{
     return this.http.put<Proyecto>(`${this.urlEndPoint}/${proyecto.id}`, proyecto, {headers: this.httpHeaders});
   }
+
+  deleteProyecto(id: number): Observable<Proyecto>{
+    return this.http.delete<Proyecto>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+  }
 }

@@ -30,4 +30,8 @@ export class UsuarioService {
   updateusuario(usuario: Usuario): Observable<Usuario>{
     return this.http.put<Usuario>(`${this.urlEndPoint}/${usuario.id}`, usuario, {headers: this.httpHeaders});
   }
+
+  deleteUsuario(id: number): Observable<Usuario>{
+    return this.http.delete<Usuario>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+  }
 }

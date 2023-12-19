@@ -14,6 +14,8 @@
       <tr>
         <th>ID</th>
         <th>DESCRIPCIÓN</th>
+        <th>EDITAR</th>
+        <th>ELIMINAR</th>
       </tr>
       </thead>
       <tbody>
@@ -22,6 +24,10 @@
         <td>{{categoria.descripcion}}</td>
         <td>
           <button class="btn btn-success" type="button" name="buttonUpdateCategoria" [routerLink]="['/categorias/form',categoria.id]">Editar</button>
+        </td>
+
+        <td>
+          <button class="btn btn-danger" type="button" name="buttonDeleteCategoria" (click)='deleteCategoria(categoria)' >Eliminar</button>
         </td>
       </tr>
       </tbody>

@@ -18,6 +18,7 @@
         <th>PRECIO</th>
         <th>CATEGORIA</th>
         <th>EDITAR</th>
+        <th>ELIMINAR</th>
       </tr>
       </thead>
       <tbody>
@@ -32,6 +33,10 @@
           <button class="btn btn-success" type="button" name="buttonUpdateEpp"
                   [routerLink]="['/epps/form',epp.id]">Editar
           </button>
+        </td>
+
+        <td>
+          <button class="btn btn-danger" type="button" name="buttonDeleteEpp" (click)='deleteEpp(epp)' >Eliminar</button>
         </td>
       </tr>
       </tbody>

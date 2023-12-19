@@ -33,7 +33,7 @@ export class CategoriaService {
     return this.http.put<Categoria>(`${this.urlEndPoint}/${categoria.id}`, categoria, {headers: this.httpHeaders});
   }
 
-  // deletCategoria(id: number): Observable<Categoria>{
-  //   return this.http.delete(`${this.urlEndPoint}/${categoria.id}`)
-  // }
+  deletCategoria(id: number): Observable<Categoria>{
+    return this.http.delete<Categoria>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+  }
 }

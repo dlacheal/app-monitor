@@ -17,6 +17,7 @@
         <th>ESTADO</th>
         <th>NOMBRE EMPLEADO</th>
         <th>EDITAR</th>
+        <th>ELIMINAR</th>
       </tr>
       </thead>
       <tbody>
@@ -30,6 +31,9 @@
           <button class="btn btn-success" type="button" name="buttonUpdateUsuario"
                   [routerLink]="['/usuarios/form',usuario.id]">Editar
           </button>
+        </td>
+        <td>
+          <button class="btn btn-danger" type="button" name="buttonDeleteUsuario" (click)='deleteUsuario(usuario)' >Eliminar</button>
         </td>
       </tr>
       </tbody>
