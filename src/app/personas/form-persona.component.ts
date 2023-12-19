@@ -44,7 +44,7 @@ export class FormPersonaComponent {
 
   public updatePersona(): void{
     this.personaService.updatePersona(this.persona)
-      .subscribe(proyecto => {
+      .subscribe(persona => {
         this.router.navigate(['/personas'])
         Swal.fire('Persona actualizada', `Persona ${this.persona.nombres} ${this.persona.apellidos} ha sido actualizada con éxito!`, 'success');
       });

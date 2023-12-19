@@ -39,4 +39,12 @@ export class FormPuestoComponent {
       }
     )
   }
+
+  public updatePuesto(): void{
+    this.puestoService.updatePuesto(this.puesto)
+      .subscribe(puesto => {
+        this.router.navigate(['/puestos'])
+        Swal.fire('Puesto actualizado', `Puesto  ${this.puesto.descripcion} ha sido actualizado con éxito!`, 'success');
+      });
+  }
 }

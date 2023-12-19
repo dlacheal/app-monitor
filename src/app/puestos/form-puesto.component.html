@@ -3,7 +3,7 @@
 
   <div class="card-header">{{ tituloFormPuesto}}</div>
   <div class="card-body">
-    <form (ngSubmit) = "createPuesto()">
+    <form>
       <!-- Descripcion -->
       <div class="form.group row">
         <label for="descripcion" class="col-form-label col-sm-2">DESCRIPCIÓN</label>
@@ -18,9 +18,15 @@
       <br>
       <div class="form-group row">
         <div class="col-sm-6">
-          <button class="btn btn-primary" role="button" >
+          <button class="btn btn-primary" role="button" (click)='cargarPuesto()' *ngIf="!puesto.id else elseBlockPuesto">
             Crear
           </button>
+
+          <ng-template #elseBlockPuesto>
+            <button class="btn btn-primary" role="button" (click)='updatePuesto()'>
+              Actualizar
+            </button>
+          </ng-template>
         </div>
       </div>
 
