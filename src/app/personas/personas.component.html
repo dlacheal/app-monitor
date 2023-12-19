@@ -9,7 +9,11 @@
       </button>
     </div>
 
-    <table class="table table-borbered table-striped">
+    <div *ngIf="personas?.length ==0" class="alert alert-info">
+      No hay personas en la base de datod!
+    </div>
+
+    <table class="table table-borbered table-striped" *ngIf="personas?.length>0">
       <thead>
       <tr>
         <th>ID</th>

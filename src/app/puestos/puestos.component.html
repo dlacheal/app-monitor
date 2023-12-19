@@ -9,7 +9,11 @@
       <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/puestos/form']"> Crear Puesto</button>
     </div>
 
-    <table class="table table-borbered table-striped">
+    <div *ngIf="puestos?.length ==0" class="alert alert-info">
+      No hay puestos en la base de datod!
+    </div>
+
+    <table class="table table-borbered table-striped" *ngIf="puestos?.length>0">
       <thead>
       <tr>
         <th>ID</th>

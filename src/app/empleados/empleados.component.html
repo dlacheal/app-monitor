@@ -8,7 +8,12 @@
       <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/empleados/form']"> Crear Empleado
       </button>
     </div>
-    <table class="table table-borbered table-striped">
+
+    <div *ngIf="empleados?.length ==0" class="alert alert-info">
+      No hay empleados en la base de datod!
+    </div>
+
+    <table class="table table-borbered table-striped" *ngIf="empleados?.length>0">
       <thead>
       <tr>
         <th>ID</th>

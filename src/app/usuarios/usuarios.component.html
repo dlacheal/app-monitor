@@ -8,7 +8,12 @@
       <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/usuarios/form']"> Crear Usuarios
       </button>
     </div>
-    <table class="table table-borbered table-striped">
+
+    <div *ngIf="usuarios?.length ==0" class="alert alert-info">
+      No hay usuarios en la base de datod!
+    </div>
+
+    <table class="table table-borbered table-striped" *ngIf="usuarios?.length>0">
       <thead>
       <tr>
         <th>ID</th>

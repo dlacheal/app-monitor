@@ -8,7 +8,11 @@
       <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/epps/form']"> Crear Epps</button>
     </div>
 
-    <table class="table table-borbered table-striped">
+    <div *ngIf="epps?.length ==0" class="alert alert-info">
+      No hay epps en la base de datod!
+    </div>
+
+    <table class="table table-borbered table-striped" *ngIf="epps?.length>0">
       <thead>
       <tr>
         <th>ID</th>
