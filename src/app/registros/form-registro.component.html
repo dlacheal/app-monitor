@@ -2,7 +2,7 @@
 
   <div class="card-header">{{ tituloFormRegistro }}</div>
   <div class="card-body">
-    <form (ngSubmit) = "createRegistro()">
+    <form>
 
       <!-- Numero Registro -->
       <div class="form.group row">
@@ -155,9 +155,15 @@
       <br>
       <div class="form-group row">
         <div class="col-sm-6">
-          <button class="btn btn-primary" role="button" >
+          <button class="btn btn-primary" role="button" (click)='createRegistro()' *ngIf="!registro.id else elseBlockRegistro">
             Crear
           </button>
+
+          <ng-template #elseBlockRegistro>
+            <button class="btn btn-primary" role="button" (click)='updateRegistro()'>
+              Actualizar
+            </button>
+          </ng-template>
         </div>
       </div>
 

@@ -2,7 +2,7 @@
 
   <div class="card-header">{{ tituloFromProyecto}}</div>
   <div class="card-body">
-    <form (ngSubmit) = "createProyecto()">
+    <form>
       <!-- Nombre Proyecto -->
       <div class="form.group row">
         <label for="nombre" class="col-form-label col-sm-2">NOMBRE PROYECTO</label>
@@ -53,9 +53,15 @@
       <br>
       <div class="form-group row">
         <div class="col-sm-6">
-          <button class="btn btn-primary" role="button" >
+          <button class="btn btn-primary" role="button" (click)='createProyecto()' *ngIf="!proyecto.id else elseBlockProyecto">
             Crear
           </button>
+
+          <ng-template #elseBlockProyecto>
+            <button class="btn btn-primary" role="button" (click)='updateProyecto()'>
+              Actualizar
+            </button>
+          </ng-template>
         </div>
       </div>
 

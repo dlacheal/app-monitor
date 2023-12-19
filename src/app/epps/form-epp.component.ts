@@ -52,4 +52,12 @@ export class FormEppComponent {
       }
     )
   }
+
+  public updateEpp(): void{
+    this.eppService.updateEpp(this.epp)
+      .subscribe(empleado => {
+        this.router.navigate(['/epps'])
+        Swal.fire('Epp actualizado', `Epp ${this.epp.nombre} ha sido actualizado con éxito!`, 'success');
+      });
+  }
 }

@@ -31,27 +31,28 @@ export class FormEmpleadoComponent {
       puestos => this.puestos = puestos
     );
 
-    this.activateRoute.paramMap.subscribe(params => {
-      let id = +params.get('id');
+    // this.activateRoute.paramMap.subscribe(params => {
+    //   let id = +params.get('id');
+    //   if(id){
+    //     this.empleadoService.getEmpleado(id)
+    //       .subscribe((empleado) => this.empleado = empleado)
+    //   }
+    // });
+
+    this.personaService.getPersonas().subscribe(personas => this.personas = personas);
+
+    this.cargarEmpleado();
+  }
+
+  cargarEmpleado(): void{
+    this.activateRoute.params.subscribe(params =>{
+      let id = params['id'];
       if(id){
         this.empleadoService.getEmpleado(id)
           .subscribe((empleado) => this.empleado = empleado)
       }
     });
-
-    this.personaService.getPersonas().subscribe(personas => this.personas = personas);
-    // this.cargarEmpleado();
   }
-
-  // cargarEmpleado(): void{
-  //   this.activateRoute.params.subscribe(params =>{
-  //     let id = params['id'];
-  //     if(id){
-  //       this.empleadoService.getEmpleado(id)
-  //         .subscribe((empleado) => this.empleado = empleado)
-  //     }
-  //   });
-  // }
 
   public createEmpleado(): void{
     this.empleadoService.createEmpleado(this.empleado)
@@ -62,5 +63,14 @@ export class FormEmpleadoComponent {
       }
     )
   }
+
+  public updateEmpleado(): void{
+    this.empleadoService.updateEmpleado(this.empleado)
+      .subscribe(empleado => {
+        this.router.navigate(['/empleados'])
+        Swal.fire('Empleado actualizado', `Empleado ${this.empleado.codigoPersona.nombres} ha sido actualizado con éxito!`, 'success');
+      });
+  }
+
 
 }

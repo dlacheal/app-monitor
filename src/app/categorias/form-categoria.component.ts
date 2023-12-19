@@ -19,6 +19,7 @@ export class FormCategoriaComponent {
   }
 
   ngOnInit(){
+
     this.cargarCategoria();
   }
 
@@ -40,6 +41,14 @@ export class FormCategoriaComponent {
        Swal.fire('Nueva Categoria', `La descripción ${this.categoria.descripcion} ha sido creada con éxito!`, 'success');
      }
    )
+  }
+
+  public updateCategoria(): void{
+    this.categoriaService.updateCategoria(this.categoria)
+      .subscribe(categoria => {
+        this.router.navigate(['/categorias'])
+        Swal.fire('Categoria actualizada', `Categoria ${this.categoria.descripcion} ha sido actualizada con éxito!`, 'success');
+      });
   }
 
 }

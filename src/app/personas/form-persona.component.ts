@@ -37,9 +37,17 @@ export class FormPersonaComponent {
       .subscribe(
       response => {
         this.router.navigate(['/personas']);
-        Swal.fire('Nueva Persona', `El persona  ${this.persona.nombres} ${this.persona.apellidos} ha sido creada con éxito!`, 'success');
+        Swal.fire('Nueva Persona', `La persona  ${this.persona.nombres} ${this.persona.apellidos} ha sido creada con éxito!`, 'success');
       }
     )
+  }
+
+  public updatePersona(): void{
+    this.personaService.updatePersona(this.persona)
+      .subscribe(proyecto => {
+        this.router.navigate(['/personas'])
+        Swal.fire('Persona actualizada', `Persona ${this.persona.nombres} ${this.persona.apellidos} ha sido actualizada con éxito!`, 'success');
+      });
   }
 
 

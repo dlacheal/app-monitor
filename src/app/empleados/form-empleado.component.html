@@ -2,7 +2,7 @@
 
   <div class="card-header">{{ tituloFormEmpleado }}</div>
   <div class="card-body">
-    <form (ngSubmit) = "createEmpleado()">
+    <form>
 
       <!-- Persona -->
       <div class="form.group row">
@@ -53,9 +53,15 @@
       <br>
       <div class="form-group row">
         <div class="col-sm-6">
-          <button class="btn btn-primary" role="button" >
+          <button class="btn btn-primary" role="button" (click)='createEmpleado()' *ngIf="!empleado.id else elseBlockEmpleado">
             Crear
           </button>
+
+          <ng-template #elseBlockEmpleado>
+            <button class="btn btn-primary" role="button" (click)='updateEmpleado()'>
+              Actualizar
+            </button>
+          </ng-template>
         </div>
       </div>
 

@@ -2,7 +2,7 @@
 
   <div class="card-header">{{ tituloFormUsuario }}</div>
   <div class="card-body">
-    <form (ngSubmit) = "createUsuario()">
+    <form>
       <!-- Username -->
       <div class="form.group row">
         <label for="username" class="col-form-label col-sm-2">USERNAME</label>
@@ -53,9 +53,15 @@
       <br>
       <div class="form-group row">
         <div class="col-sm-6">
-          <button class="btn btn-primary" role="button" >
+          <button class="btn btn-primary" role="button" (click)='createUsuario()' *ngIf="!usuario.id else elseBlockUsuario">
             Crear
           </button>
+
+          <ng-template #elseBlockUsuario>
+            <button class="btn btn-primary" role="button" (click)='updateUsuario()'>
+              Actualizar
+            </button>
+          </ng-template>
         </div>
       </div>
 

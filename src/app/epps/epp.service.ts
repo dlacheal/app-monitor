@@ -26,4 +26,8 @@ export class EppService {
   getEpp(id): Observable<Epp>{
     return this.http.get<Epp>(`${this.urlEndPoint}/${id}`);
   }
+
+  updateEpp(epp: Epp): Observable<Epp>{
+    return this.http.put<Epp>(`${this.urlEndPoint}/${epp.id}`, epp, {headers: this.httpHeaders});
+  }
 }

@@ -57,4 +57,12 @@ export class FormRegistroComponent {
     )
   }
 
+  public updateRegistro(): void{
+    this.registroService.updateRegistro(this.registro)
+      .subscribe(registro => {
+        this.router.navigate(['/registros'])
+        Swal.fire('Registro actualizado', `Registro ${this.registro.numeroRegistro} ha sido actualizado con éxito!`, 'success');
+      });
+  }
+
 }

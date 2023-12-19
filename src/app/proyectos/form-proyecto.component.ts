@@ -40,4 +40,12 @@ export class FormProyectoComponent {
     )
   }
 
+  public updateProyecto(): void{
+    this.proyectoService.updateProyecto(this.proyecto)
+      .subscribe(proyecto => {
+        this.router.navigate(['/proyectos'])
+        Swal.fire('Proyecto actualizado', `Proyecto ${this.proyecto.nombreProyecto} ha sido actualizado con éxito!`, 'success');
+      });
+  }
+
 }

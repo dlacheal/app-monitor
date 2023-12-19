@@ -20,10 +20,14 @@ export class UsuarioService {
   }
 
   createUsuario(usuario: Usuario): Observable<Usuario>{
-    return this.http.post<Usuario>(this.urlEndPoint, usuario, {headers: this.httpHeaders})
+    return this.http.post<Usuario>(this.urlEndPoint, usuario, {headers: this.httpHeaders});
   }
 
   getPUsuario(id): Observable<Usuario>{
     return this.http.get<Usuario>(`${this.urlEndPoint}/${id}`);
+  }
+
+  updateusuario(usuario: Usuario): Observable<Usuario>{
+    return this.http.put<Usuario>(`${this.urlEndPoint}/${usuario.id}`, usuario, {headers: this.httpHeaders});
   }
 }
