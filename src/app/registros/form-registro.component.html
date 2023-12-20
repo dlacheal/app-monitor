@@ -8,7 +8,13 @@
       <div class="form.group row">
         <label for="numeroRegistro" class="col-form-label col-sm-2">Nº REGISTRO</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="registro.numeroRegistro" name="numeroRegistro">
+          <input type="text" class="form-control" [(ngModel)]="registro.numeroRegistro" name="numeroRegistro" required
+                 #numeroRegistro="ngModel">
+          <div class="alert alert-danger" *ngIf="numeroRegistro.invalid && (numeroRegistro.dirty || numeroRegistro.touched)">
+            <div *ngIf="numeroRegistro.errors.required">
+              El número del registro es requerido.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -17,7 +23,13 @@
       <div class="form.group row">
         <label for="formatoRegistro" class="col-form-label col-sm-2">FORMATO REGISTRO</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="registro.formatoRegistro" name="formatoRegistro">
+          <input type="text" class="form-control" [(ngModel)]="registro.formatoRegistro" name="formatoRegistro" required
+                 #formatoRegistro="ngModel">
+          <div class="alert alert-danger" *ngIf="formatoRegistro.invalid && (formatoRegistro.dirty || formatoRegistro.touched)">
+            <div *ngIf="formatoRegistro.errors.required">
+              El formato del registro es requerido.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -26,49 +38,15 @@
       <div class="form.group row">
         <label for="numeroTrabajadores" class="col-form-label col-sm-2">Nº TRABAJADORES</label>
         <div class="col-sm-6">
-          <input type="number" class="form-control" [(ngModel)]="registro.numeroTrabajadores" name="numeroTrabajadores">
+          <input type="number" class="form-control" [(ngModel)]="registro.numeroTrabajadores" name="numeroTrabajadores" required
+                 #numeroTrabajadores="ngModel">
+          <div class="alert alert-danger" *ngIf="numeroTrabajadores.invalid && (numeroTrabajadores.dirty || numeroTrabajadores.touched)">
+            <div *ngIf="numeroTrabajadores.errors.required">
+              El numero de trabajadores en el registro es requerido.
+            </div>
+          </div>
         </div>
       </div>
-
-      <br>
-      <!-- Revisado
-      <div class="form-group row">
-        <label for="revisado" class="col-sm-2 col-form-label">REVISADO</label>
-        <div class="col-sm-6">
-          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="registro.revisado" name="revisado">
-            <option [ngValue]="undefined"> Seleccionar</option>
-            <option value="false">NO</option>
-            <option value="true">SI</option>
-          </select>
-        </div>
-      </div>
-      -->
-
-      <!-- Aprobado
-      <div class="form-group row">
-        <label for="aprobado" class="col-sm-2 col-form-label">APROBADO</label>
-        <div class="col-sm-6">
-          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="registro.aprobado" name="aprobado">
-            <option [ngValue]="undefined"> Seleccionar</option>
-            <option value="false">NO</option>
-            <option value="true">SI</option>
-          </select>
-        </div>
-      </div>
-      -->
-
-      <!-- entregado
-      <div class="form-group row">
-        <label for="aprobado" class="col-sm-2 col-form-label">ENTREGADO</label>
-        <div class="col-sm-6">
-          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="registro.entregado" name="aprobado">
-            <option [ngValue]="undefined"> Seleccionar</option>
-            <option value="false">NO APROBADO</option>
-            <option value="true">APROBADO</option>
-          </select>
-        </div>
-      </div>
-      -->
 
       <br>
       <div class="form-check form-check-inline">
@@ -84,32 +62,19 @@
         <label class="form-check-label" for="inlineCheckboxEntregado">APROBADO</label>
       </div>
 
-      <!--
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="checkbox" [ngModel]="registro.revisado"> REVISADO
-        </label>
-      </div>
-
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="checkbox" [ngModel]="registro.revisado"> REVISADO
-        </label>
-      </div>
-
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="checkbox" [ngModel]="registro.revisado"> REVISADO
-        </label>
-      </div>
-      -->
-
+      <br>
       <br>
       <!-- Nombre Proyecto Operario -->
       <div class="form.group row">
         <label for="nombreProyectoOperario" class="col-form-label col-sm-2">NOMBRE PROYECTO OPERARIO</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="registro.nombreProyectoOperario" name="nombreProyectoOperario">
+          <input type="text" class="form-control" [(ngModel)]="registro.nombreProyectoOperario" name="nombreProyectoOperario" required
+                 #nombreProyectoOperario="ngModel">
+          <div class="alert alert-danger" *ngIf="nombreProyectoOperario.invalid && (nombreProyectoOperario.dirty || nombreProyectoOperario.touched)">
+            <div *ngIf="nombreProyectoOperario.errors.required">
+              El nombre del proyecto en el registro es requerido.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -118,7 +83,13 @@
       <div class="form.group row">
         <label for="plantaOperario" class="col-form-label col-sm-2">PLANTA OPERARIO</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="registro.plantaOperario" name="plantaOperario">
+          <input type="text" class="form-control" [(ngModel)]="registro.plantaOperario" name="plantaOperario" required
+                 #plantaOperario="ngModel">
+          <div class="alert alert-danger" *ngIf="plantaOperario.invalid && (plantaOperario.dirty || plantaOperario.touched)">
+            <div *ngIf="plantaOperario.errors.required">
+              La planta del operario en el registro es requerido.
+            </div>
+          </div>
         </div>
       </div>
 

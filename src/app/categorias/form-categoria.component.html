@@ -1,33 +1,44 @@
-<div class="card bg-dark text-white mb-3 my-3 mx-3" >
+<div class="card bg-dark text-white mb-3 my-3 mx-3">
 
-    <div class="card-header">{{ tituloFormCategoria}}</div>
-    <div class="card-body">
-        <form>
-            <!-- Descripcion -->
-            <div class="form.group row">
-                <label for="descripcion" class="col-form-label col-sm-2">DESCRIPCIÓN</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)]="categoria.descripcion" name="descripcion">
-                </div>
+  <div class="card-header">{{ tituloFormCategoria}}</div>
+  <div class="card-body">
+    <form>
+      <!-- Descripcion -->
+      <div class="form.group row">
+        <label for="descripcion" class="col-form-label col-sm-2">DESCRIPCIÓN</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="categoria.descripcion" name="descripcion" required
+                 minlength="4" #descripcion="ngModel">
+          <div class="alert alert-danger" *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
+            <div *ngIf="descripcion.errors.required">
+              La descripcioón de la categoria es requerido.
             </div>
-
-            <!-- Boton -->
-            <br>
-            <br>
-            <br>
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <button class="btn btn-primary" role="button" (click)='createCategoria()' *ngIf="!categoria.id else elseBlockCategoria">
-                      Crear
-                    </button>
-                  <ng-template #elseBlockCategoria>
-                    <button class="btn btn-primary" role="button" (click)='updateCategoria()'>
-                      Actualizar
-                    </button>
-                  </ng-template>
-                </div>
+            <div *ngIf="descripcion.errors.minlength">
+              Descripción debe tener al menos 4 caracteres.
             </div>
+          </div>
 
-        </form>
-    </div>
+        </div>
+      </div>
+
+      <!-- Boton -->
+      <br>
+      <br>
+      <br>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role="button" (click)='createCategoria()'
+                  *ngIf="!categoria.id else elseBlockCategoria">
+            Crear
+          </button>
+          <ng-template #elseBlockCategoria>
+            <button class="btn btn-primary" role="button" (click)='updateCategoria()'>
+              Actualizar
+            </button>
+          </ng-template>
+        </div>
+      </div>
+
+    </form>
+  </div>
 </div>

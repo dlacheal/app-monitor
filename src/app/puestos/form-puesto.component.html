@@ -1,4 +1,4 @@
-<div class="card bg-dark text-white mb-3 my-3 mx-3" >
+<div class="card bg-dark text-white mb-3 my-3 mx-3">
 
   <div class="card-header">{{ tituloFormPuesto}}</div>
   <div class="card-body">
@@ -7,7 +7,16 @@
       <div class="form.group row">
         <label for="descripcion" class="col-form-label col-sm-2">DESCRIPCIÓN</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="puesto.descripcion" name="descripcion">
+          <input type="text" class="form-control" [(ngModel)]="puesto.descripcion" name="descripcion" required
+                 minlength="4" #descripcion="ngModel">
+          <div class="alert alert-danger" *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
+            <div *ngIf="descripcion.errors.required">
+              La descripcioón del puesto es requerido.
+            </div>
+            <div *ngIf="descripcion.errors.minlength">
+              Descripción debe tener al menos 4 caracteres.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -17,7 +26,8 @@
       <br>
       <div class="form-group row">
         <div class="col-sm-6">
-          <button class="btn btn-primary" role="button" (click)='createPuesto()' *ngIf="!puesto.id else elseBlockPuesto">
+          <button class="btn btn-primary" role="button" (click)='createPuesto()'
+                  *ngIf="!puesto.id else elseBlockPuesto">
             Crear
           </button>
 

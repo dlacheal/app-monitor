@@ -7,7 +7,16 @@
       <div class="form.group row">
         <label for="nombrePersona" class="col-form-label col-sm-2">NOMBRES</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="persona.nombres" name="nombrePersona">
+          <input type="text" class="form-control" [(ngModel)]="persona.nombres" name="nombrePersona" required
+                 minlength="4" #nombrePersona="ngModel">
+          <div class="alert alert-danger" *ngIf="nombrePersona.invalid && (nombrePersona.dirty || nombrePersona.touched)">
+            <div *ngIf="nombrePersona.errors.required">
+              El nombre de la persona es requerido.
+            </div>
+            <div *ngIf="nombrePersona.errors.minlength">
+              El nombre de la persona debe tener al menos 4 caracteres.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -16,7 +25,16 @@
       <div class="form.group row">
         <label for="apellidoPersona" class="col-form-label col-sm-2">APELLIDOS</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="persona.apellidos" name="apellidoPersona">
+          <input type="text" class="form-control" [(ngModel)]="persona.apellidos" name="apellidoPersona" required
+                 minlength="4" #apellidoPersona="ngModel">
+          <div class="alert alert-danger" *ngIf="apellidoPersona.invalid && (apellidoPersona.dirty || apellidoPersona.touched)">
+            <div *ngIf="apellidoPersona.errors.required">
+              El apellido de la persona es requerido.
+            </div>
+            <div *ngIf="apellidoPersona.errors.minlength">
+              El apellido de la persona debe tener al menos 4 caracteres.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -39,7 +57,16 @@
       <div class="form.group row">
         <label for="numeroDocumento" class="col-form-label col-sm-2">NÚMERO DOC.</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="persona.numeroDocumento" name="numeroDocumento">
+          <input type="text" class="form-control" [(ngModel)]="persona.numeroDocumento" name="numeroDocumento" required
+                 minlength="8" #numeroDocumento="ngModel">
+          <div class="alert alert-danger" *ngIf="numeroDocumento.invalid && (numeroDocumento.dirty || numeroDocumento.touched)">
+            <div *ngIf="numeroDocumento.errors.required">
+              El número de documento es requerido.
+            </div>
+            <div *ngIf="numeroDocumento.errors.minlength">
+              El número de documento debe tener al menos 8 caracteres.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -66,7 +93,16 @@
       <div class="form.group row">
         <label for="email" class="col-form-label col-sm-2">EMAIL</label>
         <div class="col-sm-6">
-          <input type="email" class="form-control" [(ngModel)]="persona.email" name="email">
+          <input type="email" class="form-control" [(ngModel)]="persona.email" name="email" required
+                 email #email="ngModel">
+          <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.errors.required">
+             El email es requerido.
+            </div>
+            <div *ngIf="email.errors.email">
+              El email debe tener un formato valido.
+            </div>
+          </div>
         </div>
       </div>
 

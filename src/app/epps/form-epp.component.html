@@ -7,7 +7,16 @@
       <div class="form.group row">
         <span for="nombreEpp" class="col-form-label col-sm-2">NOMBRE EPP</span>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="epp.nombre" name="nombreEpp">
+          <input type="text" class="form-control" [(ngModel)]="epp.nombre" name="nombreEpp" required
+                 minlength="4" #nombreEpp="ngModel">
+          <div class="alert alert-danger" *ngIf="nombreEpp.invalid && (nombreEpp.dirty || nombreEpp.touched)">
+            <div *ngIf="nombreEpp.errors.required">
+              El nombre del epp es requerido.
+            </div>
+            <div *ngIf="nombreEpp.errors.minlength">
+              El nombre del epp debe tener al menos 4 caracteres.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -16,7 +25,13 @@
       <div class="form.group row">
         <span for="stockActual" class="col-form-label col-sm-2">STOCK</span>
         <div class="col-sm-6">
-          <input type="number" class="form-control" [(ngModel)]="epp.stockActual" name="stockActual">
+          <input type="number" class="form-control" [(ngModel)]="epp.stockActual" name="stockActual" required
+               #stockActual="ngModel">
+          <div class="alert alert-danger" *ngIf="stockActual.invalid && (stockActual.dirty || stockActual.touched)">
+            <div *ngIf="stockActual.errors.required">
+              El stock del epp es requerido.
+            </div>
+          </div>
         </div>
       </div>
 

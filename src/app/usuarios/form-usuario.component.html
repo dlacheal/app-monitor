@@ -7,7 +7,16 @@
       <div class="form.group row">
         <label for="username" class="col-form-label col-sm-2">USERNAME</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="usuario.username" name="username">
+          <input type="text" class="form-control" [(ngModel)]="usuario.username" name="username" required
+                 minlength="4" #username="ngModel">
+          <div class="alert alert-danger" *ngIf="username.invalid && (username.dirty || username.touched)">
+            <div *ngIf="username.errors.required">
+              El username del usuario es requerido.
+            </div>
+            <div *ngIf="username.errors.minlength">
+              El username del usuario debe tener al menos 4 caracteres.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -16,7 +25,16 @@
       <div class="form.group row">
         <label for="password" class="col-form-label col-sm-2">PASSWORD</label>
         <div class="col-sm-6">
-          <input type="password" class="form-control" [(ngModel)]="usuario.password" name="password">
+          <input type="password" class="form-control" [(ngModel)]="usuario.password" name="password" required
+                 minlength="4" #password="ngModel">
+          <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+            <div *ngIf="password.errors.required">
+              El password del usuario es requerido.
+            </div>
+            <div *ngIf="password.errors.minlength">
+              El password del usuario debe tener al menos 4 caracteres.
+            </div>
+          </div>
         </div>
       </div>
 

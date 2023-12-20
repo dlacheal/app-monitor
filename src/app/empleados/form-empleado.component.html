@@ -1,4 +1,4 @@
-<div class="card bg-dark text-white mb-3 my-3 mx-3" >
+<div class="card bg-dark text-white mb-3 my-3 mx-3">
 
   <div class="card-header">{{ tituloFormEmpleado }}</div>
   <div class="card-body">
@@ -21,7 +21,13 @@
       <div class="form.group row">
         <label for="licencia" class="col-form-label col-sm-2">LICENCIA</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="empleado.licencia" name="licencia">
+          <input type="text" class="form-control" [(ngModel)]="empleado.licencia" name="licencia" required
+                 #licencia="ngModel">
+          <div class="alert alert-danger" *ngIf="licencia.invalid && (licencia.dirty || licencia.touched)">
+            <div *ngIf="licencia.errors.required">
+              La licencia del empledo es requerido.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -30,7 +36,13 @@
       <div class="form.group row">
         <label for="tipoSangre" class="col-form-label col-sm-2">TIPO SANGRE</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="empleado.tipoSangre" name="tipoSangre">
+          <input type="text" class="form-control" [(ngModel)]="empleado.tipoSangre" name="tipoSangre" required
+                 #tipoSangre="ngModel">
+          <div class="alert alert-danger" *ngIf="tipoSangre.invalid && (tipoSangre.dirty || tipoSangre.touched)">
+            <div *ngIf="tipoSangre.errors.required">
+              El tipo de sangre del empleado es requerido.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -53,7 +65,8 @@
       <br>
       <div class="form-group row">
         <div class="col-sm-6">
-          <button class="btn btn-primary" role="button" (click)='createEmpleado()' *ngIf="!empleado.id else elseBlockEmpleado">
+          <button class="btn btn-primary" role="button" (click)='createEmpleado()'
+                  *ngIf="!empleado.id else elseBlockEmpleado">
             Crear
           </button>
 
