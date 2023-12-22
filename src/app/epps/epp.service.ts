@@ -37,9 +37,23 @@ export class EppService {
   createEpp(epp: Epp): Observable<Epp>{
     return this.http.post<Epp>(this.urlEndPoint, epp, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.error('epp.service.createEpp(epp): ' + e.error.mensaje);
-        Swal.fire('Error al crear el epp', e.error.mensaje, 'error');
-        return throwError(e);
+        // console.error('epp.service.createEpp(epp): ' + e.error.mensaje);
+        // Swal.fire('Error al crear el epp', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al crear el epp', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al crear el epp', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al crear el epp', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
       })
     );
   }
@@ -47,9 +61,23 @@ export class EppService {
   updateEpp(epp: Epp): Observable<Epp>{
     return this.http.put<Epp>(`${this.urlEndPoint}/${epp.id}`, epp, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.error('epp.service.updateEpp(epp): ' + e.error.mensaje);
-        Swal.fire('Error al editar el epp', e.error.mensaje, 'error');
-        return throwError(e);
+        // console.error('epp.service.updateEpp(epp): ' + e.error.mensaje);
+        // Swal.fire('Error al editar el epp', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al editar el epp', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al editar el epp', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al editar el epp', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
       })
     );
   }

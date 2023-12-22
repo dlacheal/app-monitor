@@ -38,9 +38,23 @@ export class PuestoService {
   createPuesto(puesto: Puesto): Observable<Puesto>{
     return this.http.post<Puesto>(this.urlEndPoint, puesto, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.error('puesto.service.createPuesto(puesto): ' + e.error.mensaje);
-        Swal.fire('Error al crear el puesto', e.error.mensaje, 'error');
-        return throwError(e);
+        // console.error('puesto.service.createPuesto(puesto): ' + e.error.mensaje);
+        // Swal.fire('Error al crear el puesto', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al crear el puesto', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al crear el puesto', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al crear el puesto', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
       })
     );
   }
@@ -48,9 +62,23 @@ export class PuestoService {
   updatePuesto(puesto: Puesto): Observable<Puesto>{
     return this.http.put<Puesto>(`${this.urlEndPoint}/${puesto.id}`, puesto, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.error('puesto.service.updatePuesto(puesto): ' + e.error.mensaje);
-        Swal.fire('Error al editar el puesto', e.error.mensaje, 'error');
-        return throwError(e);
+        // console.error('puesto.service.updatePuesto(puesto): ' + e.error.mensaje);
+        // Swal.fire('Error al editar el puesto', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al eliminar el puesto', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al eliminar el puesto', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al eliminar el puesto', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
       })
     );
   }

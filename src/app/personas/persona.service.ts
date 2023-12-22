@@ -37,9 +37,23 @@ export class PersonaService {
   createPersona(persona: Persona): Observable<Persona>{
     return this.http.post<Persona>(this.urlEndPoint, persona, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.error('persona.service.createPersona(persona): ' + e.error.mensaje);
-        Swal.fire('Error al crear la persona', e.error.mensaje, 'error');
-        return throwError(e);
+        // console.error('persona.service.createPersona(persona): ' + e.error.mensaje);
+        // Swal.fire('Error al crear la persona', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al crear la persona', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al crear la persona', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al crear la persona', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
       })
     );
   }
@@ -47,9 +61,23 @@ export class PersonaService {
   updatePersona(persona: Persona): Observable<Persona>{
     return this.http.put<Persona>(`${this.urlEndPoint}/${persona.id}`, persona, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.error('persona.service.updatePersona(persona): ' + e.error.mensaje);
-        Swal.fire('Error al editar la persona', e.error.mensaje, 'error');
-        return throwError(e);
+        // console.error('persona.service.updatePersona(persona): ' + e.error.mensaje);
+        // Swal.fire('Error al editar la persona', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al editar la persona', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al editar la persona', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al editar la persona', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
       })
     );
   }

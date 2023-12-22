@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Empleado} from "../empleados/empleado";
 import {EmpleadoService} from "../empleados/empleado.service";
 import Swal from "sweetalert2";
+import {Observer} from "rxjs";
+import {Categoria} from "../categorias/categoria";
 
 @Component({
   selector: 'app-form-usuario',
@@ -37,7 +39,7 @@ export class FormUsuarioComponent {
     });
   }
 
-  public createUsuario(): void{
+  public createUsuarioDeprecated(): void{
     this.usuarioService.createUsuario(this.usuario).subscribe(
       response => {
         this.router.navigate(['/usuarios']);
@@ -46,12 +48,82 @@ export class FormUsuarioComponent {
     )
   }
 
-  public updateUsuario(): void{
+  public createUsuario(): void {
+    const observer: Observer<Usuario> = {
+      next: (usuario) => {
+        this.router.navigate(['/usuarios']);
+      },
+      error: (err) => {
+        // this.errores = err.error.errors as string[];
+        // console.error('Código del error desde el backend: ' + err.status);
+        // console.error(err.error.errors);
+        //////////////////////////////////////////////////
+        switch (err.status) {
+          case 400:
+            //this.errores = err.error.errors as string[];
+            console.error('Código del error desde el backend: ' + err.status);
+            console.error("Mensaje error createUsuario 400: " + err.error.errors);
+            break
+          case 500:
+            //this.errores = err.error.mensaje as string[];
+            console.error('Código del error desde el backend: ' + err.status);
+            console.error("Mensaje error createUsuario 500: " + err.error.mensaje);
+            break;
+          default:
+            console.error('Código del error desde el backend: ' + err.status);
+            console.error("Mensaje error createUsuario: codigo no validado");
+            break;
+        }
+        //////////////////////////////////////////////////
+
+      },
+      complete: () => {
+        Swal.fire('Nuevo Usuario', `El usuario  ${this.usuario.username} ha sido creado con éxito!`, 'success');
+      }
+    };
+    this.usuarioService.createUsuario(this.usuario).subscribe(observer);
+  }
+
+  public updateUsuarioDeprecated(): void{
     this.usuarioService.updateusuario(this.usuario)
       .subscribe(usuario => {
         this.router.navigate(['/usuarios'])
         Swal.fire('Usuario actualizado', `Usuario ${this.usuario.username} ha sido actualizado con éxito!`, 'success');
       });
+  }
+
+  public updateUsuario(): void {
+    const observer: Observer<Usuario> = {
+      next: (usuario) => {
+        this.router.navigate(['/usuarios']);
+      },
+      error: (err) => {
+        // this.errores = err.error.errors as string[];
+        // console.error('Código del error desde el backend: ' + err.status);
+        // console.error("Mensaje Error: " + err.error.mensaje);
+
+        //////////////////////////////////////////////////
+        switch (err.status) {
+          case 400:
+            console.error('Código del error desde el backend: ' + err.status);
+            console.error("Mensaje error updateUsuario 400: " + err.error.errors);
+            break
+          case 500:
+            console.error('Código del error desde el backend: ' + err.status);
+            console.error("Mensaje error updateUsuario 500: " + err.error.mensaje);
+            break;
+          default:
+            console.error('Código del error desde el backend: ' + err.status);
+            console.error("Mensaje error updateUsuario: codigo no validado ");
+            break;
+        }
+        //////////////////////////////////////////////////
+      },
+      complete: () => {
+        Swal.fire('Usuario actualizado', `Usuario ${this.usuario.username} ha sido actualizado con éxito!`, 'success');
+      }
+    };
+    this.usuarioService.updateusuario(this.usuario).subscribe(observer);
   }
 
 }

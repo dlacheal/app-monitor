@@ -37,9 +37,23 @@ export class EmpleadoService {
   createEmpleado(empleado: Empleado): Observable<Empleado>{
     return this.http.post<Empleado>(this.urlEndPoint, empleado, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.error('empleado.service.createEmpleado(empleado): ' + e.error.mensaje);
-        Swal.fire('Error al crear el empleado', e.error.mensaje, 'error');
-        return throwError(e);
+        // console.error('empleado.service.createEmpleado(empleado): ' + e.error.mensaje);
+        // Swal.fire('Error al crear el empleado', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al crear el empleado', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al crear el empleado', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al crear el empleado', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
       })
     );
   }
@@ -47,9 +61,23 @@ export class EmpleadoService {
   updateEmpleado(empleado: Empleado): Observable<Empleado>{
     return this.http.put<Empleado>(`${this.urlEndPoint}/${empleado.id}`, empleado, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.error('empleado.service.updateEmpleado(empleado): ' + e.error.mensaje);
-        Swal.fire('Error al editar el empleado', e.error.mensaje, 'error');
-        return throwError(e);
+        // console.error('empleado.service.updateEmpleado(empleado): ' + e.error.mensaje);
+        // Swal.fire('Error al editar el empleado', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al crear el empleado', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al crear el empleado', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al crear el empleado', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
       })
     );
   }

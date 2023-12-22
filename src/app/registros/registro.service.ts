@@ -37,9 +37,23 @@ export class RegistroService {
   createRegistro(registro: Registro): Observable<Registro>{
     return this.http.post<Registro>(this.urlEndPoint, registro, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.error('registro.service.createEmpleado(registro): ' + e.error.mensaje);
-        Swal.fire('Error al crear el registro', e.error.mensaje, 'error');
-        return throwError(e);
+        // console.error('registro.service.createEmpleado(registro): ' + e.error.mensaje);
+        // Swal.fire('Error al crear el registro', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al crear el registro', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al crear el registro', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al crear el registro', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
       })
     );
   }
@@ -47,9 +61,23 @@ export class RegistroService {
   updateRegistro(registro: Registro): Observable<Registro>{
     return this.http.put<Registro>(`${this.urlEndPoint}/${registro.id}`, registro, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.error('registro.service.updateRegistro(registro): ' + e.error.mensaje);
-        Swal.fire('Error al editar el registro', e.error.mensaje, 'error');
-        return throwError(e);
+        // console.error('registro.service.updateRegistro(registro): ' + e.error.mensaje);
+        // Swal.fire('Error al editar el registro', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al editar el registro', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al editar el registro', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al editar el registro', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
       })
     );
   }

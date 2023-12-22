@@ -37,9 +37,23 @@ export class UsuarioService {
   createUsuario(usuario: Usuario): Observable<Usuario>{
     return this.http.post<Usuario>(this.urlEndPoint, usuario, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.error('usuario.service.createEmpleado(usuario): ' + e.error.mensaje);
-        Swal.fire('Error al crear el usuario', e.error.mensaje, 'error');
-        return throwError(e);
+        // console.error('usuario.service.createEmpleado(usuario): ' + e.error.mensaje);
+        // Swal.fire('Error al crear el usuario', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al crear la categoria', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al crear la categoria', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al crear la categoria', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
       })
     );
   }
@@ -47,9 +61,23 @@ export class UsuarioService {
   updateusuario(usuario: Usuario): Observable<Usuario>{
     return this.http.put<Usuario>(`${this.urlEndPoint}/${usuario.id}`, usuario, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.error('usuario.service.updateusuario(usuario): ' + e.error.mensaje);
-        Swal.fire('Error al editar el usuario', e.error.mensaje, 'error');
-        return throwError(e);
+        // console.error('usuario.service.updateusuario(usuario): ' + e.error.mensaje);
+        // Swal.fire('Error al editar el usuario', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al editar el usuario', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al editar el usuario', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al editar el usuario', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
       })
     );
   }

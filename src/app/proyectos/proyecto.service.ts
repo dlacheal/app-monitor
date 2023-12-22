@@ -39,9 +39,23 @@ export class ProyectoService {
   createProyecto(proyecto: Proyecto): Observable<Proyecto>{
     return this.http.post<Proyecto>(this.urlEndPoint, proyecto, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.error('proyecto.service.createProyecto(empleado): ' + e.error.mensaje);
-        Swal.fire('Error al crear el proyecto', e.error.mensaje, 'error');
-        return throwError(e);
+        // console.error('proyecto.service.createProyecto(empleado): ' + e.error.mensaje);
+        // Swal.fire('Error al crear el proyecto', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al crear el proyecto', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al crear el proyecto', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al crear el proyecto', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
       })
     );
   }
@@ -49,9 +63,23 @@ export class ProyectoService {
   updateProyecto(proyecto: Proyecto): Observable<Proyecto>{
     return this.http.put<Proyecto>(`${this.urlEndPoint}/${proyecto.id}`, proyecto, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-        console.error('proyecto.service.updateProyecto(empleado): ' + e.error.mensaje);
-        Swal.fire('Error al editar el proyecto', e.error.mensaje, 'error');
-        return throwError(e);
+        // console.error('proyecto.service.updateProyecto(empleado): ' + e.error.mensaje);
+        // Swal.fire('Error al editar el proyecto', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al editar el proyecto', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al editar el proyecto', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al editar el proyecto', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
       })
     );
   }
