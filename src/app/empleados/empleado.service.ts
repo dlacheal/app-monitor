@@ -19,7 +19,18 @@ export class EmpleadoService {
 
   getEmpleados(): Observable<Empleado[]>{
     return this.http.get<Empleado[]>(this.urlEndPoint).pipe(
-      map(response => response as Empleado[])
+    map( response => {
+      let empleados = response as Empleado[];
+
+      return empleados.map( empleado => {
+        empleado.codigoPersona.nombres = empleado.codigoPersona.nombres.toUpperCase();
+        empleado.codigoPersona.apellidos = empleado.codigoPersona.apellidos.toUpperCase();
+        empleado.codigoPuesto.descripcion = empleado.codigoPuesto.descripcion.toUpperCase();
+        empleado.tipoSangre = empleado.tipoSangre.toUpperCase();
+        empleado.licencia = empleado.licencia.toUpperCase();
+        return empleado;
+      });
+    })
     );
   }
 

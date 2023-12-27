@@ -6,7 +6,6 @@ import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
-
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +20,15 @@ export class ProyectoService {
   getProyectos(): Observable<Proyecto[]> {
 
     return this.http.get<Proyecto[]>(this.urlEndPoint).pipe(
-      map( response => response as Proyecto[] )
+    map( response => {
+      let proyectos = response as Proyecto[];
+
+      return proyectos.map( proyecto => {
+        proyecto.nombreProyecto = proyecto.nombreProyecto.toUpperCase();
+        proyecto.ubicacion = proyecto.ubicacion.toUpperCase();
+        return proyecto;
+      });
+    })
     );
   }
 

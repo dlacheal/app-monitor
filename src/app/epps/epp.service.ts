@@ -19,7 +19,16 @@ export class EppService {
 
   getEpps(): Observable<Epp[]>{
     return this.http.get<Epp[]>(this.urlEndPoint).pipe(
-      map(response => response as Epp[])
+    map( response => {
+      let epps = response as Epp[];
+
+      return epps.map( epp => {
+        epp.nombre = epp.nombre.toUpperCase();
+        epp.talla = epp.talla.toUpperCase();
+        epp.codigoCategoria.descripcion = epp.codigoCategoria.descripcion.toUpperCase();
+        return epp;
+      });
+    })
     );
   }
 

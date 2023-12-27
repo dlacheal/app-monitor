@@ -19,7 +19,15 @@ export class RegistroService {
 
   getRegistros(): Observable<Registro[]>{
     return this.http.get<Registro[]>(this.urlEndPoint).pipe(
-      map(response => response as Registro[])
+    map( response => {
+      let registros = response as Registro[];
+
+      return registros.map( registro => {
+        registro.codigoEmpleado.codigoPersona.nombres = registro.codigoEmpleado.codigoPersona.nombres.toUpperCase();
+        registro.codigoEmpleado.codigoPersona.apellidos = registro.codigoEmpleado.codigoPersona.apellidos.toUpperCase();
+        return registro;
+      });
+    })
     );
   }
 

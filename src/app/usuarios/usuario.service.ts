@@ -5,6 +5,7 @@ import { Observable, map, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
+import {Categoria} from "../categorias/categoria";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,16 @@ export class UsuarioService {
 
   getUsuarios(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(this.urlEndPoint).pipe(
-      map(response => response as Usuario[])
+    map( response => {
+      let usuarios = response as Usuario[];
+
+      return usuarios.map( usuario => {
+        usuario.username = usuario.username.toUpperCase();
+        usuario.codigoEmpleado.codigoPersona.nombres = usuario.codigoEmpleado.codigoPersona.nombres.toUpperCase();
+        usuario.codigoEmpleado.codigoPersona.apellidos = usuario.codigoEmpleado.codigoPersona.apellidos.toUpperCase();
+        return usuario;
+      });
+    })
     );
   }
 

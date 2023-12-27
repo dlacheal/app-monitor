@@ -30,7 +30,13 @@
         <td>{{usuario.id}}</td>
         <td>{{usuario.username}}</td>
         <td>{{usuario.password}}</td>
-        <td>{{usuario.enable}}</td>
+<!--        <td>{{usuario.enable}}</td>-->
+        <td>
+          <span class="btn btn-secondary" *ngIf="!usuario.enable else elseBlock">INHABILITADO</span>
+          <ng-template #elseBlock>
+            <span class="btn btn-secondary"  >HABILITADO</span>
+          </ng-template>
+        </td>
         <td>{{usuario.codigoEmpleado.codigoPersona.nombres}} {{usuario.codigoEmpleado.codigoPersona.apellidos}}</td>
         <td>
           <button class="btn btn-success" type="button" name="buttonUpdateUsuario"

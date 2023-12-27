@@ -19,7 +19,18 @@ export class PersonaService {
 
   getPersonas(): Observable<Persona[]>{
     return this.http.get<Persona[]>(this.urlEndPoint).pipe(
-      map(response => response as Persona[])
+
+    map( response => {
+      let personas = response as Persona[];
+
+      return personas.map( persona => {
+        persona.nombres = persona.nombres.toUpperCase();
+        persona.apellidos = persona.apellidos.toUpperCase();
+        persona.direccion = persona.direccion.toUpperCase();
+        persona.email = persona.email.toUpperCase();
+        return persona;
+      });
+    })
     );
   }
 

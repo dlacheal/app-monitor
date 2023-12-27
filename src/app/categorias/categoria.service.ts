@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Categoria} from './categoria';
-import {Observable, throwError} from 'rxjs';
+import {map, Observable, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {Router} from "@angular/router";
@@ -19,9 +19,16 @@ export class CategoriaService {
   }
 
   getCategorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(this.urlEndPoint)
-    //   .pipe( map( response => response as Categoria[] )
-    // );
+    return this.http.get<Categoria[]>(this.urlEndPoint).pipe(
+      map( response => {
+        let categorias = response as Categoria[];
+
+        return categorias.map( categoria => {
+          categoria.descripcion = categoria.descripcion.toUpperCase();
+          return categoria;
+        });
+      })
+    );
   }
 
   getCategoria(id): Observable<Categoria> {
