@@ -12,7 +12,7 @@ export class Registro {
     entregado: boolean;
     nombreProyectoOperario: string;
     plantaOperario: string;
-    //fechaRegistro: Date;
+    fechaRegistro: Date;
     codigoEmpleado: Empleado;
     codigoProyecto: Proyecto;
     detalleRegistroList: DetalleRegistro[] = [];

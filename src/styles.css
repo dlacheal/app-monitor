@@ -21,3 +21,6 @@ body{
 .btn-success{
   margin: 5px 5px 5px 5px;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
