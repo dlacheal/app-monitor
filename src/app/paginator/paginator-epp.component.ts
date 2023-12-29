@@ -2,8 +2,7 @@ import {Component, Input, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'app-paginator-epp',
-  templateUrl: './paginator-epp.component.html',
-  styleUrls: ['./paginator-epp.component.css']
+  templateUrl: './paginator-epp.component.html'
 })
 export class PaginatorEppComponent {
 

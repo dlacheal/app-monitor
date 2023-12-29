@@ -2,8 +2,7 @@ import {Component, Input, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'app-paginator-registro',
-  templateUrl: './paginator-registro.component.html',
-  styleUrls: ['./paginator-registro.component.css']
+  templateUrl: './paginator-registro.component.html'
 })
 export class PaginatorRegistroComponent {
 
