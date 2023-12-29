@@ -1,43 +1,50 @@
-<div class="card border-primary mb-3 my-3 mx-3">
-  <div class="card-header">Listado de Puestos</div>
-  <div class="card-body text-primary">
-    <!--
-      <h5 class="card-title">Listado de Puestos</h5>
-    -->
+<div class="container py-4">
+  <div class="card border-primary mb-3 my-3 mx-3">
+    <div class="card-header">Listado de Puestos</div>
+    <div class="card-body text-primary">
+      <!--
+        <h5 class="card-title">Listado de Puestos</h5>
+      -->
 
-    <div class="my-2 text-left">
-      <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/puestos/form']"> Crear Puesto</button>
+      <div class="my-2 text-left">
+        <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/puestos/form']"> Crear Puesto
+        </button>
+      </div>
+
+      <div *ngIf="puestos?.length ==0" class="alert alert-info">
+        No hay puestos en la base de datod!
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-borbered table-striped" *ngIf="puestos?.length>0">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>DESCRIPCIÓN</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let puesto of puestos">
+            <td>{{puesto.id}}</td>
+            <td>{{puesto.descripcion}}</td>
+            <td>
+              <button class="btn btn-success" type="button" name="buttonUpdatePuesto"
+                      [routerLink]="['/puestos/form',puesto.id]">Editar
+              </button>
+            </td>
+
+            <td>
+              <button class="btn btn-danger" type="button" name="buttonDeletePuesto" (click)='deletePuesto(puesto)'>
+                Eliminar
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <app-paginator-puesto *ngIf="paginadorPuesto" [paginador]="paginadorPuesto"></app-paginator-puesto>
+      </div>
     </div>
-
-    <div *ngIf="puestos?.length ==0" class="alert alert-info">
-      No hay puestos en la base de datod!
-    </div>
-
-    <table class="table table-borbered table-striped" *ngIf="puestos?.length>0">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>DESCRIPCIÓN</th>
-        <th>EDITAR</th>
-        <th>ELIMINAR</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let puesto of puestos">
-        <td>{{puesto.id}}</td>
-        <td>{{puesto.descripcion}}</td>
-        <td>
-          <button class="btn btn-success" type="button" name="buttonUpdatePuesto"
-                  [routerLink]="['/puestos/form',puesto.id]">Editar
-          </button>
-        </td>
-
-        <td>
-          <button class="btn btn-danger" type="button" name="buttonDeletePuesto" (click)='deletePuesto(puesto)' >Eliminar</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <app-paginator-puesto *ngIf="paginadorPuesto" [paginador] = "paginadorPuesto"></app-paginator-puesto>
   </div>
 </div>

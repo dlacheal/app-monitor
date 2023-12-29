@@ -1,54 +1,55 @@
 <div class="container py-4">
-<div class="card border-primary mb-3 my-3 mx-3">
-  <div class="card-header">Listado de Epps</div>
-  <div class="card-body text-primary">
-    <!--
-      <h5 class="card-title">Listado de Puestos</h5>
-    -->
-    <div class="my-2 text-left">
-      <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/epps/form']"> Crear Epps</button>
+  <div class="card border-primary mb-3 my-3 mx-3">
+    <div class="card-header">Listado de Epps</div>
+    <div class="card-body text-primary">
+      <!--
+        <h5 class="card-title">Listado de Puestos</h5>
+      -->
+      <div class="my-2 text-left">
+        <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/epps/form']"> Crear Epps</button>
+      </div>
+
+      <div *ngIf="epps?.length ==0" class="alert alert-info">
+        No hay epps en la base de datod!
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-borbered table-striped" *ngIf="epps?.length>0">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>STOCK</th>
+            <th>TALLA</th>
+            <th>PRECIO</th>
+            <th>CATEGORIA</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let epp of epps">
+            <td>{{epp.id}}</td>
+            <td>{{epp.nombre}}</td>
+            <td>{{epp.stockActual}}</td>
+            <td>{{epp.talla}}</td>
+            <td>{{epp.precio}}</td>
+            <td>{{epp.codigoCategoria.descripcion}}</td>
+            <td>
+              <button class="btn btn-success" type="button" name="buttonUpdateEpp"
+                      [routerLink]="['/epps/form',epp.id]">Editar
+              </button>
+            </td>
+
+            <td>
+              <button class="btn btn-danger" type="button" name="buttonDeleteEpp" (click)='deleteEpp(epp)'>Eliminar
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <app-paginator-epp *ngIf="paginadorEpp" [paginador]="paginadorEpp"></app-paginator-epp>
+      </div>
     </div>
-
-    <div *ngIf="epps?.length ==0" class="alert alert-info">
-      No hay epps en la base de datod!
-    </div>
-
-    <div class="table-responsive">
-    <table class="table table-borbered table-striped" *ngIf="epps?.length>0">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>NOMBRE</th>
-        <th>STOCK</th>
-        <th>TALLA</th>
-        <th>PRECIO</th>
-        <th>CATEGORIA</th>
-        <th>EDITAR</th>
-        <th>ELIMINAR</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let epp of epps">
-        <td>{{epp.id}}</td>
-        <td>{{epp.nombre}}</td>
-        <td>{{epp.stockActual}}</td>
-        <td>{{epp.talla}}</td>
-        <td>{{epp.precio}}</td>
-        <td>{{epp.codigoCategoria.descripcion}}</td>
-        <td>
-          <button class="btn btn-success" type="button" name="buttonUpdateEpp"
-                  [routerLink]="['/epps/form',epp.id]">Editar
-          </button>
-        </td>
-
-        <td>
-          <button class="btn btn-danger" type="button" name="buttonDeleteEpp" (click)='deleteEpp(epp)' >Eliminar</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <app-paginator-epp *ngIf="paginadorEpp" [paginador] = "paginadorEpp"></app-paginator-epp>
   </div>
-</div>
-</div>
 </div>
