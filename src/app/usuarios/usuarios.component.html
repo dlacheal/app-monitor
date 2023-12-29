@@ -1,54 +1,60 @@
-<div class="card border-primary mb-3 my-3 mx-3">
-  <div class="card-header">Listado de Usuarios</div>
-  <div class="card-body text-primary">
-    <!--
-      <h5 class="card-title">Listado de Puestos</h5>
-    -->
-    <div class="my-2 text-left">
-      <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/usuarios/form']"> Crear Usuarios
-      </button>
-    </div>
+<div class="container py-4">
+  <div class="card border-primary mb-3 my-3 mx-3">
+    <div class="card-header">Listado de Usuarios</div>
+    <div class="card-body text-primary">
+      <!--
+        <h5 class="card-title">Listado de Puestos</h5>
+      -->
+      <div class="my-2 text-left">
+        <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/usuarios/form']"> Crear Usuarios
+        </button>
+      </div>
 
-    <div *ngIf="usuarios?.length ==0" class="alert alert-info">
-      No hay usuarios en la base de datod!
-    </div>
+      <div *ngIf="usuarios?.length ==0" class="alert alert-info">
+        No hay usuarios en la base de datod!
+      </div>
 
-    <table class="table table-borbered table-striped" *ngIf="usuarios?.length>0">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>USERNAME</th>
-        <th>PASSWORD</th>
-        <th>ESTADO</th>
-        <th>NOMBRE EMPLEADO</th>
-        <th>EDITAR</th>
-        <th>ELIMINAR</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let usuario of usuarios">
-        <td>{{usuario.id}}</td>
-        <td>{{usuario.username}}</td>
-        <td>{{usuario.password}}</td>
-<!--        <td>{{usuario.enable}}</td>-->
-        <td>
-          <span class="btn btn-secondary" *ngIf="!usuario.enable else elseBlock">INHABILITADO</span>
-          <ng-template #elseBlock>
-            <span class="btn btn-secondary"  >HABILITADO</span>
-          </ng-template>
-        </td>
-        <td>{{usuario.codigoEmpleado.codigoPersona.nombres}} {{usuario.codigoEmpleado.codigoPersona.apellidos}}</td>
-        <td>
-          <button class="btn btn-success" type="button" name="buttonUpdateUsuario"
-                  [routerLink]="['/usuarios/form',usuario.id]">Editar
-          </button>
-        </td>
-        <td>
-          <button class="btn btn-danger" type="button" name="buttonDeleteUsuario" (click)='deleteUsuario(usuario)' >Eliminar</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <app-paginator-usuario *ngIf="paginadorUsuario" [paginador] = "paginadorUsuario"></app-paginator-usuario>
+      <div class="table-responsive">
+        <table class="table table-borbered table-striped" *ngIf="usuarios?.length>0">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>USERNAME</th>
+            <th>PASSWORD</th>
+            <th>ESTADO</th>
+            <th>NOMBRE EMPLEADO</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let usuario of usuarios">
+            <td>{{usuario.id}}</td>
+            <td>{{usuario.username}}</td>
+            <td>{{usuario.password}}</td>
+            <!--        <td>{{usuario.enable}}</td>-->
+            <td>
+              <span class="btn btn-secondary" *ngIf="!usuario.enable else elseBlock">INHABILITADO</span>
+              <ng-template #elseBlock>
+                <span class="btn btn-secondary">HABILITADO</span>
+              </ng-template>
+            </td>
+            <td>{{usuario.codigoEmpleado.codigoPersona.nombres}} {{usuario.codigoEmpleado.codigoPersona.apellidos}}</td>
+            <td>
+              <button class="btn btn-success" type="button" name="buttonUpdateUsuario"
+                      [routerLink]="['/usuarios/form',usuario.id]">Editar
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-danger" type="button" name="buttonDeleteUsuario" (click)='deleteUsuario(usuario)'>
+                Eliminar
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <app-paginator-usuario *ngIf="paginadorUsuario" [paginador]="paginadorUsuario"></app-paginator-usuario>
+      </div>
+    </div>
   </div>
 </div>

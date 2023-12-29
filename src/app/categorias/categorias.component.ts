@@ -12,6 +12,7 @@ export class CategoriasComponent implements OnInit{
 
   // listaCategoria: string[] = ['Altura', 'Básico', 'Construccion', 'Electricidad', 'Pintado'];
 
+  tituloCategoria: String =  'Listado de Categorias';
   categorias: Categoria[];
   habilitar: boolean = true;
   paginadorCategoria: any;

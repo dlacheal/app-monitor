@@ -1,42 +1,49 @@
-<div class="card border-primary mb-3 my-3 mx-3">
-  <div class="card-header">Listado de Categorias</div>
-  <div class="card-body text-primary">
-    <!--
-      <h5 class="card-title">Listado de Categorias</h5>
-    -->
-    <div class="my-2 text-left">
-      <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/categorias/form']"> Crear Categoria
-      </button>
+<div class="container py-4">
+  <div class="card border-primary mb-3 my-3 mx-3">
+    <div class="card-header">{{ tituloCategoria }}</div>
+    <div class="card-body text-primary">
+      <!--
+        <h5 class="card-title">Listado de Categorias</h5>
+      -->
+      <div class="my-2 text-left">
+        <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/categorias/form']"> Crear Categoria
+        </button>
+      </div>
+
+      <div *ngIf="categorias?.length ==0" class="alert alert-info">
+        No hay categorias en la base de datod!
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-borbered table-striped" *ngIf="categorias?.length>0">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>DESCRIPCIÓN</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let categoria of categorias">
+            <td>{{categoria.id}}</td>
+            <td>{{categoria.descripcion}}</td>
+            <td>
+              <button class="btn btn-success" type="button" name="buttonUpdateCategoria"
+                      [routerLink]="['/categorias/form',categoria.id]">Editar
+              </button>
+            </td>
+
+            <td>
+              <button class="btn btn-danger" type="button" name="buttonDeleteCategoria"
+                      (click)='deleteCategoria(categoria)'>Eliminar
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <app-paginator-categoria *ngIf="paginadorCategoria" [paginador]="paginadorCategoria"></app-paginator-categoria>
+      </div>
     </div>
-
-    <div *ngIf="categorias?.length ==0" class="alert alert-info">
-      No hay categorias en la base de datod!
-    </div>
-
-    <table class="table table-borbered table-striped" *ngIf="categorias?.length>0">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>DESCRIPCIÓN</th>
-        <th>EDITAR</th>
-        <th>ELIMINAR</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let categoria of categorias">
-        <td>{{categoria.id}}</td>
-        <td>{{categoria.descripcion}}</td>
-        <td>
-          <button class="btn btn-success" type="button" name="buttonUpdateCategoria" [routerLink]="['/categorias/form',categoria.id]">Editar</button>
-        </td>
-
-        <td>
-          <button class="btn btn-danger" type="button" name="buttonDeleteCategoria" (click)='deleteCategoria(categoria)' >Eliminar</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <app-paginator-categoria *ngIf="paginadorCategoria" [paginador] = "paginadorCategoria"></app-paginator-categoria>
-
   </div>
 </div>

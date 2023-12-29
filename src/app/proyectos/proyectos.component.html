@@ -1,52 +1,58 @@
-<div class="card border-primary mb-3 my-3 mx-3">
-  <div class="card-header">Listado de Proyectos</div>
-  <div class="card-body text-primary">
-    <!--
-      <h5 class="card-title">Listado de Puestos</h5>
-    -->
+<div class="container py-4">
+  <div class="card border-primary mb-3 my-3 mx-3">
+    <div class="card-header">Listado de Proyectos</div>
+    <div class="card-body text-primary">
+      <!--
+        <h5 class="card-title">Listado de Puestos</h5>
+      -->
 
-    <div class="my-2 text-left">
-      <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/proyectos/form']"> Crear Proyecto
-      </button>
+      <div class="my-2 text-left">
+        <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/proyectos/form']"> Crear Proyecto
+        </button>
+      </div>
+
+      <div *ngIf="proyectos?.length ==0" class="alert alert-info">
+        No hay proyectos en la base de datod!
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-borbered table-striped" *ngIf="proyectos?.length>0">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>FECHA INICIO</th>
+            <th>T. ESTIMADO</th>
+            <th>T. REAL</th>
+            <th>UBICACIÓN</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let proyecto of proyectos">
+            <td>{{proyecto.id}}</td>
+            <td>{{proyecto.nombreProyecto}}</td>
+            <td>{{proyecto.fechaInicio}}</td>
+            <td>{{proyecto.tiempoEstimado}}</td>
+            <td>{{proyecto.tiempoReal}}</td>
+            <td>{{proyecto.ubicacion}}</td>
+            <td>
+              <button class="btn btn-success" type="button" name="buttonUpdateProyecto"
+                      [routerLink]="['/proyectos/form',proyecto.id]">Editar
+              </button>
+            </td>
+
+            <td>
+              <button class="btn btn-danger" type="button" name="buttonDeleteProyecto"
+                      (click)='deleteProyecto(proyecto)'>Eliminar
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <app-paginator-proyecto *ngIf="paginadorProyecto" [paginador]="paginadorProyecto"></app-paginator-proyecto>
+      </div>
     </div>
-
-    <div *ngIf="proyectos?.length ==0" class="alert alert-info">
-      No hay proyectos en la base de datod!
-    </div>
-
-    <table class="table table-borbered table-striped" *ngIf="proyectos?.length>0">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>NOMBRE</th>
-        <th>FECHA INICIO</th>
-        <th>T. ESTIMADO</th>
-        <th>T. REAL</th>
-        <th>UBICACIÓN</th>
-        <th>EDITAR</th>
-        <th>ELIMINAR</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let proyecto of proyectos">
-        <td>{{proyecto.id}}</td>
-        <td>{{proyecto.nombreProyecto}}</td>
-        <td>{{proyecto.fechaInicio}}</td>
-        <td>{{proyecto.tiempoEstimado}}</td>
-        <td>{{proyecto.tiempoReal}}</td>
-        <td>{{proyecto.ubicacion}}</td>
-        <td>
-          <button class="btn btn-success" type="button" name="buttonUpdateProyecto"
-                  [routerLink]="['/proyectos/form',proyecto.id]">Editar
-          </button>
-        </td>
-
-        <td>
-          <button class="btn btn-danger" type="button" name="buttonDeleteProyecto" (click)='deleteProyecto(proyecto)' >Eliminar</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <app-paginator-proyecto *ngIf="paginadorProyecto" [paginador] = "paginadorProyecto"></app-paginator-proyecto>
   </div>
 </div>

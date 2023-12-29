@@ -1,50 +1,57 @@
-<div class="card border-primary mb-3 my-3 mx-3">
-  <div class="card-header">Listado de Empleados</div>
-  <div class="card-body text-primary">
-    <!--
-      <h5 class="card-title">Listado de Puestos</h5>
-    -->
-    <div class="my-2 text-left">
-      <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/empleados/form']"> Crear Empleado
-      </button>
+<div class="container py-4">
+  <div class="card border-primary mb-3 my-3 mx-3">
+    <div class="card-header">Listado de Empleados</div>
+    <div class="card-body text-primary">
+      <!--
+        <h5 class="card-title">Listado de Puestos</h5>
+      -->
+      <div class="my-2 text-left">
+        <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/empleados/form']"> Crear Empleado
+        </button>
+      </div>
+
+      <div *ngIf="empleados?.length ==0" class="alert alert-info">
+        No hay empleados en la base de datod!
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-borbered table-striped" *ngIf="empleados?.length>0">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>NOMBRE EMPLEADO</th>
+            <th>PUESTO</th>
+            <th>LICENCIA</th>
+            <th>TIPO SANGRE</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let empleado of empleados">
+            <td>{{empleado.id}}</td>
+            <td>{{empleado.codigoPersona.nombres}} {{empleado.codigoPersona.apellidos}}</td>
+            <td>{{empleado.codigoPuesto.descripcion}}</td>
+            <td>{{empleado.licencia}}</td>
+            <td>{{empleado.tipoSangre}}</td>
+
+            <td>
+              <button class="btn btn-success" type="button" name="buttonUpdateEmpleado"
+                      [routerLink]="['/empleados/form',empleado.id]">Editar
+              </button>
+            </td>
+
+            <td>
+              <button class="btn btn-danger" type="button" name="buttonDeleteEmpleado"
+                      (click)='deleteEmpleado(empleado)'>
+                Eliminar
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <app-paginator-empleado *ngIf="paginadorEmpleado" [paginador]="paginadorEmpleado"></app-paginator-empleado>
+      </div>
     </div>
-
-    <div *ngIf="empleados?.length ==0" class="alert alert-info">
-      No hay empleados en la base de datod!
-    </div>
-
-    <table class="table table-borbered table-striped" *ngIf="empleados?.length>0">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>NOMBRE EMPLEADO</th>
-        <th>PUESTO</th>
-        <th>LICENCIA</th>
-        <th>TIPO SANGRE</th>
-        <th>EDITAR</th>
-        <th>ELIMINAR</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let empleado of empleados">
-        <td>{{empleado.id}}</td>
-        <td>{{empleado.codigoPersona.nombres}} {{empleado.codigoPersona.apellidos}}</td>
-        <td>{{empleado.codigoPuesto.descripcion}}</td>
-        <td>{{empleado.licencia}}</td>
-        <td>{{empleado.tipoSangre}}</td>
-
-        <td>
-          <button class="btn btn-success" type="button" name="buttonUpdateEmpleado"
-                  [routerLink]="['/empleados/form',empleado.id]">Editar
-          </button>
-        </td>
-
-        <td>
-          <button class="btn btn-danger" type="button" name="buttonDeleteEmpleado" (click)='deleteEmpleado(empleado)' >Eliminar</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <app-paginator-empleado *ngIf="paginadorEmpleado" [paginador] = "paginadorEmpleado"></app-paginator-empleado>
   </div>
 </div>

@@ -1,3 +1,4 @@
+<div class="container py-4">
 <div class="card border-primary mb-3 my-3 mx-3">
   <div class="card-header">Listado de Epps</div>
   <div class="card-body text-primary">
@@ -12,6 +13,7 @@
       No hay epps en la base de datod!
     </div>
 
+    <div class="table-responsive">
     <table class="table table-borbered table-striped" *ngIf="epps?.length>0">
       <thead>
       <tr>
@@ -47,4 +49,6 @@
     </table>
     <app-paginator-epp *ngIf="paginadorEpp" [paginador] = "paginadorEpp"></app-paginator-epp>
   </div>
+</div>
+</div>
 </div>

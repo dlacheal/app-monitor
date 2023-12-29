@@ -1,51 +1,57 @@
-<div class="card border-primary mb-3 my-3 mx-3">
-  <div class="card-header">Listado de Registros</div>
-  <div class="card-body text-primary">
-    <!--
-      <h5 class="card-title">Listado de Puestos</h5>
-    -->
-    <div class="my-2 text-left">
-      <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/registros/form']"> Crear Registro
-      </button>
+<div class="container py-4">
+  <div class="card border-primary mb-3 my-3 mx-3">
+    <div class="card-header">Listado de Registros</div>
+    <div class="card-body text-primary">
+      <!--
+        <h5 class="card-title">Listado de Puestos</h5>
+      -->
+      <div class="my-2 text-left">
+        <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/registros/form']"> Crear Registro
+        </button>
+      </div>
+
+      <div *ngIf="registros?.length ==0" class="alert alert-info">
+        No hay resgistros en la base de datod!
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-borbered table-striped" *ngIf="registros?.length>0">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nº REGISTRO</th>
+            <th>TIPO DOC.</th>
+            <th>NUMERO DOC.</th>
+            <th>NOMBRE EMPLEADO</th>
+            <th>FECHA REGISTRO</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let registro of registros">
+            <td>{{registro.id}}</td>
+            <td>{{registro.numeroRegistro}}</td>
+            <td>{{registro.codigoEmpleado.codigoPersona.tipoDocumento}}</td>
+            <td>{{registro.codigoEmpleado.codigoPersona.numeroDocumento}}</td>
+            <td>{{registro.codigoEmpleado.codigoPersona.nombres}} {{registro.codigoEmpleado.codigoPersona.apellidos}}</td>
+            <td>{{registro.fechaRegistro}}</td>
+            <td>
+              <button class="btn btn-success" type="button" name="buttonUpdateRegistro"
+                      [routerLink]="['/registros/form',registro.id]">Editar
+              </button>
+            </td>
+
+            <td>
+              <button class="btn btn-danger" type="button" name="buttonDeleteRegistro"
+                      (click)='deleteRegistro(registro)'>Eliminar
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <app-paginator-registro *ngIf="paginadorRegistro" [paginador]="paginadorRegistro"></app-paginator-registro>
+      </div>
     </div>
-
-    <div *ngIf="registros?.length ==0" class="alert alert-info">
-      No hay resgistros en la base de datod!
-    </div>
-
-    <table class="table table-borbered table-striped" *ngIf="registros?.length>0">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nº REGISTRO</th>
-        <th>TIPO DOC.</th>
-        <th>NUMERO DOC.</th>
-        <th>NOMBRE EMPLEADO</th>
-        <th>FECHA REGISTRO</th>
-        <th>EDITAR</th>
-        <th>ELIMINAR</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let registro of registros">
-        <td>{{registro.id}}</td>
-        <td>{{registro.numeroRegistro}}</td>
-        <td>{{registro.codigoEmpleado.codigoPersona.tipoDocumento}}</td>
-        <td>{{registro.codigoEmpleado.codigoPersona.numeroDocumento}}</td>
-        <td>{{registro.codigoEmpleado.codigoPersona.nombres}} {{registro.codigoEmpleado.codigoPersona.apellidos}}</td>
-        <td>{{registro.fechaRegistro}}</td>
-        <td>
-          <button class="btn btn-success" type="button" name="buttonUpdateRegistro"
-                  [routerLink]="['/registros/form',registro.id]">Editar
-          </button>
-        </td>
-
-        <td>
-          <button class="btn btn-danger" type="button" name="buttonDeleteRegistro" (click)='deleteRegistro(registro)' >Eliminar</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <app-paginator-registro *ngIf="paginadorRegistro" [paginador] = "paginadorRegistro"></app-paginator-registro>
   </div>
 </div>
