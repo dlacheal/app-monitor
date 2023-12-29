@@ -31,6 +31,19 @@ export class RegistroService {
     );
   }
 
+  getRegistrosPage(page: number): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
+      map( (response: any) => {
+        (response.content as Registro[]).map( registro => {
+          registro.codigoEmpleado.codigoPersona.nombres = registro.codigoEmpleado.codigoPersona.nombres.toUpperCase();
+          registro.codigoEmpleado.codigoPersona.apellidos = registro.codigoEmpleado.codigoPersona.apellidos.toUpperCase();
+          return registro;
+        });
+        return response;
+      })
+    );
+  }
+
   getRegistro(id): Observable<Registro>{
     return this.http.get<Registro>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {

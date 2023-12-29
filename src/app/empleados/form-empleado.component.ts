@@ -8,6 +8,7 @@ import {PersonaService} from "../personas/persona.service";
 import {Persona} from "../personas/persona";
 import Swal from "sweetalert2";
 import {Observer} from "rxjs";
+import {Categoria} from "../categorias/categoria";
 
 @Component({
   selector: 'app-form-empleado',
@@ -143,5 +144,20 @@ export class FormEmpleadoComponent {
     this.empleadoService.updateEmpleado(this.empleado).subscribe(observer);
   }
 
+  compararPersona(p1: Persona, p2:Persona): boolean{
+
+    if(p1 === undefined && p2 === undefined){
+      return true;
+    }
+    return p1 === null || p2 === null || p1 === undefined || p2 === undefined? false: p1.id === p2.id;
+  }
+
+  compararPuesto(p1: Puesto, p2:Puesto): boolean{
+
+    if(p1 === undefined && p2 === undefined){
+      return true;
+    }
+    return p1 === null || p2 === null || p1 === undefined || p2 === undefined? false: p1.id === p2.id;
+  }
 
 }

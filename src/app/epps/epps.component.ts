@@ -3,6 +3,7 @@ import { EppService } from './epp.service';
 import { Epp } from './epp';
 import {Empleado} from "../empleados/empleado";
 import Swal from "sweetalert2";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-epps',
@@ -11,13 +12,27 @@ import Swal from "sweetalert2";
 export class EppsComponent {
 
   epps: Epp[];
+  paginadorEpp: any;
 
-  constructor(private eppService: EppService){}
+  constructor(private eppService: EppService,
+              private activateRoute: ActivatedRoute){}
 
   ngOnInit(): void{
-    this.eppService.getEpps().subscribe(
-      epps => this.epps = epps
-    );
+
+    let page = 0;
+    this.activateRoute.paramMap.subscribe(params => {
+      let page: number = +params.get('page');
+
+      if (!page) {
+        page = 0;
+      }
+
+      this.eppService.getEppsPage(page)
+        .subscribe(response => {
+          this.epps = response.content as Epp[];
+          this.paginadorEpp = response;
+        });
+    });
   }
 
   deleteEpp(epp: Epp): void{

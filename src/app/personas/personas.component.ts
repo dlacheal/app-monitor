@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Persona } from './persona';
 import { PersonaService } from './persona.service';
-import {Categoria} from "../categorias/categoria";
 import Swal from "sweetalert2";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-personas',
@@ -11,14 +11,28 @@ import Swal from "sweetalert2";
 export class PersonasComponent {
 
   personas: Persona[];
+  paginadorPersona: any;
 
-  constructor(private personaService: PersonaService){}
+  constructor(private personaService: PersonaService,
+              private activateRoute: ActivatedRoute) {}
 
   ngOnInit(): void{
-    this.personaService.getPersonas().subscribe(
-      personas => this.personas = personas
-    );
-  }
+
+    let page = 0;
+    this.activateRoute.paramMap.subscribe(params => {
+      let page: number = +params.get('page');
+
+      if (!page) {
+        page = 0;
+      }
+
+    this.personaService.getPersonasPage(page)
+      .subscribe(response => {
+      this.personas = response.content as Persona[];
+      this.paginadorPersona = response;
+    });
+  });
+}
 
   deletePersona(persona: Persona): void{
 

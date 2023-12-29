@@ -131,4 +131,12 @@ export class FormEppComponent {
     };
     this.eppService.updateEpp(this.epp).subscribe(observer);
   }
+
+  compararCategoria(c1: Categoria, c2:Categoria): boolean{
+
+    if(c1 === undefined && c2 === undefined){
+      return true;
+    }
+    return c1 === null || c2 === null || c1 === undefined || c2 === undefined? false: c1.id === c2.id;
+  }
 }

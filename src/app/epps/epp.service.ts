@@ -32,6 +32,20 @@ export class EppService {
     );
   }
 
+  getEppsPage(page: number): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
+      map( (response: any) => {
+        (response.content as Epp[]).map( epp => {
+          epp.nombre = epp.nombre.toUpperCase();
+          epp.talla = epp.talla.toUpperCase();
+          epp.codigoCategoria.descripcion = epp.codigoCategoria.descripcion.toUpperCase();
+          return epp;
+        });
+        return response;
+      })
+    );
+  }
+
   getEpp(id): Observable<Epp>{
     return this.http.get<Epp>(`${this.urlEndPoint}/${id}`).pipe(
     catchError(e => {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Empleado } from './empleado';
 import { EmpleadoService } from './empleado.service';
 import Swal from "sweetalert2";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-empleados',
@@ -10,13 +11,27 @@ import Swal from "sweetalert2";
 export class EmpleadosComponent {
 
   empleados: Empleado[];
+  paginadorEmpleado: any
 
-  constructor(private empleadoService: EmpleadoService){}
+  constructor(private empleadoService: EmpleadoService,
+              private activateRoute: ActivatedRoute){}
 
   ngOnInit(): void{
-    this.empleadoService.getEmpleados().subscribe(
-      empleados => this.empleados = empleados
-    );
+
+    let page = 0;
+    this.activateRoute.paramMap.subscribe(params => {
+      let page: number = +params.get('page');
+
+      if (!page) {
+        page = 0;
+      }
+
+      this.empleadoService.getEmpleadosPage(page)
+        .subscribe(response => {
+          this.empleados = response.content as Empleado[];
+          this.paginadorEmpleado = response;
+        });
+    });
   }
 
   deleteEmpleado(empleado: Empleado): void{

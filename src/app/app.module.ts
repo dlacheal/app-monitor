@@ -1,24 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
 
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
 
-import { CategoriaService } from './categorias/categoria.service';
-import { PuestoService } from './puestos/puesto.service';
-import { ProyectoService } from './proyectos/proyecto.service';
-import { PersonaService } from './personas/persona.service';
-import { EppService } from './epps/epp.service';
-import { EmpleadoService } from './empleados/empleado.service';
-import { RegistroService } from './registros/registro.service';
-import { UsuarioService } from './usuarios/usuario.service';
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 import { CategoriasComponent } from './categorias/categorias.component';
 import { PuestosComponent } from './puestos/puestos.component';
@@ -29,7 +21,15 @@ import { EmpleadosComponent } from './empleados/empleados.component';
 import { RegistrosComponent } from './registros/registros.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 
-import { FormsModule } from '@angular/forms';
+import { CategoriaService } from './categorias/categoria.service';
+import { PuestoService } from './puestos/puesto.service';
+import { ProyectoService } from './proyectos/proyecto.service';
+import { PersonaService } from './personas/persona.service';
+import { EppService } from './epps/epp.service';
+import { EmpleadoService } from './empleados/empleado.service';
+import { RegistroService } from './registros/registro.service';
+import { UsuarioService } from './usuarios/usuario.service';
+
 import { FormCategoriaComponent } from './categorias/form-categoria.component';
 import { FormPuestoComponent } from './puestos/form-puesto.component';
 import { FormProyectoComponent } from './proyectos/form-proyecto.component';
@@ -38,6 +38,14 @@ import { FormEppComponent } from './epps/form-epp.component';
 import { FormEmpleadoComponent } from './empleados/form-empleado.component';
 import { FormRegistroComponent } from './registros/form-registro.component';
 import { FormUsuarioComponent } from './usuarios/form-usuario.component';
+import { PaginatorPuestoComponent } from './paginator/paginator-puesto.component';
+import { PaginatorCategoriaComponent } from './paginator/paginator-categoria.component';
+import { PaginatorEmpleadoComponent } from './paginator/paginator-empleado.component';
+import { PaginatorEppComponent } from './paginator/paginator-epp.component';
+import { PaginatorPersonaComponent } from './paginator/paginator-persona.component';
+import { PaginatorProyectoComponent } from './paginator/paginator-proyecto.component';
+import { PaginatorRegistroComponent } from './paginator/paginator-registro.component';
+import { PaginatorUsuarioComponent } from './paginator/paginator-usuario.component';
 
 
 
@@ -69,6 +77,16 @@ const routes: Routes = [
   {path: 'empleados/form/:id', component: FormEmpleadoComponent},
   {path: 'registros/form/:id', component: FormRegistroComponent},
   {path: 'usuarios/form/:id', component: FormUsuarioComponent},
+  //form-pages
+  {path: 'puestos/page/:page', component: PuestosComponent},
+  {path: 'categorias/page/:page', component: CategoriasComponent},
+  {path: 'proyectos/page/:page', component: ProyectosComponent},
+  {path: 'personas/page/:page', component: PersonasComponent},
+  {path: 'epps/page/:page', component: EppsComponent},
+  {path: 'empleados/page/:page', component: EmpleadosComponent},
+  {path: 'registros/page/:page', component: RegistrosComponent},
+  {path: 'usuarios/page/:page', component: UsuariosComponent},
+
 
 ];
 
@@ -93,7 +111,15 @@ const routes: Routes = [
     FormEppComponent,
     FormEmpleadoComponent,
     FormRegistroComponent,
-    FormUsuarioComponent
+    FormUsuarioComponent,
+    PaginatorPuestoComponent,
+    PaginatorCategoriaComponent,
+    PaginatorEmpleadoComponent,
+    PaginatorEppComponent,
+    PaginatorPersonaComponent,
+    PaginatorProyectoComponent,
+    PaginatorRegistroComponent,
+    PaginatorUsuarioComponent
   ],
   imports: [
     BrowserModule,

@@ -34,6 +34,21 @@ export class PersonaService {
     );
   }
 
+  getPersonasPage(page: number): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
+      map( (response: any) => {
+        (response.content as Persona[]).map( persona => {
+          persona.nombres = persona.nombres.toUpperCase();
+          persona.apellidos = persona.apellidos.toUpperCase();
+          persona.direccion = persona.direccion.toUpperCase();
+          persona.email = persona.email.toUpperCase();
+          return persona;
+        });
+        return response;
+      })
+    );
+  }
+
   getPersona(id): Observable<Persona>{
     return this.http.get<Persona>(`${this.urlEndPoint}/${id}`).pipe(
     catchError(e => {

@@ -1,32 +1,47 @@
-import { Component } from '@angular/core';
-import { Categoria } from './categoria';
-import { CategoriaService } from './categoria.service';
+import {Component, OnInit} from '@angular/core';
+import {Categoria} from './categoria';
+import {CategoriaService} from './categoria.service';
 import Swal from "sweetalert2";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-categorias',
   templateUrl: './categorias.component.html'
 })
-export class CategoriasComponent {
+export class CategoriasComponent implements OnInit{
 
-  listaCategoria: string[] = ['Altura', 'Básico', 'Construccion', 'Electricidad', 'Pintado'];
+  // listaCategoria: string[] = ['Altura', 'Básico', 'Construccion', 'Electricidad', 'Pintado'];
 
-  categorias:  Categoria[];
+  categorias: Categoria[];
   habilitar: boolean = true;
+  paginadorCategoria: any;
 
-  constructor(private categoriaService: CategoriaService){}
+  constructor(private categoriaService: CategoriaService,
+              private activateRoute: ActivatedRoute) {}
 
-  ngOnInit(){
-    this.categoriaService.getCategorias().subscribe(
-      categorias => this.categorias = categorias
-    );
+  ngOnInit(): void {
+
+    this.activateRoute.paramMap.subscribe(params => {
+      let page: number = +params.get('page');
+      console.log("page:" + this.activateRoute);
+
+      if (!page) {
+        page = 0;
+      }
+
+      this.categoriaService.getCategoriasPage(+page)
+        .subscribe(response => {
+          this.categorias = response.content as Categoria[];
+          this.paginadorCategoria = response;
+        });
+    });
   }
 
-  setHabilitar(): void{
-    this.habilitar = (this.habilitar == true)? false:true
+  setHabilitar(): void {
+    this.habilitar = (this.habilitar == true) ? false : true
   }
 
-  deleteCategoria(categoria: Categoria): void{
+  deleteCategoria(categoria: Categoria): void {
 
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {

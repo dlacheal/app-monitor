@@ -8,7 +8,7 @@
       <div class="form.group row">
         <label for="personaEmpleado" class="col-form-label col-sm-2">PERSONA</label>
         <div class="col-sm-6">
-          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="empleado.codigoPersona"
+          <select [compareWith]="compararPersona" class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="empleado.codigoPersona"
                   name="personaEmpleado">
             <option [ngValue]="undefined"> SELECCIONAR</option>
             <option *ngFor="let persona of personas" [ngValue]="persona">{{persona.apellidos}}</option>
@@ -51,7 +51,7 @@
       <div class="form.group row">
         <label for="puestoEmpleado" class="col-form-label col-sm-2">PUESTO</label>
         <div class="col-sm-6">
-          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="empleado.codigoPuesto"
+          <select [compareWith]="compararPuesto" class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="empleado.codigoPuesto"
                   name="puestoEmpleado">
             <option [ngValue]="undefined"> SELECCIONAR</option>
             <option *ngFor="let codigoPuesto of puestos" [ngValue]="codigoPuesto">{{codigoPuesto.descripcion}} </option>

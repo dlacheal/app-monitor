@@ -6,7 +6,6 @@ import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
-import {Categoria} from "../categorias/categoria";
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +28,18 @@ export class PuestoService {
         return puesto;
       });
     })
+    );
+  }
+
+  getPuestosPage(page: number): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
+      map( (response: any) => {
+        (response.content as Puesto[]).map( puesto => {
+          puesto.descripcion = puesto.descripcion.toUpperCase();
+          return puesto;
+        });
+        return response;
+      })
     );
   }
 

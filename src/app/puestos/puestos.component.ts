@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Puesto } from './puesto';
 import { PuestoService } from './puesto.service';
-import {Proyecto} from "../proyectos/proyecto";
 import Swal from "sweetalert2";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-puestos',
@@ -11,14 +11,28 @@ import Swal from "sweetalert2";
 export class PuestosComponent {
 
   puestos: Puesto[];
+  paginadorPuesto: any;
 
-  constructor(private puestoService: PuestoService){}
+  constructor(private puestoService: PuestoService,
+              private activateRoute: ActivatedRoute) {}
 
   ngOnInit(): void{
-    this.puestoService.getPuestos().subscribe(
-      puestos => this.puestos = puestos
-    );
-  }
+
+    let page = 0;
+    this.activateRoute.paramMap.subscribe(params => {
+      let page: number = +params.get('page');
+
+      if (!page) {
+        page = 0;
+      }
+
+    this.puestoService.getPuestosPage(page)
+      .subscribe(response => {
+      this.puestos = response.content as Puesto[];
+      this.paginadorPuesto = response;
+    });
+  });
+}
 
   deletePuesto(puesto: Puesto): void{
     const swalWithBootstrapButtons = Swal.mixin({

@@ -56,9 +56,9 @@
       <br>
       <!-- Categoria -->
       <div class="form.group row">
-        <span for="categoriaEpp" class="col-form-label col-sm-2">CATEGORÍA</span>
+        <label for="categoriaEpp" class="col-form-label col-sm-2">CATEGORÍA</label>
         <div class="col-sm-6">
-          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="epp.codigoCategoria"
+          <select [compareWith]="compararCategoria" class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="epp.codigoCategoria"
                   name="categoriaEpp">
             <option [ngValue]="undefined"> SELECCIONAR</option>
             <option *ngFor="let categoriaEpp of categoriasEpp" [ngValue]="categoriaEpp">{{categoriaEpp.descripcion}} </option>

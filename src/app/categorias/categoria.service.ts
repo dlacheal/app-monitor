@@ -31,6 +31,18 @@ export class CategoriaService {
     );
   }
 
+  getCategoriasPage(page: number): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
+      map( (response: any) => {
+        (response.content as Categoria[]).map( categoria => {
+          categoria.descripcion = categoria.descripcion.toUpperCase();
+          return categoria;
+        });
+        return response;
+      })
+    );
+  }
+
   getCategoria(id): Observable<Categoria> {
     return this.http.get<Categoria>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {

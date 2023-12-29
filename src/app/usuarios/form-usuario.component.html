@@ -56,7 +56,7 @@
       <div class="form.group row">
         <label for="codigoEmpleadoUsuario" class="col-form-label col-sm-2">EMPLEADO</label>
         <div class="col-sm-6">
-          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="usuario.codigoEmpleado"
+          <select [compareWith]="compararUsuario" class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="usuario.codigoEmpleado"
                   name="codigoEmpleadoUsuario">
             <option [ngValue]="undefined"> SELECCIONAR</option>
             <option *ngFor="let empleado of empleados" [ngValue]="empleado">{{empleado.codigoPersona.nombres}} {{empleado.codigoPersona.apellidos}} </option>

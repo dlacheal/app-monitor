@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -29,6 +30,19 @@ export class ProyectoService {
         return proyecto;
       });
     })
+    );
+  }
+
+  getProyectosPage(page: number): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
+      map( (response: any) => {
+        (response.content as Proyecto[]).map( proyecto => {
+          proyecto.nombreProyecto = proyecto.nombreProyecto.toUpperCase();
+          proyecto.ubicacion = proyecto.ubicacion.toUpperCase();
+          return proyecto;
+        });
+        return response;
+      })
     );
   }
 

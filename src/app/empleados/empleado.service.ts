@@ -34,6 +34,23 @@ export class EmpleadoService {
     );
   }
 
+  getEmpleadosPage(page: number): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
+      map( (response: any) => {
+        // let categorias = response as Categoria[];
+        (response.content as Empleado[]).map( empleado => {
+          empleado.codigoPersona.nombres = empleado.codigoPersona.nombres.toUpperCase();
+          empleado.codigoPersona.apellidos = empleado.codigoPersona.apellidos.toUpperCase();
+          empleado.codigoPuesto.descripcion = empleado.codigoPuesto.descripcion.toUpperCase();
+          empleado.tipoSangre = empleado.tipoSangre.toUpperCase();
+          empleado.licencia = empleado.licencia.toUpperCase();
+          return empleado;
+        });
+        return response;
+      })
+    );
+  }
+
   getEmpleado(id): Observable<Empleado>{
     return this.http.get<Empleado>(`${this.urlEndPoint}/${id}`).pipe(
     catchError(e => {

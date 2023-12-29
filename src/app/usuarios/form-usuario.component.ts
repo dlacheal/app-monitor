@@ -126,4 +126,12 @@ export class FormUsuarioComponent {
     this.usuarioService.updateusuario(this.usuario).subscribe(observer);
   }
 
+  compararUsuario(u1: Categoria, u2:Categoria): boolean{
+
+    if(u1 === undefined && u2 === undefined){
+      return true;
+    }
+    return u1 === null || u2 === null || u1 === undefined || u2 === undefined? false: u1.id === u2.id;
+  }
+
 }

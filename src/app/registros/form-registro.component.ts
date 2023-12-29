@@ -137,4 +137,20 @@ export class FormRegistroComponent {
     this.registroService.updateRegistro(this.registro).subscribe(observer);
   }
 
+  compararEmpleado(e1: Empleado, e2:Empleado): boolean{
+
+    if(e1 === undefined && e2 === undefined){
+      return true;
+    }
+    return e1 === null || e2 === null || e1 === undefined || e2 === undefined? false: e1.id === e2.id;
+  }
+
+  compararProyecto(p1: Empleado, p2:Empleado): boolean{
+
+    if(p1 === undefined && p2 === undefined){
+      return true;
+    }
+    return p1 === null || p2 === null || p1 === undefined || p2 === undefined? false: p1.id === p2.id;
+  }
+
 }

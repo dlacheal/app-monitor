@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Registro } from './registro';
 import { RegistroService } from './registro.service';
-import {Proyecto} from "../proyectos/proyecto";
 import Swal from "sweetalert2";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-registros',
@@ -11,14 +11,29 @@ import Swal from "sweetalert2";
 export class RegistrosComponent {
 
   registros: Registro[];
+  paginadorRegistro: any;
 
-  constructor(private registroService: RegistroService){}
+  constructor(private registroService: RegistroService,
+              private activateRoute: ActivatedRoute) {}
 
   ngOnInit(): void{
-    this.registroService.getRegistros().subscribe(
-      registros => this.registros = registros
-    );
-  }
+
+    let page = 0;
+    this.activateRoute.paramMap.subscribe(params => {
+      let page: number = +params.get('page');
+
+      if (!page) {
+        page = 0;
+      }
+
+    this.registroService.getRegistrosPage(page)
+      .subscribe(response => {
+      this.registros = response.content as Registro[];
+      this.paginadorRegistro = response;
+    });
+  });
+}
+
 
   deleteRegistro(registro: Registro): void{
     const swalWithBootstrapButtons = Swal.mixin({
