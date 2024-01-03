@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {EppService} from "../../epps/epp.service";
 import {ActivatedRoute} from "@angular/router";
 import Swal from "sweetalert2";
@@ -19,11 +19,11 @@ export class DetalleEmpleadoComponent {
               private activateRoute: ActivatedRoute) {
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.activateRoute.paramMap.subscribe(params => {
       let id = +params.get('id');
 
-      if(id){
+      if (id) {
         this.empleadoService.getEmpleado(id).subscribe(empleado => {
           this.empleado = empleado;
         });
@@ -31,15 +31,23 @@ export class DetalleEmpleadoComponent {
     });
   }
 
-  seleccionarFotoEmpleado(event){
+  seleccionarFotoEmpleado(event) {
     this.fotoSeleccionada = event.target.files[0];
+    if (this.fotoSeleccionada.type.indexOf('image') < 0) {
+      Swal.fire('Error seleccionar foto', "El archivo debe ser de tipo imagen", 'error');
+      this.fotoSeleccionada = null;
+    }
   }
 
-  subirFotoEpp(){
-    this.empleadoService.subirFoto(this.fotoSeleccionada, this.empleado.id)
-      .subscribe(empleado => {
-        this.empleado = empleado;
-        Swal.fire('La foto se ha subido completamente!', `La foto se ha subido con éxito: ${this.empleado.rutaFoto}`, 'success');
-      });
+  subirFotoEpp() {
+    if (!this.fotoSeleccionada) {
+      Swal.fire('Error Upload', "Debe seleccionar una foto", 'error');
+    } else {
+      this.empleadoService.subirFoto(this.fotoSeleccionada, this.empleado.id)
+        .subscribe(empleado => {
+          this.empleado = empleado;
+          Swal.fire('La foto se ha subido completamente!', `La foto se ha subido con éxito: ${this.empleado.rutaFoto}`, 'success');
+        });
+    }
   }
 }

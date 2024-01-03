@@ -1,11 +1,36 @@
-<div class="card bg-dark text-white mb-3 my-3 mx-3" >
+<div class="card bg-dark text-white">
   <div class="card-header">{{ tituloDetalleEpp }}</div>
   <div class="card-body">
+    <div class="container">
+      <div class="row-cols-2">
 
-    <div class="input-group">
-      <input (change)="seleccionarImagenEpp($event)" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-      <button (click)="subirImagenEpp()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Upload</button>
+        <div class="col-sm">
+          <ul *ngIf="epp" class="list-group text-dark mb-3">
+            <li class="list-group-item active">NOMBRE: {{epp.nombre}}</li>
+            <li class="list-group-item">STOCK: {{epp.stockActual}}</li>
+            <li class="list-group-item">TALLA: {{epp.talla}}</li>
+            <li class="list-group-item">PRECIO: {{epp.precio}}</li>
+            <li class="list-group-item">CATEGORIA: {{epp.codigoCategoria.descripcion}}</li>
+          </ul>
+
+          <div class="input-group">
+            <input (change)="seleccionarImagenEpp($event)" type="file" class="form-control" id="inputGroupFile04"
+                   aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+            <button (click)="subirImagenEpp()" [disabled]="!imagenSeleccionada" class="btn btn-outline-secondary" type="button"
+                    id="inputGroupFileAddon04">Upload
+            </button>
+          </div>
+        </div>
+        <br>
+
+        <div class="col-sm">
+          <img *ngIf="epp?.rutaImagen" src="http://192.168.18.94:8081/api/epps/uploads/img/{{epp.rutaImagen}}"
+          alt="{{epp.rutaImagen}}"
+          class="img-thumbnail rounded">
+        </div>
+      </div>
     </div>
+
 
   </div>
 </div>

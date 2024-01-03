@@ -1,10 +1,37 @@
-<div class="card bg-dark text-white mb-3 my-3 mx-3" >
+<div class="card bg-dark text-white mb-3 my-3 mx-3">
   <div class="card-header">{{ tituloDetalleEmpleado }}</div>
   <div class="card-body">
 
-    <div class="input-group">
-      <input (change)="seleccionarFotoEmpleado($event)" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-      <button (click)="subirFotoEpp()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Upload</button>
+    <div class="container">
+      <div class="row">
+
+        <div class="col-sm">
+          <ul *ngIf="empleado" class="list-group text-dark mb-3">
+            <li class="list-group-item active">NOMBRE: {{empleado.codigoPersona.nombres}} {{empleado.codigoPersona.apellidos}}</li>
+            <li class="list-group-item">DNI: {{empleado.codigoPersona.numeroDocumento}}</li>
+            <li class="list-group-item">TELÉFONO: {{empleado.codigoPersona.telefono}}</li>
+            <li class="list-group-item">EMAIL: {{empleado.codigoPersona.telefono}}</li>
+            <li class="list-group-item">DIRECCIÓN: {{empleado.codigoPersona.direccion}}</li>
+            <li class="list-group-item">LICENCIA: {{empleado.licencia}}</li>
+            <li class="list-group-item">DIRECCIÓN: {{empleado.tipoSangre}}</li>
+            <li class="list-group-item">PUESTO: {{empleado.codigoPuesto.descripcion}}</li>
+          </ul>
+
+          <div class="input-group">
+            <input (change)="seleccionarFotoEmpleado($event)" type="file" class="form-control" id="inputGroupFile04"
+                   aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+            <button (click)="subirFotoEpp()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">
+              Upload
+            </button>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <img *ngIf="empleado?.rutaFoto" src="http://192.168.18.94:8081/api/empleados/uploads/img/{{empleado.rutaFoto}}"
+               alt="{{empleado.rutaFoto}}"
+               class="img-thumbnail rounded">
+        </div>
+      </div>
     </div>
 
   </div>
