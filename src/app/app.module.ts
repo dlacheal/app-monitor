@@ -46,6 +46,8 @@ import { PaginatorPersonaComponent } from './paginator/paginator-persona.compone
 import { PaginatorProyectoComponent } from './paginator/paginator-proyecto.component';
 import { PaginatorRegistroComponent } from './paginator/paginator-registro.component';
 import { PaginatorUsuarioComponent } from './paginator/paginator-usuario.component';
+import { DetalleEppComponent } from './epps/detalle-epp/detalle-epp.component';
+import { DetalleEmpleadoComponent } from './empleados/detalle-empleado/detalle-empleado.component';
 
 
 
@@ -86,7 +88,9 @@ const routes: Routes = [
   {path: 'empleados/page/:page', component: EmpleadosComponent},
   {path: 'registros/page/:page', component: RegistrosComponent},
   {path: 'usuarios/page/:page', component: UsuariosComponent},
-
+  //ver
+  {path: 'epps/ver/:id', component: DetalleEppComponent},
+  {path: 'empleados/ver/:id', component: DetalleEmpleadoComponent},
 
 ];
 
@@ -119,7 +123,9 @@ const routes: Routes = [
     PaginatorPersonaComponent,
     PaginatorProyectoComponent,
     PaginatorRegistroComponent,
-    PaginatorUsuarioComponent
+    PaginatorUsuarioComponent,
+    DetalleEppComponent,
+    DetalleEmpleadoComponent
   ],
   imports: [
     BrowserModule,

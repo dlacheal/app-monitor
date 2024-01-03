@@ -5,7 +5,7 @@ import {Registro} from "../registros/registro";
 export class Empleado {
     id: number;
     //foto: string;
-    //rutaFoto: string
+    rutaFoto: string
     licencia: string;
     tipoSangre: string;
     codigoPuesto: Puesto;

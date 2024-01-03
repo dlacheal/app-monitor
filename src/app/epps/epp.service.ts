@@ -114,4 +114,17 @@ export class EppService {
       })
     );
   }
+
+  subirImagen(archivo: File, id): Observable<Epp>{
+    let formData = new FormData();
+    formData.append("archivo", archivo);
+    formData.append("id", id);
+    return this.http.post(`${this.urlEndPoint}/uploads`, formData).pipe(
+      map( (response: any) => response.epp as Epp ),
+      catchError( e => {
+        Swal.fire('Error al subir la imagen del epp', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
+  }
 }

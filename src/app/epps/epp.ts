@@ -7,6 +7,6 @@ export class Epp {
     talla: string;
     precio: number;
     //imagen: string;
-    //rutaImagen: string;
+    rutaImagen: string;
     codigoCategoria: Categoria;
 }

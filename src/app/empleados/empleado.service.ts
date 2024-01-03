@@ -119,4 +119,17 @@ export class EmpleadoService {
       })
     );
   }
+
+  subirFoto(archivo: File, id): Observable<Empleado>{
+    let formData = new FormData();
+    formData.append("archivo", archivo);
+    formData.append("id", id);
+    return this.http.post(`${this.urlEndPoint}/uploads`, formData).pipe(
+      map( (response: any) => response.empleado as Empleado ),
+      catchError( e => {
+        Swal.fire('Error al subir la foto del empleado', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
+  }
 }

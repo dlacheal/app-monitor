@@ -29,7 +29,7 @@
           </thead>
           <tbody>
           <tr *ngFor="let epp of epps">
-            <td>{{epp.id}}</td>
+            <td><button type="button" class="btn btn-outline-primary" [routerLink]="['/epps/ver',epp.id]">{{epp.id}}</button></td>
             <td>{{epp.nombre}}</td>
             <td>{{epp.stockActual}}</td>
             <td>{{epp.talla}}</td>
