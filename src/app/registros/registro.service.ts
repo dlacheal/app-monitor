@@ -1,8 +1,8 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, map, throwError } from 'rxjs';
-import { Registro } from './registro';
-import { catchError } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Observable, map, throwError} from 'rxjs';
+import {Registro} from './registro';
+import {catchError} from 'rxjs/operators';
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
 
@@ -12,29 +12,40 @@ import Swal from "sweetalert2";
 export class RegistroService {
 
   private urlEndPoint: string = '/api/registros';
-  private httpHeaders =  new HttpHeaders({'Content-Type': 'application/json'});
+  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  private countRegistros: string;
 
-  constructor(private http:HttpClient,
-              private router: Router) { }
+  constructor(private http: HttpClient,
+              private router: Router) {
+  }
 
-  getRegistros(): Observable<Registro[]>{
+  getRegistros(): Observable<Registro[]> {
     return this.http.get<Registro[]>(this.urlEndPoint).pipe(
-    map( response => {
-      let registros = response as Registro[];
+      map(response => {
+        let registros = response as Registro[];
 
-      return registros.map( registro => {
-        registro.codigoEmpleado.codigoPersona.nombres = registro.codigoEmpleado.codigoPersona.nombres.toUpperCase();
-        registro.codigoEmpleado.codigoPersona.apellidos = registro.codigoEmpleado.codigoPersona.apellidos.toUpperCase();
-        return registro;
-      });
-    })
+        return registros.map(registro => {
+          registro.codigoEmpleado.codigoPersona.nombres = registro.codigoEmpleado.codigoPersona.nombres.toUpperCase();
+          registro.codigoEmpleado.codigoPersona.apellidos = registro.codigoEmpleado.codigoPersona.apellidos.toUpperCase();
+          return registro;
+        });
+      })
     );
+  }
+
+  getCountRegistros(): Observable<any> {
+    return this.http.get<string>(this.urlEndPoint + "/count")
+      // .subscribe(data => {
+      //   this.countRegistros = data;
+      //   console.log("count: " + this.countRegistros);
+      // }
+    // );
   }
 
   getRegistrosPage(page: number): Observable<any> {
     return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
-      map( (response: any) => {
-        (response.content as Registro[]).map( registro => {
+      map((response: any) => {
+        (response.content as Registro[]).map(registro => {
           registro.codigoEmpleado.codigoPersona.nombres = registro.codigoEmpleado.codigoPersona.nombres.toUpperCase();
           registro.codigoEmpleado.codigoPersona.apellidos = registro.codigoEmpleado.codigoPersona.apellidos.toUpperCase();
           return registro;
@@ -44,7 +55,7 @@ export class RegistroService {
     );
   }
 
-  getRegistro(id): Observable<Registro>{
+  getRegistro(id): Observable<Registro> {
     return this.http.get<Registro>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {
         this.router.navigate(['/registros'])
@@ -55,7 +66,7 @@ export class RegistroService {
     );
   }
 
-  createRegistro(registro: Registro): Observable<Registro>{
+  createRegistro(registro: Registro): Observable<Registro> {
     return this.http.post<Registro>(this.urlEndPoint, registro, {headers: this.httpHeaders}).pipe(
       catchError(e => {
         // console.error('registro.service.createEmpleado(registro): ' + e.error.mensaje);
@@ -79,7 +90,7 @@ export class RegistroService {
     );
   }
 
-  updateRegistro(registro: Registro): Observable<Registro>{
+  updateRegistro(registro: Registro): Observable<Registro> {
     return this.http.put<Registro>(`${this.urlEndPoint}/${registro.id}`, registro, {headers: this.httpHeaders}).pipe(
       catchError(e => {
         // console.error('registro.service.updateRegistro(registro): ' + e.error.mensaje);
@@ -103,7 +114,7 @@ export class RegistroService {
     );
   }
 
-  deleteRegistro(id: number): Observable<Registro>{
+  deleteRegistro(id: number): Observable<Registro> {
     return this.http.delete<Registro>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
       catchError(e => {
         console.error('registro.service.deleteRegistro(id): ' + e.error.mensaje);

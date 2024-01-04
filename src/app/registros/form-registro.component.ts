@@ -39,6 +39,10 @@ export class FormRegistroComponent {
 
     this.cargarRegistro();
 
+    this.registroService.getCountRegistros().subscribe(data => {
+      this.registro.numeroRegistro = data + 1;
+    });
+
   }
 
   cargarRegistro(): void{
