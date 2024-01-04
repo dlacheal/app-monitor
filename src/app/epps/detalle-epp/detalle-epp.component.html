@@ -24,7 +24,7 @@
         <br>
 
         <div class="col-sm">
-          <img *ngIf="epp?.rutaImagen" src="http://192.168.18.94:8081/api/epps/uploads/img/{{epp.rutaImagen}}"
+          <img *ngIf="epp?.rutaImagen" src="{{urlEndPointEpp}}/uploads/img/{{epp.rutaImagen}}"
           alt="{{epp.rutaImagen}}"
           class="img-thumbnail rounded">
         </div>

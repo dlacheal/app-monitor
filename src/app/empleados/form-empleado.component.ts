@@ -17,7 +17,7 @@ import {Categoria} from "../categorias/categoria";
 export class FormEmpleadoComponent {
 
   public empleado: Empleado = new Empleado();
-  public tituloFormEmpleado = "Crear Empleado";
+  public tituloFormEmpleado = "Formulario Empleado";
   public puestos: Puesto[];
   public personas: Persona[];
 

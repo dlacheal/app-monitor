@@ -13,7 +13,7 @@ import {Categoria} from "../categorias/categoria";
 export class FormPuestoComponent {
 
   public puesto: Puesto = new Puesto();
-  public tituloFormPuesto = "Crear Puesto";
+  public tituloFormPuesto = "Formulario Puesto";
 
   constructor(private puestoService: PuestoService,
               private router: Router,

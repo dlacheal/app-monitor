@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 })
 export class EmpleadoService {
 
-  private urlEndPoint: string = '/api/empleados';
+  public urlEndPoint: string = '/api/empleados';
   private httpHeaders =  new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http:HttpClient,

@@ -13,6 +13,7 @@ export class DetalleEppComponent {
   public epp: Epp;
   public tituloDetalleEpp = "Detalle del Epp";
   public imagenSeleccionada: File;
+  public urlEndPointEpp: string;
 
   constructor(private eppService: EppService,
               private activateRoute: ActivatedRoute) {
@@ -28,6 +29,7 @@ export class DetalleEppComponent {
         });
       }
     });
+    this.urlEndPointEpp = this.eppService.urlEndPoint;
   }
 
   seleccionarImagenEpp(event) {

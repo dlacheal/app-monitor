@@ -15,7 +15,7 @@ import {Categoria} from "../categorias/categoria";
 export class FormUsuarioComponent {
 
   public usuario: Usuario = new Usuario();
-  public tituloFormUsuario = "Crear Usuario";
+  public tituloFormUsuario = "Formulario Usuario";
   public empleados: Empleado[];
 
   constructor(private usuarioService: UsuarioService,

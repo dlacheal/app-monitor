@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 })
 export class EppService {
 
-  private urlEndPoint: string = '/api/epps';
+  public urlEndPoint: string = '/api/epps';
   private httpHeaders =  new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http:HttpClient,

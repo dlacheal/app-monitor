@@ -14,7 +14,7 @@ import {Observer} from "rxjs";
 export class FormEppComponent {
 
   public epp: Epp = new Epp();
-  public tituloFormEpp = "Crear Epp";
+  public tituloFormEpp = "Formulario Epp";
   public categoriasEpp: Categoria[];
 
   constructor(private eppService: EppService,

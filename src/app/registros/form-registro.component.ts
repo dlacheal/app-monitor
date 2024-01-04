@@ -17,7 +17,7 @@ import {Categoria} from "../categorias/categoria";
 export class FormRegistroComponent {
 
   public registro: Registro = new Registro();
-  public tituloFormRegistro = "Crear Registro";
+  public tituloFormRegistro = "Formulario Registro";
   public empleados: Empleado[];
   public proyectos: Proyecto[];
 

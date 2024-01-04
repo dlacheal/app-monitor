@@ -19,11 +19,11 @@
           <thead class="table-dark thead-inverse bg-dark text-white">
           <tr>
             <th>ID</th>
-            <th>NOMBRES</th>
-            <th>APELLIDOS</th>
-            <th>TIPO DOC.</th>
-            <th>NUMERO DOC.</th>
-            <th>TELEF.</th>
+            <th>NOMBRES APELLIDOS</th>
+<!--            <th>APELLIDOS</th>-->
+            <th>DNI/CEX</th>
+<!--            <th>NUMERO DOC.</th>-->
+            <th>TELÉFONO</th>
             <th>DIRECCIÓN</th>
             <th>EMEAIL</th>
             <th>EDITAR</th>
@@ -33,9 +33,9 @@
           <tbody>
           <tr *ngFor="let persona of personas">
             <td>{{persona.id}}</td>
-            <td>{{persona.nombres}}</td>
-            <td>{{persona.apellidos}}</td>
-            <td>{{persona.tipoDocumento}}</td>
+            <td>{{persona.nombres}} {{persona.apellidos}}</td>
+<!--            <td>{{persona.apellidos}}</td>-->
+<!--            <td>{{persona.tipoDocumento}}</td>-->
             <td>{{persona.numeroDocumento}}</td>
             <td>{{persona.telefono}}</td>
             <td>{{persona.direccion}}</td>

@@ -13,7 +13,7 @@ import {Observer, throwError} from "rxjs";
 export class FormCategoriaComponent {
 
   public categoria: Categoria = new Categoria();
-  public tituloFormCategoria = "Crear Categoria";
+  public tituloFormCategoria = "Formulario Categoria";
 
   public errores: string[];
 

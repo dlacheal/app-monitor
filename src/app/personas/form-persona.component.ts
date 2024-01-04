@@ -12,7 +12,7 @@ import {Observer} from "rxjs";
 export class FormPersonaComponent {
 
   public persona: Persona = new Persona();
-  public tituloFormPersona = "Crear Persona";
+  public tituloFormPersona = "Formulario Persona";
 
   constructor(private personaService: PersonaService,
               private router: Router,

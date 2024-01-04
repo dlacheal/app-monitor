@@ -30,7 +30,7 @@
           <tbody>
           <tr *ngFor="let empleado of empleados">
 <!--            <td>{{empleado.id}}</td>-->
-            <td><button type="button" class="btn btn-outline-primary" [routerLink]="['/empleados/ver',empleado.id]">{{empleado.id}}</button></td>
+            <td><button type="button" class="btn btn-outline-warning" [routerLink]="['/empleados/ver',empleado.id]">{{empleado.id}}</button></td>
             <td>{{empleado.codigoPersona.nombres}} {{empleado.codigoPersona.apellidos}}</td>
             <td>{{empleado.codigoPuesto.descripcion}}</td>
             <td>{{empleado.licencia}}</td>

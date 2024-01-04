@@ -5,6 +5,6 @@ import { Component } from "@angular/core";
     templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-    titleHeader: string = 'App Angular'
-    
+    titleHeader: string = 'App Monitor'
+
 }

@@ -12,7 +12,7 @@ import {Observer} from "rxjs";
 export class FormProyectoComponent {
 
   public proyecto: Proyecto = new Proyecto();
-  public tituloFromProyecto = "Crear Proyecto";
+  public tituloFromProyecto = "Formulario Proyecto";
 
   constructor(private proyectoService: ProyectoService,
               private router: Router,
