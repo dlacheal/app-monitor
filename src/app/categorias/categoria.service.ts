@@ -20,10 +20,10 @@ export class CategoriaService {
 
   getCategorias(): Observable<Categoria[]> {
     return this.http.get<Categoria[]>(this.urlEndPoint).pipe(
-      map( response => {
+      map(response => {
         let categorias = response as Categoria[];
 
-        return categorias.map( categoria => {
+        return categorias.map(categoria => {
           categoria.descripcion = categoria.descripcion.toUpperCase();
           return categoria;
         });
@@ -33,8 +33,8 @@ export class CategoriaService {
 
   getCategoriasPage(page: number): Observable<any> {
     return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
-      map( (response: any) => {
-        (response.content as Categoria[]).map( categoria => {
+      map((response: any) => {
+        (response.content as Categoria[]).map(categoria => {
           categoria.descripcion = categoria.descripcion.toUpperCase();
           return categoria;
         });
@@ -57,48 +57,48 @@ export class CategoriaService {
   createCategoria(categoria: Categoria): Observable<Categoria> {
     return this.http.post<Categoria>(this.urlEndPoint, categoria, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-          // console.error('categoria.service.createCategoria(categoria): ' + e.error.mensaje);
-          // Swal.fire('Error al crear la categoria', e.error.mensaje, 'error');
-          // return throwError(e);
-          switch (e.status) {
-            case 400:
-              Swal.fire('Error al crear la categoria', e.error.errors.toString(), 'error');
-              return throwError(e);
-              break;
-            case 500:
-              Swal.fire('Error al crear la categoria', e.error.mensaje, 'error');
-              return throwError(e);
-              break;
-            default:
-              Swal.fire('Error al crear la categoria', e.error.mensaje, 'error');
-              return throwError(e);
-              break;
-          }
-        })
+        // console.error('categoria.service.createCategoria(categoria): ' + e.error.mensaje);
+        // Swal.fire('Error al crear la categoria', e.error.mensaje, 'error');
+        // return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al crear la categoria', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al crear la categoria', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al crear la categoria', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
+      })
     );
   }
 
   updateCategoria(categoria: Categoria): Observable<Categoria> {
     return this.http.put<Categoria>(`${this.urlEndPoint}/${categoria.id}`, categoria, {headers: this.httpHeaders}).pipe(
       catchError(e => {
-          //   console.error('categoria.service.updateCategoria(categoria): ' + e.error.mensaje);
-          //   Swal.fire('Error al editar la categoria', e.error.mensaje, 'error');
-          //   return throwError(e);
-          switch (e.status) {
-            case 400:
-              Swal.fire('Error al editar la categoria', e.error.errors.toString(), 'error');
-              return throwError(e);
-              break;
-            case 500:
-              Swal.fire('Error al editar la categoria', e.error.mensaje, 'error');
-              return throwError(e);
-              break;
-            default:
-              Swal.fire('Error al editar la categoria', e.error.mensaje, 'error');
-              return throwError(e);
-              break;
-          }
-        })
+        //   console.error('categoria.service.updateCategoria(categoria): ' + e.error.mensaje);
+        //   Swal.fire('Error al editar la categoria', e.error.mensaje, 'error');
+        //   return throwError(e);
+        switch (e.status) {
+          case 400:
+            Swal.fire('Error al editar la categoria', e.error.errors.toString(), 'error');
+            return throwError(e);
+            break;
+          case 500:
+            Swal.fire('Error al editar la categoria', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+          default:
+            Swal.fire('Error al editar la categoria', e.error.mensaje, 'error');
+            return throwError(e);
+            break;
+        }
+      })
     );
   }
 

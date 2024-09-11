@@ -1,5 +1,5 @@
 <div class="container py-4">
-  <div class="card border-dark mb-3 my-3 mx-3">
+  <div class="card border-dark bg-light mb-3 my-3 mx-3">
     <div class="card-header">Listado de Registros</div>
     <div class="card-body text-primary">
       <!--
@@ -30,7 +30,8 @@
           </thead>
           <tbody>
           <tr *ngFor="let registro of registros">
-            <td>{{registro.id}}</td>
+<!--            <td>{{registro.id}}</td>-->
+            <td><button type="button" class="btn btn-outline-warning" [routerLink]="['/registros/ver',registro.id]">{{registro.id}}</button></td>
             <td>{{registro.numeroRegistro}}</td>
             <td>{{registro.codigoEmpleado.codigoPersona.tipoDocumento}}</td>
             <td>{{registro.codigoEmpleado.codigoPersona.numeroDocumento}}</td>

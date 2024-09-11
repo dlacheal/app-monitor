@@ -1,40 +1,41 @@
 import { Component } from '@angular/core';
-import { Empleado } from './empleado';
-import { EmpleadoService } from './empleado.service';
+import { Notificacion } from './notificacion';
+import { NotificacionService } from './notificacion.service';
 import Swal from "sweetalert2";
 import {ActivatedRoute} from "@angular/router";
+import {Empleado} from "../empleados/empleado";
 
 @Component({
-  selector: 'app-empleados',
-  templateUrl: './empleados.component.html'
+  selector: 'app-notificaciones',
+  templateUrl: './notificaciones.component.html'
 })
-export class EmpleadosComponent {
+export class NotificacionesComponent {
 
-  empleados: Empleado[];
-  paginadorEmpleado: any;
+  notificaciones: Notificacion[];
+  paginadorNotificacion: any;
 
-  constructor(private empleadoService: EmpleadoService,
+  constructor(private notificacionService: NotificacionService,
               private activateRoute: ActivatedRoute){}
 
   ngOnInit(): void{
-
     let page = 0;
     this.activateRoute.paramMap.subscribe(params => {
       let page: number = +params.get('page');
+      console.log("page:" + this.activateRoute);
 
       if (!page) {
         page = 0;
       }
 
-      this.empleadoService.getEmpleadosPage(page)
+      this.notificacionService.getNotificacionesPage(page)
         .subscribe(response => {
-          this.empleados = response.content as Empleado[];
-          this.paginadorEmpleado = response;
+          this.notificaciones = response.content as Notificacion[];
+          this.paginadorNotificacion = response;
         });
     });
   }
 
-  deleteEmpleado(empleado: Empleado): void{
+  deleteNotificacion(notificacion: Notificacion): void{
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -45,7 +46,7 @@ export class EmpleadosComponent {
 
     swalWithBootstrapButtons.fire({
       title: 'Está seguro?',
-      text: `¿Seguro que desea eliminar el empleado  ${empleado.codigoPersona.nombres} ${empleado.codigoPersona.apellidos}?`,
+      text: `¿Seguro que desea eliminar la notificación con fecha ${notificacion.fechaNotificacion}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí, Eliminar!',
@@ -53,12 +54,12 @@ export class EmpleadosComponent {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        this.empleadoService.deleteEmpleado(empleado.id).subscribe(
+        this.notificacionService.deleteNotificacion(notificacion.id).subscribe(
           response => {
-            this.empleados = this.empleados.filter(emp => emp !== empleado);
+            this.notificaciones = this.notificaciones.filter(emp => emp !== notificacion);
             Swal.fire(
               'Empleado Eliminiado!',
-              `El Empleado ${empleado.codigoPersona.nombres} ${empleado.codigoPersona.apellidos} ha sido eliminado con éxito.`,
+              `La Notificación ${notificacion.id} con fecha ${notificacion.fechaNotificacion} ha sido eliminada con éxito.`,
               'success'
             )
           }

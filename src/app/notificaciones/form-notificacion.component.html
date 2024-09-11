@@ -1,0 +1,105 @@
+<div class="card bg-dark text-white mb-3 my-3 mx-3">
+
+  <div class="card-header">{{ tituloFormNotificacion }}</div>
+  <div class="card-body">
+    <form>
+      <!-- FECHA NOTIFICACIÓN -->
+      <div class="form.group row">
+        <label for="fechaNotificacion" class="col-form-label col-sm-2">FECHA NOTIFICACIÓN</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="notificacion.fechaNotificacion" name="fechaNotificacion"
+                 required
+                 minlength="4" #fechaNotificacion="ngModel">
+          <div class="alert alert-danger"
+               *ngIf="fechaNotificacion.invalid && (fechaNotificacion.dirty || fechaNotificacion.touched)">
+            <div *ngIf="fechaNotificacion.errors.required">
+              La Fecha de la notificación es requerida.
+            </div>
+            <!--
+            <div *ngIf="fechaNotificacion.errors.minlength">
+              La Fecha de la notificación debe tener al menos 4 caracteres.
+            </div>
+            -->
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+
+      <br>
+      <!-- Revisado -->
+      <div class="form-group row">
+        <label for="revisado" class="col-sm-2 col-form-label">REVISADO</label>
+        <div class="col-sm-6">
+          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="notificacion.revisado"
+                  name="revisado">
+            <option [ngValue]="undefined"> Seleccionar</option>
+            <option value="false">NO</option>
+            <option value="true">SI</option>
+          </select>
+        </div>
+      </div>
+
+      <br>
+      <!-- Enviado -->
+      <div class="form-group row">
+        <label for="enviado" class="col-sm-2 col-form-label">MEMORANDO</label>
+        <div class="col-sm-6">
+          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="notificacion.enviado"
+                  name="enviado">
+            <option [ngValue]="undefined"> Seleccionar</option>
+            <option value="false">NO</option>
+            <option value="true">SI</option>
+          </select>
+        </div>
+      </div>
+
+      <br>
+      <!-- Criticidad -->
+      <div class="form-group row">
+        <label for="criticidad" class="col-sm-2 col-form-label">CRITICIDAD</label>
+        <div class="col-sm-6">
+          <select class="custom-select form-control form-control-sm col-md-6" [(ngModel)]="notificacion.criticidad"
+                  name="criticidad">
+            <option [ngValue]="undefined"> Seleccionar</option>
+            <option value=0>NINGUNA</option>
+            <option value=1>BAJA</option>
+            <option value=2>MEDIA</option>
+            <option value=3>ALTA</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Descripcion -->
+      <br>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">DESCRIPCIÓN:</label>
+<!--        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [value]="notificacion.descripcion"></textarea>-->
+        <input type="text" class="form-control" id="exampleFormControlTextarea1" [(ngModel)]="notificacion.descripcion" name="descripcion">
+      </div>
+
+      <!-- Boton -->
+      <br>
+      <br>
+      <br>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role="button" (click)='createNotificacion()'
+                  *ngIf="!notificacion.id else elseBlockNotificacion">
+            Crear
+          </button>
+
+          <ng-template #elseBlockNotificacion>
+
+
+            <button class="btn btn-primary" role="button" (click)='updateNotificacion()'>
+              Actualizar
+            </button>
+          </ng-template>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

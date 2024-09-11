@@ -1,0 +1,115 @@
+<div class="card bg-light text-dark mb-3 my-3 mx-3" *ngIf="registro">
+
+  <div class="card-header">{{ tituloDetalleRegistro }}</div>
+  <div class="card-body">
+
+    <h4 class="card-title">
+      <a [routerLink]="['/registros']" class="btn btn-info btn-xs">&laquo; volver</a>
+    </h4>
+
+    <!-- Numero Registro -->
+    <div class="form.group row">
+      <label for="numeroRegistro" class="col-form-label col-sm-2">Nº REGISTRO</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" [(ngModel)]="registro.id" name="numeroRegistro" required
+               #numeroRegistro="ngModel" disabled>
+        <div class="alert alert-danger"
+             *ngIf="numeroRegistro.invalid && (numeroRegistro.dirty || numeroRegistro.touched)">
+          <div *ngIf="numeroRegistro.errors.required">
+            El número del registro es requerido.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="list-group my-2">
+      <li class="list-group-item list-group-item-primary">Datos de la Empresa</li>
+      <li class="list-group-item">RUC: 20606479051</li>
+      <li class="list-group-item">Razón social: Eco Building Tecnology</li>
+      <li class="list-group-item">Dirección Fiscal: Calle - Los Hornos 350 - Los Olivos, Lima-Perú</li>
+    </ul>
+
+    <ul class="list-group my-2">
+      <li class="list-group-item list-group-item-primary">Datos del
+        Empleado: {{registro.codigoEmpleado.codigoPersona.nombres}} {{registro.codigoEmpleado.codigoPersona.apellidos}}</li>
+      <li class="list-group-item">DNI: {{registro.codigoEmpleado.codigoPersona.numeroDocumento}} </li>
+      <li class="list-group-item">Puesto: {{registro.codigoEmpleado.codigoPuesto.descripcion}} </li>
+      <li class="list-group-item">Proyecto: {{registro.codigoProyecto.nombreProyecto}}</li>
+      <li class="list-group-item">Planta: {{registro.plantaOperario}}</li>
+    </ul>
+
+    <div class="alert alert-danger my-4" *ngIf="registro.detalleRegistroList == 0">
+      No Hay epps asignados al registro an Nº {{registro.id}}
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered" *ngIf="registro.detalleRegistroList?.length>0">
+        <thead class="table-light thead-inverse bg-light text-white">
+        <tr>
+          <th>EPP</th>
+          <th>TALLA</th>
+          <th>CANTIDAD</th>
+          <th>MOTIVO</th>
+          <th>FECHA ENTREGA</th>
+          <th>CONFORMIDAD</th>
+          <th>OBSERVACIÓN</th>
+<!--          <th>EDITAR</th>-->
+<!--          <th>ELIMINAR</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let itemRegistro of registro.detalleRegistroList">
+          <td>{{itemRegistro.codigoEpp.nombre}}</td>
+          <td>{{itemRegistro.tallaEpp}}</td>
+          <td>{{itemRegistro.cantidad}}</td>
+          <td>{{itemRegistro.motivoEntrega}}</td>
+          <td>{{itemRegistro.fechaEntrega}}</td>
+          <td *ngIf="itemRegistro.conformidad == true "> SI </td>
+          <td *ngIf="itemRegistro.conformidad == false "> NO</td>
+          <td>{{itemRegistro.observacion}}</td>
+<!--          <td>-->
+<!--            <button class="btn btn-success" type="button" name="buttonUpdateRegistro"-->
+<!--                    [routerLink]="['/registros/form',registro.id]">-->
+<!--              Ver-->
+<!--            </button>-->
+<!--          </td>-->
+<!--          <td>-->
+<!--                        <button class="btn btn-danger" type="button" name="buttonDeleteRegistro"-->
+<!--                                (click)='deleteRegistroEmpleado(registroEmpleado)'>Eliminar-->
+<!--                        </button>-->
+<!--          </td>-->
+        </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+
+    <ul class="list-group my-4">
+      <li class="list-group-item mx-6 list-group-item-primary">Estado de conformidad</li>
+      <tr>
+        <th class="mx-6">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckboxRevisado" [(ngModel)]="registro.revisado"
+                   [ngModelOptions]="{standalone: true}" disabled>
+            <label class="form-check-label" for="inlineCheckboxRevisado">REVISADO</label>
+          </div>
+        </th>
+        <th class="mx-6">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckboxAprobado" [(ngModel)]="registro.entregado"
+                   [ngModelOptions]="{standalone: true}" disabled>
+            <label class="form-check-label" for="inlineCheckboxAprobado">ENTREGADO</label>
+          </div>
+        </th>
+        <th class="mx-6">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckboxEntregado" [(ngModel)]="registro.aprobado"
+                   [ngModelOptions]="{standalone: true}" disabled>
+            <label class="form-check-label" for="inlineCheckboxEntregado">APROBADO</label>
+          </div>
+        </th>
+      </tr>
+
+    </ul>
+  </div>

@@ -1,20 +1,18 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">{{titleHeader}}</a>
+    <a class="navbar-brand" href="#"><i class="bi bi-display"></i> {{titleHeader}}</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Monitoreo</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/puestos">Puestos</a>
-        </li>
+
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/categorias">Categorias</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/epps">Epps</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/proyectos">Proyectos</a>
@@ -23,7 +21,7 @@
           <a class="nav-link" routerLink="/personas">Personas</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/epps">Epps</a>
+          <a class="nav-link" routerLink="/puestos">Puestos</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/empleados">Empleados</a>
@@ -35,26 +33,43 @@
           <a class="nav-link" routerLink="/usuarios">Usuarios</a>
         </li>
         <li class="nav-item dropdown">
+
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+<!--            <i  class="bi bi-bell">-->
+              <span class="bi bi-bell" matBadge={{notificaciones.length}} matBadgeColor="accent" matBadgeOverlap="false">  </span>
+<!--            <mat-icon matBadge="3">home</mat-icon>-->
+<!--            </i>-->
           </a>
+
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="/notificaciones">NOTIFICACIONES</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <span class="btn btn-primary" [routerLink]="['/notificaciones']">Todas</span>
+            <span class="btn btn-danger" href="/notificaciones">No leídos</span>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <tr *ngFor="let notificacion of notificaciones">
+              <li>
+                <a class="dropdown-item btn btn-outline-warning"
+                   [routerLink]="['/notificaciones/ver',notificacion.id]">{{notificacion.fechaNotificacion}}
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+            </tr>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
       </ul>
+      <!--
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
+      -->
     </div>
   </div>
 </nav>

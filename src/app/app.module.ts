@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import { MatBadgeModule } from "@angular/material/badge";
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -20,6 +21,7 @@ import { EppsComponent } from './epps/epps.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
 import { RegistrosComponent } from './registros/registros.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 
 import { CategoriaService } from './categorias/categoria.service';
 import { PuestoService } from './puestos/puesto.service';
@@ -29,6 +31,7 @@ import { EppService } from './epps/epp.service';
 import { EmpleadoService } from './empleados/empleado.service';
 import { RegistroService } from './registros/registro.service';
 import { UsuarioService } from './usuarios/usuario.service';
+import { NotificacionService } from './notificaciones/notificacion.service';
 
 import { FormCategoriaComponent } from './categorias/form-categoria.component';
 import { FormPuestoComponent } from './puestos/form-puesto.component';
@@ -38,6 +41,8 @@ import { FormEppComponent } from './epps/form-epp.component';
 import { FormEmpleadoComponent } from './empleados/form-empleado.component';
 import { FormRegistroComponent } from './registros/form-registro.component';
 import { FormUsuarioComponent } from './usuarios/form-usuario.component';
+import { FormNotificacionComponent } from './notificaciones/form-notificacion.component';
+
 import { PaginatorPuestoComponent } from './paginator/paginator-puesto.component';
 import { PaginatorCategoriaComponent } from './paginator/paginator-categoria.component';
 import { PaginatorEmpleadoComponent } from './paginator/paginator-empleado.component';
@@ -46,8 +51,12 @@ import { PaginatorPersonaComponent } from './paginator/paginator-persona.compone
 import { PaginatorProyectoComponent } from './paginator/paginator-proyecto.component';
 import { PaginatorRegistroComponent } from './paginator/paginator-registro.component';
 import { PaginatorUsuarioComponent } from './paginator/paginator-usuario.component';
+import { PaginatorNotificacionComponent } from './paginator/paginator-notificacion.component';
 import { DetalleEppComponent } from './epps/detalle-epp/detalle-epp.component';
 import { DetalleEmpleadoComponent } from './empleados/detalle-empleado/detalle-empleado.component';
+import { DetalleNotificacionComponent } from './notificaciones/detalle-notificacion/detalle-notificacion.component';
+import { DetalleRegistroComponent } from './detalle-registro/detalle-registro.component';
+
 
 
 
@@ -61,6 +70,7 @@ const routes: Routes = [
   {path: 'empleados', component: EmpleadosComponent},
   {path: 'registros', component: RegistrosComponent},
   {path: 'usuarios', component: UsuariosComponent},
+  {path: 'notificaciones', component: NotificacionesComponent},
   // form-create
   {path: 'categorias/form', component: FormCategoriaComponent},
   {path: 'puestos/form', component: FormPuestoComponent},
@@ -70,6 +80,7 @@ const routes: Routes = [
   {path: 'empleados/form', component: FormEmpleadoComponent},
   {path: 'registros/form', component: FormRegistroComponent},
   {path: 'usuarios/form', component: FormUsuarioComponent},
+  {path: 'notificaciones/form', component: FormNotificacionComponent},
   // form-edit
   {path: 'categorias/form/:id', component: FormCategoriaComponent},
   {path: 'puestos/form/:id', component: FormPuestoComponent},
@@ -79,6 +90,7 @@ const routes: Routes = [
   {path: 'empleados/form/:id', component: FormEmpleadoComponent},
   {path: 'registros/form/:id', component: FormRegistroComponent},
   {path: 'usuarios/form/:id', component: FormUsuarioComponent},
+  {path: 'notificaciones/form/:id', component: FormNotificacionComponent},
   //form-pages
   {path: 'puestos/page/:page', component: PuestosComponent},
   {path: 'categorias/page/:page', component: CategoriasComponent},
@@ -91,6 +103,8 @@ const routes: Routes = [
   //ver
   {path: 'epps/ver/:id', component: DetalleEppComponent},
   {path: 'empleados/ver/:id', component: DetalleEmpleadoComponent},
+  {path: 'notificaciones/ver/:id', component: DetalleNotificacionComponent},
+  {path: 'registros/ver/:id', component: DetalleRegistroComponent},
 
 ];
 
@@ -108,6 +122,7 @@ const routes: Routes = [
     EmpleadosComponent,
     RegistrosComponent,
     UsuariosComponent,
+    NotificacionesComponent,
     FormCategoriaComponent,
     FormPuestoComponent,
     FormProyectoComponent,
@@ -116,6 +131,7 @@ const routes: Routes = [
     FormEmpleadoComponent,
     FormRegistroComponent,
     FormUsuarioComponent,
+    FormNotificacionComponent,
     PaginatorPuestoComponent,
     PaginatorCategoriaComponent,
     PaginatorEmpleadoComponent,
@@ -124,8 +140,11 @@ const routes: Routes = [
     PaginatorProyectoComponent,
     PaginatorRegistroComponent,
     PaginatorUsuarioComponent,
+    PaginatorNotificacionComponent,
     DetalleEppComponent,
-    DetalleEmpleadoComponent
+    DetalleEmpleadoComponent,
+    DetalleNotificacionComponent,
+    DetalleRegistroComponent
   ],
   imports: [
     BrowserModule,
@@ -134,7 +153,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatBadgeModule
   ],
   providers: [
     PuestoService,
@@ -144,7 +164,8 @@ const routes: Routes = [
     EppService,
     EmpleadoService,
     RegistroService,
-    UsuarioService
+    UsuarioService,
+    NotificacionService
   ],
   bootstrap: [AppComponent]
 })

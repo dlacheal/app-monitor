@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {EppService} from "../../epps/epp.service";
 import {ActivatedRoute} from "@angular/router";
 import Swal from "sweetalert2";
 import {Empleado} from "../empleado";

@@ -8,7 +8,6 @@ import {Proyecto} from "../proyectos/proyecto";
 import {ProyectoService} from "../proyectos/proyecto.service";
 import Swal from "sweetalert2";
 import {Observer} from "rxjs";
-import {Categoria} from "../categorias/categoria";
 
 @Component({
   selector: 'app-form-registro',

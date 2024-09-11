@@ -8,7 +8,7 @@ export class Empleado {
     rutaFoto: string
     licencia: string;
     tipoSangre: string;
-    codigoPuesto: Puesto;
-    codigoPersona: Persona;
+    codigoPuesto: Puesto = new Puesto();
+    codigoPersona: Persona = new Persona();
     registros: Registro[] = [];
 }

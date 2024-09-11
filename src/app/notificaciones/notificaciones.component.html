@@ -1,0 +1,65 @@
+<div class="container py-4">
+  <div class="card border-dark bg-light mb-3 my-3 mx-3">
+    <div class="card-header">Listado de Notificaciones</div>
+    <div class="card-body text-primary">
+
+      <div class="my-2 text-left">
+        <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/notificaciones/form']"> Crear Notificaciön
+        </button>
+      </div>
+
+      <div *ngIf="notificaciones?.length ==0" class="alert alert-info">
+        No hay notificaciones en la base de datod!
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered" *ngIf="notificaciones?.length>0">
+          <thead class="table-dark thead-inverse bg-dark text-white">
+          <tr>
+            <th>ID</th>
+            <th>FECHA NOTIFICACION</th>
+            <th>REVISADO</th>
+            <th>MEMORANDO</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let notificacion of notificaciones">
+            <td><button type="button" class="btn btn-outline-warning" [routerLink]="['/notificaciones/ver',notificacion.id]">{{notificacion.id}}</button></td>
+            <td>{{notificacion.fechaNotificacion}}</td>
+
+            <td>
+              <span class="btn btn-secondary" *ngIf="notificacion.revisado else elseBlockRevisado">SI</span>
+              <ng-template #elseBlockRevisado>
+                <span class="btn btn-secondary">NO</span>
+              </ng-template>
+            </td>
+
+            <td>
+              <span class="btn btn-secondary" *ngIf="notificacion.enviado else elseBlockEnviado">SI</span>
+              <ng-template #elseBlockEnviado>
+                <span class="btn btn-secondary">NO</span>
+              </ng-template>
+            </td>
+
+            <td>
+              <button class="btn btn-success" type="button" name="buttonUpdateNotificacion"
+                      [routerLink]="['/notificaciones/form',notificacion.id]">Editar
+              </button>
+            </td>
+
+            <td>
+              <button class="btn btn-danger" type="button" name="buttonDeleteNotificacion"
+                      (click)='deleteNotificacion(notificacion)'>
+                Eliminar
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <app-paginator-notificacion *ngIf="paginadorNotificacion" [paginador]="paginadorNotificacion"></app-paginator-notificacion>
+      </div>
+    </div>
+  </div>
+</div>

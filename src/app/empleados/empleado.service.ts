@@ -110,7 +110,7 @@ export class EmpleadoService {
     );
   }
 
-  deleEmpleado(id: number): Observable<Empleado>{
+  deleteEmpleado(id: number): Observable<Empleado>{
     return this.http.delete<Empleado>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
       catchError(e => {
         console.error('empleado.service.deleEmpleado(id): ' + e.error.mensaje);

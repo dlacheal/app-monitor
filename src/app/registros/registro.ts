@@ -1,6 +1,6 @@
 import { Empleado } from "../empleados/empleado";
 import { Proyecto } from "../proyectos/proyecto";
-import {DetalleRegistro} from "./detalle/detalle-registro";
+import {DetalleRegistro} from "../detalle-registro/detalle-registro";
 
 export class Registro {
     id: number;
@@ -13,7 +13,7 @@ export class Registro {
     nombreProyectoOperario: string;
     plantaOperario: string;
     fechaRegistro: Date;
-    codigoEmpleado: Empleado;
-    codigoProyecto: Proyecto;
+    codigoEmpleado: Empleado = new Empleado();
+    codigoProyecto: Proyecto = new Proyecto();
     detalleRegistroList: DetalleRegistro[] = [];
 }

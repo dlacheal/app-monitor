@@ -1,0 +1,64 @@
+<div class="card bg-dark text-white">
+  <div class="card-header">{{ tituloDetalleNotificacion }}</div>
+  <div class="card-body">
+    <div class="container">
+<!--      <div class="row-cols-2">-->
+              <div class="row">
+        <div class="col-sm">
+          <ul *ngIf="notificacion" class="list-group text-dark mb-3">
+            <li class="list-group-item active">CÓDIGO: {{notificacion.id}}</li>
+            <li class="list-group-item ">FECHA NOTIFICACIÓN: {{notificacion.fechaNotificacion}}</li>
+
+            <li class="list-group-item" *ngIf="notificacion.revisado else elseBlockRevisado">REVISADO: SI</li>
+            <ng-template #elseBlockRevisado>
+              <li class="list-group-item">REVISADO: NO</li>
+            </ng-template>
+
+            <li class="list-group-item" *ngIf="notificacion.enviado else elseBlockEnviado">MEMORANDO: SI</li>
+            <ng-template #elseBlockEnviado>
+              <li class="list-group-item">MEMORANDO: NO</li>
+            </ng-template>
+
+
+            <li class="list-group-item" *ngIf="notificacion.criticidad === 0">CRITICIDAD: NINGUNA</li>
+            <li class="list-group-item" *ngIf="notificacion.criticidad === 1">CRITICIDAD: BAJA</li>
+            <li class="list-group-item" *ngIf="notificacion.criticidad === 2">CRITICIDAD: MEDIA</li>
+            <li class="list-group-item" *ngIf="notificacion.criticidad === 3">CRITICIDAD: ALTA</li>
+          </ul>
+
+          <div class="input-group">
+            <input (change)="seleccionarImagenNotificacion($event)" type="file" class="form-control"
+                   id="inputGroupFile04"
+                   aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+            <button (click)="subirImagenNotificacion()" [disabled]="!imagenSeleccionada"
+                    class="btn btn-outline-secondary" type="button"
+                    id="inputGroupFileAddon05">Upload
+            </button>
+          </div>
+
+        </div>
+        <br>
+
+        <div class="col-sm">
+          <img *ngIf="notificacion?.rutaFotograma"
+               src="{{urlEndPointNotificacion}}/uploads/img/{{notificacion.rutaFotograma}}"
+               alt="{{notificacion.rutaFotograma}}"
+               class="img-thumbnail rounded">
+        </div>
+
+      </div>
+
+      <br>
+      <div class="col-sm">
+        <div class="form-group">
+          <label for="notificacionTextarea">DESCRIPCIÓN:</label>
+          <textarea class="form-control" id="notificacionTextarea" >{{notificacion.descripcion}}</textarea>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+</div>
