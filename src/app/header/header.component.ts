@@ -1,19 +1,27 @@
 import { Component } from "@angular/core";
 import {NotificacionService} from "../notificaciones/notificacion.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Notificacion} from "../notificaciones/notificacion";
+import {AuthService} from "../usuarios/auth.service";
+import Swal from "sweetalert2";
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html'
 })
 export class HeaderComponent {
+
+  /** Atributos **/
   titleHeader: string = 'App Monitor';
   notificaciones: Notificacion[] = [];
   paginadorNotificacion: any;
 
+
+  /** Constructor **/
   constructor(private notificacionService: NotificacionService,
-              private activateRoute: ActivatedRoute){}
+              private activateRoute: ActivatedRoute,
+              public authService: AuthService,
+              private router: Router){}
 
   ngOnInit(): void{
     let page = 0;
@@ -30,6 +38,15 @@ export class HeaderComponent {
           this.paginadorNotificacion = response;
         });
     });
+  }
+
+  /** Metodos **/
+  logout(): void{
+    let username = this.authService.usuario.username;
+    this.authService.logout();
+
+    Swal.fire('Logout', `Hola ${username}, has cerrado sesión con éxito!`, 'success');
+    this.router.navigate(['/login']);
   }
 
 }

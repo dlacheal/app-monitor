@@ -21,21 +21,21 @@
           <tr>
             <th>ID</th>
             <th>DESCRIPCIÓN</th>
-            <th>EDITAR</th>
-            <th>ELIMINAR</th>
+            <th *ngIf="authService.hasRole('ROLE_ADMIN')">EDITAR</th>
+            <th *ngIf="authService.hasRole('ROLE_ADMIN')">ELIMINAR</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let puesto of puestos">
             <td>{{puesto.id}}</td>
             <td>{{puesto.descripcion}}</td>
-            <td>
+            <td *ngIf="authService.hasRole('ROLE_ADMIN')">
               <button class="btn btn-success" type="button" name="buttonUpdatePuesto"
                       [routerLink]="['/puestos/form',puesto.id]">Editar
               </button>
             </td>
 
-            <td>
+            <td *ngIf="authService.hasRole('ROLE_ADMIN')">
               <button class="btn btn-danger" type="button" name="buttonDeletePuesto" (click)='deletePuesto(puesto)'>
                 Eliminar
               </button>

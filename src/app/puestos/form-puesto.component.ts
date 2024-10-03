@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import Swal from "sweetalert2";
 import {Observer} from "rxjs";
 import {Categoria} from "../categorias/categoria";
+import {AuthService} from "../usuarios/auth.service";
 
 @Component({
   selector: 'app-form-puesto',
@@ -17,6 +18,7 @@ export class FormPuestoComponent {
 
   constructor(private puestoService: PuestoService,
               private router: Router,
+              public authService: AuthService,
               private activateRoute: ActivatedRoute) {
   }
 

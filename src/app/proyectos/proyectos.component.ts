@@ -20,6 +20,7 @@ export class ProyectosComponent {
     let page = 0;
     this.activateRoute.paramMap.subscribe(params => {
       let page: number = +params.get('page');
+      console.log("page:" + this.activateRoute);
 
       if (!page) {
         page = 0;

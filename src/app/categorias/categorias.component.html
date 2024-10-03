@@ -3,7 +3,7 @@
     <div class="card-header">{{ tituloCategoria }}</div>
     <div class="card-body text-primary">
       <div class="my-2 text-left">
-        <button class="btn btn-primary btn-rounded" type="button" [routerLink]="['/categorias/form']"> Crear Categoria
+        <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-primary btn-rounded" type="button" [routerLink]="['/categorias/form']"> Crear Categoria
         </button>
       </div>
 
@@ -17,21 +17,21 @@
           <tr>
             <th>ID</th>
             <th>DESCRIPCIÓN</th>
-            <th>EDITAR</th>
-            <th>ELIMINAR</th>
+            <th *ngIf="authService.hasRole('ROLE_ADMIN')">EDITAR</th>
+            <th *ngIf="authService.hasRole('ROLE_ADMIN')">ELIMINAR</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let categoria of categorias">
             <td>{{categoria.id}}</td>
             <td>{{categoria.descripcion}}</td>
-            <td>
+            <td *ngIf="authService.hasRole('ROLE_ADMIN')">
               <button class="btn btn-success" type="button" name="buttonUpdateCategoria"
                       [routerLink]="['/categorias/form',categoria.id]">Editar
               </button>
             </td>
 
-            <td>
+            <td *ngIf="authService.hasRole('ROLE_ADMIN')">
               <button class="btn btn-danger" type="button" name="buttonDeleteCategoria"
                       (click)='deleteCategoria(categoria)'>Eliminar
               </button>

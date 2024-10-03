@@ -49,6 +49,7 @@ export class EppService {
   getEpp(id): Observable<Epp>{
     return this.http.get<Epp>(`${this.urlEndPoint}/${id}`).pipe(
     catchError(e => {
+
       this.router.navigate(['/epps'])
       console.error('epp.service.getCategoria(id): ' + e.error.mensaje);
       Swal.fire('Error al editar', e.error.mensaje, 'error');

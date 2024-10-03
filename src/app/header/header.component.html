@@ -6,48 +6,67 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul *ngIf="authService.isAuthenticated()" class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown justify-content-end">
+          <a class="bi bi-person-lock btn btn-outline-primary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false"> {{ authService.usuario.username }}
+            </span>
+            <div class="dropdown-menu justify-content-center " aria-labelledby="dropdownMenuLink">
+              <span class="bi bi-person-bounding-box btn btn-outline-secondary" role="button" href="/login"> Settings</span>
+              <hr class="dropdown-divider">
+              <span class="bi bi-power btn btn-outline-danger" role="button" (click)="logout()" href="/login"> Sign Out</span>
+            </div>
+          </a>
+        </li>
 
-        <li class="nav-item" routerLinkActive="active">
+        <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/categorias">Categorias</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/epps">Epps</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/proyectos">Proyectos</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/personas">Personas</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/puestos">Puestos</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/empleados">Empleados</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/registros">Registros</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/usuarios">Usuarios</a>
-        </li>
-        <li class="nav-item dropdown">
 
+        <li class="nav-item" routerLinkActive="active" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-<!--            <i  class="bi bi-bell">-->
-              <span class="bi bi-bell" matBadge={{notificaciones.length}} matBadgeColor="accent" matBadgeOverlap="false">  </span>
-<!--            <mat-icon matBadge="3">home</mat-icon>-->
-<!--            </i>-->
+            <a class="nav-link">Empleados</a>
           </a>
 
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/notificaciones">NOTIFICACIONES</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+            <li *ngIf="authService.hasRole('ROLE_ADMIN')"><a class="dropdown-item" routerLink="/empleados">Todos</a></li>
+            <li *ngIf="authService.hasRole('ROLE_ADMIN')"><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" routerLink="/empleados/ver/{{ authService.usuario.codigoEmpleado.id }}">Ver</a></li>
+          </ul>
+        </li>
+
+        <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/registros">Registros</a>
+        </li>
+        <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/usuarios">Usuarios</a>
+        </li>
+        <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item dropdown">
+
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="bi bi-bell" matBadge={{notificaciones.length}} matBadgeColor="accent"
+                  matBadgeOverlap="false">
+            </span>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/notificaciones">NOTIFICACIONES</a></li>
+            <li><hr class="dropdown-divider"></li>
             <span class="btn btn-primary" [routerLink]="['/notificaciones']">Todas</span>
-            <span class="btn btn-danger" href="/notificaciones">No leídos</span>
+            <span class="btn btn-danger" routerLink="/notificaciones">No leídos</span>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -63,7 +82,9 @@
             </tr>
           </ul>
         </li>
+
       </ul>
+
       <!--
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

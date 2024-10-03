@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
@@ -22,6 +22,7 @@ import { EmpleadosComponent } from './empleados/empleados.component';
 import { RegistrosComponent } from './registros/registros.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';
+import { LoginComponent } from './usuarios/login.component';
 
 import { CategoriaService } from './categorias/categoria.service';
 import { PuestoService } from './puestos/puesto.service';
@@ -56,55 +57,61 @@ import { DetalleEppComponent } from './epps/detalle-epp/detalle-epp.component';
 import { DetalleEmpleadoComponent } from './empleados/detalle-empleado/detalle-empleado.component';
 import { DetalleNotificacionComponent } from './notificaciones/detalle-notificacion/detalle-notificacion.component';
 import { DetalleRegistroComponent } from './detalle-registro/detalle-registro.component';
+import {AuthGuard} from "./usuarios/guards/auth.guard";
+import {RoleGuard} from "./usuarios/guards/role.guard";
+import {TokenInterceptor} from "./usuarios/interceptors/token.interceptor";
+import {AuthInterceptor} from "./usuarios/interceptors/auth.interceptor";
+
 
 
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/puestos', pathMatch: 'full'},
-  {path: 'puestos', component: PuestosComponent},
-  {path: 'categorias', component: CategoriasComponent},
-  {path: 'proyectos', component: ProyectosComponent},
-  {path: 'personas', component: PersonasComponent},
-  {path: 'epps', component: EppsComponent},
-  {path: 'empleados', component: EmpleadosComponent},
-  {path: 'registros', component: RegistrosComponent},
-  {path: 'usuarios', component: UsuariosComponent},
-  {path: 'notificaciones', component: NotificacionesComponent},
+  {path: 'puestos', component: PuestosComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'categorias', component: CategoriasComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'proyectos', component: ProyectosComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'personas', component: PersonasComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'epps', component: EppsComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'empleados', component: EmpleadosComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'registros', component: RegistrosComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'notificaciones', component: NotificacionesComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'login', component: LoginComponent},
   // form-create
-  {path: 'categorias/form', component: FormCategoriaComponent},
-  {path: 'puestos/form', component: FormPuestoComponent},
-  {path: 'proyectos/form', component: FormProyectoComponent},
-  {path: 'personas/form', component: FormPersonaComponent},
-  {path: 'epps/form', component: FormEppComponent},
-  {path: 'empleados/form', component: FormEmpleadoComponent},
-  {path: 'registros/form', component: FormRegistroComponent},
-  {path: 'usuarios/form', component: FormUsuarioComponent},
-  {path: 'notificaciones/form', component: FormNotificacionComponent},
+  {path: 'categorias/form', component: FormCategoriaComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'puestos/form', component: FormPuestoComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'proyectos/form', component: FormProyectoComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'personas/form', component: FormPersonaComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'epps/form', component: FormEppComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'empleados/form', component: FormEmpleadoComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'registros/form', component: FormRegistroComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'usuarios/form', component: FormUsuarioComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'notificaciones/form', component: FormNotificacionComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
   // form-edit
-  {path: 'categorias/form/:id', component: FormCategoriaComponent},
-  {path: 'puestos/form/:id', component: FormPuestoComponent},
-  {path: 'proyectos/form/:id', component: FormProyectoComponent},
-  {path: 'personas/form/:id', component: FormPersonaComponent},
-  {path: 'epps/form/:id', component: FormEppComponent},
-  {path: 'empleados/form/:id', component: FormEmpleadoComponent},
-  {path: 'registros/form/:id', component: FormRegistroComponent},
-  {path: 'usuarios/form/:id', component: FormUsuarioComponent},
-  {path: 'notificaciones/form/:id', component: FormNotificacionComponent},
+  {path: 'categorias/form/:id', component: FormCategoriaComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'puestos/form/:id', component: FormPuestoComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'proyectos/form/:id', component: FormProyectoComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'personas/form/:id', component: FormPersonaComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'epps/form/:id', component: FormEppComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'empleados/form/:id', component: FormEmpleadoComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'registros/form/:id', component: FormRegistroComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'usuarios/form/:id', component: FormUsuarioComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'notificaciones/form/:id', component: FormNotificacionComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
   //form-pages
-  {path: 'puestos/page/:page', component: PuestosComponent},
-  {path: 'categorias/page/:page', component: CategoriasComponent},
-  {path: 'proyectos/page/:page', component: ProyectosComponent},
-  {path: 'personas/page/:page', component: PersonasComponent},
-  {path: 'epps/page/:page', component: EppsComponent},
-  {path: 'empleados/page/:page', component: EmpleadosComponent},
-  {path: 'registros/page/:page', component: RegistrosComponent},
-  {path: 'usuarios/page/:page', component: UsuariosComponent},
+  {path: 'puestos/page/:page', component: PuestosComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'categorias/page/:page', component: CategoriasComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'proyectos/page/:page', component: ProyectosComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'personas/page/:page', component: PersonasComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'epps/page/:page', component: EppsComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'empleados/page/:page', component: EmpleadosComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'registros/page/:page', component: RegistrosComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'usuarios/page/:page', component: UsuariosComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
   //ver
-  {path: 'epps/ver/:id', component: DetalleEppComponent},
-  {path: 'empleados/ver/:id', component: DetalleEmpleadoComponent},
-  {path: 'notificaciones/ver/:id', component: DetalleNotificacionComponent},
-  {path: 'registros/ver/:id', component: DetalleRegistroComponent},
+  {path: 'epps/ver/:id', component: DetalleEppComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  {path: 'empleados/ver/:id', component: DetalleEmpleadoComponent, canActivate:[AuthGuard]},
+  {path: 'notificaciones/ver/:id', component: DetalleNotificacionComponent, canActivate:[AuthGuard]},
+  {path: 'registros/ver/:id', component: DetalleRegistroComponent, canActivate:[AuthGuard]},
 
 ];
 
@@ -144,7 +151,8 @@ const routes: Routes = [
     DetalleEppComponent,
     DetalleEmpleadoComponent,
     DetalleNotificacionComponent,
-    DetalleRegistroComponent
+    DetalleRegistroComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -165,7 +173,9 @@ const routes: Routes = [
     EmpleadoService,
     RegistroService,
     UsuarioService,
-    NotificacionService
+    NotificacionService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

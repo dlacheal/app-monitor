@@ -5,6 +5,7 @@ import {Empleado} from "../empleado";
 import {EmpleadoService} from "../empleado.service";
 import {Registro} from "../../registros/registro";
 import {RegistroService} from "../../registros/registro.service";
+import {AuthService} from "../../usuarios/auth.service";
 
 @Component({
   selector: 'detalle-empleado',
@@ -18,12 +19,14 @@ export class DetalleEmpleadoComponent {
   public registrosEmpleado: Registro[];
   public urlEndPointEmpleado: string;
 
-  constructor(private empleadoService: EmpleadoService,
+  constructor(public empleadoService: EmpleadoService,
               private registroService: RegistroService,
+              public authService: AuthService,
               private activateRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.empleado = new Empleado();
     this.activateRoute.paramMap.subscribe(params => {
       let id = +params.get('id');
 

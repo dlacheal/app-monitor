@@ -5,7 +5,7 @@ export class Usuario {
     username: string;
     password: string;
     enable: boolean;
-    //authorities: Authority[]
-    codigoEmpleado: Empleado;
+    authorities: String[] = [];
+    codigoEmpleado: Empleado = new Empleado();
 
 }

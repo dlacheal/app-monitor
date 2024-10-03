@@ -16,17 +16,17 @@ export class AppComponent {
 
   public showAlert = false;
 
-  constructor(private tareaProgramadaService: TareaProgramadaService, 
+  constructor(private tareaProgramadaService: TareaProgramadaService,
               private alertService: AlertService) {
 
     }
 
   ngOnInit(): void {
     //this.alertService.alert$.subscribe((res) => (this.showAlert = true));
-    this.cierto = false;
-    this.cierto = this.tareaProgramadaService.iniciarTareaProgramada(this.cierto);
-    
-    
+    //this.cierto = false;
+    //this.cierto = this.tareaProgramadaService.iniciarTareaProgramada(this.cierto);
+
+
   }
 
   ngOnDestroy(): void {

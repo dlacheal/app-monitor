@@ -3,6 +3,7 @@ import { Puesto } from './puesto';
 import { PuestoService } from './puesto.service';
 import Swal from "sweetalert2";
 import {ActivatedRoute} from "@angular/router";
+import {AuthService} from "../usuarios/auth.service";
 
 @Component({
   selector: 'app-puestos',
@@ -14,6 +15,7 @@ export class PuestosComponent {
   paginadorPuesto: any;
 
   constructor(private puestoService: PuestoService,
+              public authService: AuthService,
               private activateRoute: ActivatedRoute) {}
 
   ngOnInit(): void{

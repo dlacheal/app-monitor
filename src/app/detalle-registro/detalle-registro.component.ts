@@ -52,8 +52,14 @@ export class DetalleRegistroComponent {
       if(id){
         this.registroService.getRegistro(id)
           .subscribe((registro) => {
-            this.registro = registro
-            console.log("cargarRegistro: " + this.registro.detalleRegistroList[0].codigoEpp.nombre)
+            this.registro = registro;
+
+            if(this.registro.detalleRegistroList.length>0){
+              console.log("cargarRegistro.registro.detalleRegistroList[0].codigoEpp.nombre: " + this.registro.detalleRegistroList[0].codigoEpp.nombre);
+            }else {
+              console.log("cargarRegistro.registro.detalleRegistroList.length: " + this.registro.detalleRegistroList.length);
+            }
+
           })
       }
     });

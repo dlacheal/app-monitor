@@ -3,6 +3,7 @@ import {Categoria} from './categoria';
 import {CategoriaService} from './categoria.service';
 import Swal from "sweetalert2";
 import {ActivatedRoute} from "@angular/router";
+import {AuthService} from "../usuarios/auth.service";
 
 @Component({
   selector: 'app-categorias',
@@ -18,6 +19,7 @@ export class CategoriasComponent implements OnInit{
   paginadorCategoria: any;
 
   constructor(private categoriaService: CategoriaService,
+              public authService: AuthService,
               private activateRoute: ActivatedRoute) {}
 
   ngOnInit(): void {

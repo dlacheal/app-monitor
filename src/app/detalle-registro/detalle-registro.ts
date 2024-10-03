@@ -10,5 +10,5 @@ export class DetalleRegistro {
   fechaEntrega: string;
   conformidad: boolean;
   motivoEntrega: string;
-  codigoEpp: Epp;
+  codigoEpp: Epp = new Epp();
 }

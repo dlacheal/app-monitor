@@ -34,7 +34,7 @@ export class FormUsuarioComponent {
     this.activateRoute.params.subscribe(params => {
       let id = params['id'];
       if(id){
-        this.usuarioService.getPUsuario(id).subscribe((usuario) => this.usuario = usuario)
+        this.usuarioService.getUsuario(id).subscribe((usuario) => this.usuario = usuario)
       }
     });
   }

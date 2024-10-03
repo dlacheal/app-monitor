@@ -52,7 +52,7 @@
                 <th>PLANTA</th>
                 <th>UBICACIÓN</th>
                 <th>DETALLE</th>
-                <th>ELIMINAR</th>
+                <th *ngIf="authService.hasRole('ROLE_ADMIN')">ELIMINAR</th>
               </tr>
               </thead>
               <tbody>
@@ -67,7 +67,7 @@
                           [routerLink]="['/registros/ver',registroEmpleado.id]">Ver
                   </button>
                 </td>
-                <td>
+                <td *ngIf="authService.hasRole('ROLE_ADMIN')">
                   <button class="btn btn-danger" type="button" name="buttonDeleteRegistro"
                           (click)='deleteRegistroEmpleado(registroEmpleado)'>Eliminar
                   </button>
